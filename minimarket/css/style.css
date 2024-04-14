@@ -1,7 +1,41 @@
+:root{
+    --color-font: #fff;
+    --bg-color: #1323cdce; /* Azul oscuro */
+    --bg-color-hover: #303f9f; /* Azul más claro */
+    --link-color: #c5cae9; /* Gris azulado */
+    --link-color-hover: #9ba9ee; /* Azul medio */
+}
+
+.navbar{
+    background-color: var(--bg-color);
+    height: 80px;
+    margin: 20px;
+    border-radius: 16px;
+    padding: 0.5rem;
+}
+
+.navbar-brand{
+    font-weight: 500;
+    color: var(--color-font);
+    font-size: 24px;
+    transition: 0.3s color;
+}
+
+.navbar-brand img{
+    margin-right: 10px;
+    width: 50px;
+}
+
+.offcanvas-title img{
+    margin-right: 10px;
+    width: 50px;
+}
+
 .loggin-button{
-    background-color: #009970;
-    color: #fff;
+    background-color: var(--bg-color);
+    color: var(--color-font);
     font-size: 14px;
+    font-weight: bold;
     padding: 8px 20px;
     border-radius: 50px;
     text-decoration: none;
@@ -9,5 +43,50 @@
 }
 
 .loggin-button:hover{
-    background-color: #007c6e;
+    background-color: var(--bg-color-hover);
+    border: 0.5px solid #ae3a00;
+}
+
+.navbar-toggler{
+    border: none;
+    font-size: 1.25rem;
+}
+
+.navbar-toggler:focus, .btn-close:focus{
+    box-shadow: none;
+    outline: none;
+}
+
+.nav-link{
+    color: #000;
+    font-weight: 500;
+    position: relative;
+}
+
+.nav-link:hover, .nav-link.active{
+    color: var(--link-color-hover);
+}
+
+@media(min-width: 991px){
+    .nav-link{
+        color: var(--color-font);
+    }
+
+    .nav-link::before{
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 2px;
+        background-color: var(--link-color-hover);
+        visibility: hidden;
+        transition: 0.3s ease-in-out;
+    }
+
+    .nav-link:hover::before, .nav-link.active::before{
+        width: 100%;
+        visibility: visible;
+    }
 }
