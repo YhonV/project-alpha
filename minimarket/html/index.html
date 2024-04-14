@@ -17,12 +17,13 @@
         <div class="container-fluid">
             <a class="navbar-brand me-auto" href="#">
                 <img src="/minimarket/img/logo.png" alt="">
-                El veci</a>
+                ElVeci</a>
             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
                 aria-labelledby="offcanvasNavbarLabel">
                 <div class="offcanvas-header">
                     <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-                        <img src="/minimarket/img/logo.png" alt="">El veci</h5>
+                        <img src="/minimarket/img/logo.png" alt="">ElVeci
+                    </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
@@ -46,8 +47,8 @@
                 </div>
             </div>
             <a href="#" class="loggin-button">Login</a>
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
-                aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -55,13 +56,26 @@
     </nav>
     <!-- End Navbar -->
 
-    <!-- Hero section -->
 
-    <section class="hero-section">
+    <script>
+        // Ejecuta el código después de que el DOM esté completamente cargado
+document.addEventListener('DOMContentLoaded', function() {
+    // Obtén todos los elementos con la clase 'nav-link'
+    var navLink = document.getElementsByClassName('nav-link');
 
-    </section>
-
-    <!-- End Hero section -->
+    // Recorre todos los elementos
+    for (var i = 0; i < navLink.length; i++) {
+        // Comprueba si la ruta del href del enlace coincide con la ruta de la ubicación actual
+        if (navLink[i].getAttribute('href') === window.location.pathname) {
+            // Agrega la clase 'current' al enlace correspondiente
+            navLink[i].classList.add('current');
+        } else {
+            // Remueve la clase 'current' si no coincide
+            navLink[i].classList.remove('current');
+        }
+    }
+});
+    </script>
 
     <!-- BootStrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

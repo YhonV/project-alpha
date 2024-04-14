@@ -1,9 +1,8 @@
 :root{
-    --color-font: #fff;
-    --bg-color: #1323cdce; /* Azul oscuro */
-    --bg-color-hover: #303f9f; /* Azul más claro */
-    --link-color: #c5cae9; /* Gris azulado */
-    --link-color-hover: #9ba9ee; /* Azul medio */
+    --color-font: #fff; /* Marfil */
+    --bg-color: #D32F2F; /* Rojo */
+    --bg-color-hover: #F57C00; /* Amarillo */
+    --link-color-hover: #f5ae74; /* Amarillo */
 }
 
 .navbar{
@@ -19,6 +18,11 @@
     color: var(--color-font);
     font-size: 24px;
     transition: 0.3s color;
+}
+
+.nav-link.current::before{
+    width: 100%;
+    visibility: visible;
 }
 
 .navbar-brand img{
@@ -58,7 +62,7 @@
 }
 
 .nav-link{
-    color: #000;
+    color: var(--color-font);
     font-weight: 500;
     position: relative;
 }
@@ -67,10 +71,7 @@
     color: var(--link-color-hover);
 }
 
-@media(min-width: 991px){
-    .nav-link{
-        color: var(--color-font);
-    }
+@media(min-width: 990px){
 
     .nav-link::before{
         content: "";
@@ -89,4 +90,7 @@
         width: 100%;
         visibility: visible;
     }
+}
+.offcanvas .nav-link{
+    color: #000; /* Negro */
 }
