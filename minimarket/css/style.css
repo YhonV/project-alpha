@@ -183,24 +183,7 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-/* This pen */
-
-
-.dark {
-  background: #110f16;
-}
-
+/*CSS de pagina nosotros*/
 
 .light {
   background: #f3f5f7;
@@ -350,7 +333,7 @@ a:hover {
     }
 
     .postcard__img {
-      max-width: 300px;
+      max-width: 200px;
       max-height: 100%;
       transition: transform 0.3s ease;
     }
@@ -393,31 +376,26 @@ a:hover {
     }
   }
 }
-
-@media screen and (min-width: 1024px) {
-  .postcard__text {
-    padding: 2rem 3.5rem;
-  }
-
-  .postcard__text:before {
-    content: "";
-    position: absolute;
-    display: block;
-
-    top: -20%;
-    height: 130%;
-    width: 55px;
-  }
-
-  .postcard.dark {
-    .postcard__text:before {
-      background: #18151f;
+@media screen and (min-width: 1024px){
+		.postcard__text {
+      padding: 2rem 3.5rem;
     }
-  }
-
-  .postcard.light {
-    .postcard__text:before {
-      background: #e1e5ea;
+		
+		.postcard__text:before {
+      content: "";
+      position: absolute;
+      display: block;
+      
+      top: -20%;
+      height: 130%;
+      width: 55px;
     }
+	
+  
+	.postcard.light {
+		.postcard__text:before {
+			background: #e1e5ea;
+		}
   }
 }
+/*CSS de pagina nosotros*/
