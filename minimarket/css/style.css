@@ -1,99 +1,186 @@
-:root{
-    --color-font: #fff; /* Marfil */
-    --bg-color: #D32F2F; /* Rojo */
-    --bg-color-hover: #F57C00; /* Amarillo */
-    --link-color-hover: #f5ae74; /* Amarillo */
+:root {
+  --color-font: #000;
+  /* Marfil */
+  --bg-color: #ffe800;
+  /* Rojo */
+  --bg-color-hover: #ffffff;
+  /* Amarillo */
+  --link-color-hover: #f19045;
+  /* Amarillo */
 }
 
-.navbar{
-    background-color: var(--bg-color);
-    height: 80px;
-    margin: 20px;
-    border-radius: 16px;
-    padding: 0.5rem;
+.navbar {
+  background-color: var(--bg-color);
+  padding: 0.5rem;
 }
 
-.navbar-brand{
-    font-weight: 500;
-    color: var(--color-font);
-    font-size: 24px;
-    transition: 0.3s color;
+.navbar-brand {
+  font-weight: 500;
+  color: var(--color-font);
+  font-size: 24px;
+  transition: 0.3s color;
 }
 
-.nav-link.current::before{
-    width: 100%;
-    visibility: visible;
+.nav-link.current::before {
+  width: 100%;
+  visibility: visible;
 }
 
-.navbar-brand img{
-    margin-right: 10px;
-    width: 50px;
+.navbar-brand img {
+  margin-right: 10px;
+  width: 50px;
 }
 
-.offcanvas-title img{
-    margin-right: 10px;
-    width: 50px;
+.offcanvas-title img {
+  margin-right: 10px;
+  width: 50px;
 }
 
-.loggin-button{
-    background-color: var(--bg-color);
-    color: var(--color-font);
-    font-size: 14px;
-    font-weight: bold;
-    padding: 8px 20px;
-    border-radius: 50px;
-    text-decoration: none;
-    transition: 0.3s background-color;
+.loggin-button {
+  background-color: var(--bg-color);
+  color: var(--color-font);
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: 0.3s background-color;
 }
 
-.loggin-button:hover{
-    background-color: var(--bg-color-hover);
-    border: 0.5px solid #ae3a00;
+.loggin-button:hover {
+  background-color: var(--bg-color-hover);
+  border: 0.5px solid #ae3a00;
 }
 
-.navbar-toggler{
-    border: none;
-    font-size: 1.25rem;
+.navbar-toggler {
+  border: none;
+  font-size: 1.25rem;
 }
 
-.navbar-toggler:focus, .btn-close:focus{
-    box-shadow: none;
-    outline: none;
+.navbar-toggler:focus,
+.btn-close:focus {
+  box-shadow: none;
+  outline: none;
 }
 
-.nav-link{
-    color: var(--color-font);
+.nav-item {
+  .nav-link {
+    color: #000;
     font-weight: 500;
     position: relative;
+  }
 }
 
-.nav-link:hover, .nav-link.active{
-    color: var(--link-color-hover);
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--link-color-hover);
 }
 
-@media(min-width: 990px){
+@media(min-width: 990px) {
+  
+  .nav-link {
+    color: #000;
+  }
 
-    .nav-link::before{
-        content: "";
-        position: absolute;
-        bottom: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 0;
-        height: 2px;
-        background-color: var(--link-color-hover);
-        visibility: hidden;
-        transition: 0.3s ease-in-out;
-    }
+  .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--link-color-hover);
+    visibility: hidden;
+    transition: 0.3s ease-in-out;
+  }
 
-    .nav-link:hover::before, .nav-link.active::before{
-        width: 100%;
-        visibility: visible;
-    }
+  .nav-link:hover::before,
+  .nav-link.active::before {
+    width: 100%;
+    visibility: visible;
+  }
 }
-.offcanvas .nav-link{
-    color: #000; /* Negro */
+
+
+
+
+/* Inicio de Products Cards */
+
+.height{
+  height:100vh;
 }
+
+.container{
+  margin-top: 120px;
+}
+.card{
+  width:350px;
+  height:370px;
+  margin: 15px; /* Agrega un margen a las tarjetas */
+}
+
+.image{
+  position:absolute;
+  right:12px;
+  top:10px;
+}
+
+.main-heading{
+  font-size:40px;
+  color:red !important;
+}
+
+.ratings i{
+  color:orange;
+}
+
+.user-ratings h6{
+  margin-top:2px;
+}
+
+.colors{
+  display:flex;
+  margin-top:2px;
+}
+
+.colors span{
+  width:15px;
+  height:15px;
+  border-radius:50%;
+  cursor:pointer;
+  display:flex;
+  margin-right:6px;
+}
+
+.colors span:nth-child(1) {
+  background-color:red;
+}
+
+.colors span:nth-child(2) {
+  background-color:blue;
+}
+
+.colors span:nth-child(3) {
+  background-color:yellow;
+}
+
+.colors span:nth-child(4) {
+  background-color:purple;
+}
+
+.btn-danger{
+  height:48px;
+  font-size:18px;
+}
+
+
+ /* Fin de Products Cards */
+
+
+
+
 
 
 
@@ -111,31 +198,32 @@
 
 
 .dark {
-	background: #110f16;
+  background: #110f16;
 }
 
 
 .light {
-	background: #f3f5f7;
+  background: #f3f5f7;
 }
 
-a, a:hover {
-	text-decoration: none;
-	transition: color 0.3s ease-in-out;
+a,
+a:hover {
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
 }
 
 #pageHeaderTitle {
-	margin: 2rem 0;
-	text-transform: uppercase;
-	text-align: center;
-	font-size: 2.5rem;
+  margin: 2rem 0;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 2.5rem;
 }
 
 /* Cards */
 .postcard {
   flex-wrap: wrap;
   display: flex;
-  
+
   box-shadow: 0 4px 21px -12px rgba(0, 0, 0, 0.66);
   border-radius: 10px;
   margin: 0 0 2rem 0;
@@ -143,30 +231,32 @@ a, a:hover {
   position: relative;
   color: #ffffff;
 
-	&.dark {
-		background-color: #18151f;
-	}
-	&.light {
-		background-color: #e1e5ea;
-	}
-	
-	.t-dark {
-		color: #18151f;
-	}
-	
+  &.dark {
+    background-color: #18151f;
+  }
+
+  &.light {
+    background-color: #e1e5ea;
+  }
+
+  .t-dark {
+    color: #18151f;
+  }
+
   a {
     color: inherit;
   }
-	
-	h1,	.h1 {
-		margin-bottom: 0.5rem;
-		font-weight: 500;
-		line-height: 1.2;
-	}
-	
-	.small {
-		font-size: 80%;
-	}
+
+  h1,
+  .h1 {
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .small {
+    font-size: 80%;
+  }
 
   .postcard__title {
     font-size: 1.75rem;
@@ -211,7 +301,7 @@ a, a:hover {
     flex-flow: row wrap;
     font-size: 14px;
     margin: 20px 0 0 0;
-		padding: 0;
+    padding: 0;
     justify-content: center;
 
     .tag__item {
@@ -303,29 +393,31 @@ a, a:hover {
     }
   }
 }
-@media screen and (min-width: 1024px){
-		.postcard__text {
-      padding: 2rem 3.5rem;
-    }
-		
-		.postcard__text:before {
-      content: "";
-      position: absolute;
-      display: block;
-      
-      top: -20%;
-      height: 130%;
-      width: 55px;
-    }
-	
-  .postcard.dark {
-		.postcard__text:before {
-			background: #18151f;
-		}
+
+@media screen and (min-width: 1024px) {
+  .postcard__text {
+    padding: 2rem 3.5rem;
   }
-	.postcard.light {
-		.postcard__text:before {
-			background: #e1e5ea;
-		}
+
+  .postcard__text:before {
+    content: "";
+    position: absolute;
+    display: block;
+
+    top: -20%;
+    height: 130%;
+    width: 55px;
+  }
+
+  .postcard.dark {
+    .postcard__text:before {
+      background: #18151f;
+    }
+  }
+
+  .postcard.light {
+    .postcard__text:before {
+      background: #e1e5ea;
+    }
   }
 }
