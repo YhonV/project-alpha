@@ -260,7 +260,7 @@ a, a:hover {
     }
 
     .postcard__img {
-      max-width: 300px;
+      max-width: 200px;
       max-height: 100%;
       transition: transform 0.3s ease;
     }
@@ -318,11 +318,7 @@ a, a:hover {
       width: 55px;
     }
 	
-  .postcard.dark {
-		.postcard__text:before {
-			background: #18151f;
-		}
-  }
+  
 	.postcard.light {
 		.postcard__text:before {
 			background: #e1e5ea;
