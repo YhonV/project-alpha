@@ -1,7 +1,7 @@
 :root {
   --color-font: #000;
   /* Marfil */
-  --bg-color: #ffe800;
+  --bg-color: #E6CA3F;
   /* Rojo */
   --bg-color-hover: #ffffff;
   /* Amarillo */
@@ -11,7 +11,10 @@
 
 .navbar {
   background-color: var(--bg-color);
-  padding: 0.5rem;
+    height: 80px;
+    margin: 20px;
+    border-radius: 16px;
+    padding: 0.5rem;
 }
 
 .navbar-brand {
@@ -399,3 +402,7 @@ a:hover {
   }
 }
 /*CSS de pagina nosotros*/
+
+
+
+/* Footer CSS */
