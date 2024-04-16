@@ -219,17 +219,13 @@ a:hover {
   position: relative;
   color: #ffffff;
 
-  &.dark {
-    background-color: #18151f;
-  }
+  
 
   &.light {
-    background-color: #e1e5ea;
+    background-color:  #E6CA3F;
   }
 
-  .t-dark {
-    color: #18151f;
-  }
+  
 
   a {
     color: inherit;
@@ -479,5 +475,4 @@ a:hover {
 
 
 /* Fin Css Contacto */
-
 
