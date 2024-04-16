@@ -71,6 +71,7 @@
     color: #000;
     font-weight: 500;
     position: relative;
+    transition: 0.5s;
   }
 }
 
@@ -78,6 +79,7 @@
 .nav-link:hover,
 .nav-link.active {
   color: var(--link-color-hover);
+  font-size: 105%;
 }
 
 @media(min-width: 990px) {
