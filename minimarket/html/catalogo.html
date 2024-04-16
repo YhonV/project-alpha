@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ElVeci</title>
+    <link rel="stylesheet" href="/minimarket/js/app.js">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/minimarket/css/catalogo.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand me-auto" href="#">
+                <img src="/minimarket/img/logo.png" alt="">
+                JMC</a>
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+                aria-labelledby="offcanvasNavbarLabel">
+                <div class="offcanvas-header">
+                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                        <img src="/minimarket/img/logo.png" alt="">JMC
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                </div>
+                <div class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2 active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="#">Categorías</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="nosotros.html">Sobre Nosotros</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="#">Portafolio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link mx-lg-2" href="contacto.html">Contacto</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <a href="#" class="loggin-button">Login</a>
+
+            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+        </div>
+    </nav>
+    <!-- End Navbar -->
+    <!-- Catalogo -->
+    
+    <div class="container">
+    <div class="row">
+      <!-- BEGIN SEARCH RESULT -->
+      <div class="col-md-12">
+        <div class="grid search">
+          <div class="grid-body">
+            <div class="row">
+              <!-- BEGIN FILTERS -->
+              <div class="col-md-3">
+                <h2 class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
+                <hr>
+                
+                <!-- BEGIN FILTER BY CATEGORY -->
+                <h4>By category:</h4>
+                <div class="checkbox">
+                  <label><input type="checkbox" class="icheck"> Application</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" class="icheck"> Design</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" class="icheck"> Desktop</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" class="icheck"> Management</label>
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" class="icheck"> Mobile</label>
+                </div>
+                <!-- END FILTER BY CATEGORY -->
+                
+                <div class="padding"></div>
+                
+                <!-- BEGIN FILTER BY DATE -->
+                <h4>By date:</h4>
+                From
+                <div class="input-group date form_date" data-date="2014-06-14T05:25:07Z" data-date-format="dd-mm-yyyy" data-link-field="dtp_input1">
+                  <input type="text" class="form-control">
+                  <span class="input-group-addon bg-blue"><i class="fa fa-th"></i></span>
+                </div>
+                <input type="hidden" id="dtp_input1" value="">
+                
+                To
+                <div class="input-group date form_date" data-date="2014-06-14T05:25:07Z" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2">
+                  <input type="text" class="form-control">
+                  <span class="input-group-addon bg-blue"><i class="fa fa-th"></i></span>
+                </div>
+                <input type="hidden" id="dtp_input2" value="">
+                <!-- END FILTER BY DATE -->
+                
+                <div class="padding"></div>
+                
+                <!-- BEGIN FILTER BY PRICE -->
+                <h4>By price:</h4>
+                Between <div id="price1">$300</div> to <div id="price2">$800</div>
+                <div class="slider-primary">
+                  <div class="slider slider-horizontal" style="width: 152px;"><div class="slider-track"><div class="slider-selection" style="left: 30%; width: 50%;"></div><div class="slider-handle round" style="left: 30%;"></div><div class="slider-handle round" style="left: 80%;"></div></div><div class="tooltip top hide" style="top: -30px; left: 50.1px;"><div class="tooltip-arrow"></div><div class="tooltip-inner">300 : 800</div></div><input type="text" class="slider" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="[300,800]" data-slider-tooltip="hide"></div>
+                </div>
+                <!-- END FILTER BY PRICE -->
+              </div>
+              <!-- END FILTERS -->
+              <!-- BEGIN RESULT -->
+              <div class="col-md-9">
+                <h2><i class="fa fa-file-o"></i> Result</h2>
+                <hr>
+                <!-- BEGIN SEARCH INPUT -->
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Ingrese el nombre del producto...">
+                  <span class="input-group-btn">
+                    <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                  </span>
+                </div>
+                <!-- END SEARCH INPUT -->
+                <p>Showing all results matching "Nombre del producto"</p>
+                
+                <div class="padding"></div>
+                
+                <div class="row">
+                  <!-- BEGIN ORDER RESULT -->
+                  <div class="col-sm-6">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        Order by <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu" role="menu">
+                        <li><a href="#">Name</a></li>
+                        <li><a href="#">Date</a></li>
+                        <li><a href="#">View</a></li>
+                        <li><a href="#">Rating</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!-- END ORDER RESULT -->
+                  
+                  <div class="col-md-6 text-right">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-default active"><i class="fa fa-list"></i></button>
+                      <button type="button" class="btn btn-default"><i class="fa fa-th"></i></button>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- BEGIN TABLE RESULT -->
+                <div class="table-responsive">
+                  <table class="table table-hover">
+                    <tbody><tr>
+                      <td class="number text-center">1</td>
+                      <td class="image"><img src="https://www.bootdey.com/image/400x300/FF8C00" alt=""></td>
+                      <td class="product"><strong>Product 1</strong><br>This is the product description.</td>
+                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span></td>
+                      <td class="price text-right">$350</td>
+                    </tr>
+                    <tr>
+                      <td class="number text-center">2</td>
+                      <td class="image"><img src="https://www.bootdey.com/image/400x300/5F9EA0" alt=""></td>
+                      <td class="product"><strong>Product 2</strong><br>This is the product description.</td>
+                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span></td>
+                      <td class="price text-right">$1,050</td>
+                    </tr>
+                    <tr>
+                      <td class="number text-center">3</td>
+                      <td class="image"><img src="https://www.bootdey.com/image/400x300" alt=""></td>
+                      <td class="product"><strong>Product 3</strong><br>This is the product description.</td>
+                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i></span></td>
+                      <td class="price text-right">$550</td>
+                    </tr>
+                    <tr>
+                      <td class="number text-center">4</td>
+                      <td class="image"><img src="https://www.bootdey.com/image/400x300/8A2BE2" alt=""></td>
+                      <td class="product"><strong>Product 4</strong><br>This is the product description.</td>
+                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span></td>
+                      <td class="price text-right">$330</td>
+                    </tr>
+                    <tr>
+                      <td class="number text-center">5</td>
+                      <td class="image"><img src="https://www.bootdey.com/image/400x300" alt=""></td>
+                      <td class="product"><strong>Product 5</strong><br>This is the product description.</td>
+                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></td>
+                      <td class="price text-right">$540</td>
+                    </tr>
+                    <tr>
+                      <td class="number text-center">6</td>
+                      <td class="image"><img src="https://www.bootdey.com/image/400x300/6495ED" alt=""></td>
+                      <td class="product"><strong>Product 6</strong><br>This is the product description.</td>
+                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span></td>
+                      <td class="price text-right">$870</td>
+                    </tr>
+                    <tr>
+                      <td class="number text-center">7</td>
+                      <td class="image"><img src="https://www.bootdey.com/image/400x300/DC143C" alt=""></td>
+                      <td class="product"><strong>Product 7</strong><br>This is the product description.</td>
+                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span></td>
+                      <td class="price text-right">$620</td>
+                    </tr>
+                    <tr>
+                      <td class="number text-center">8</td>
+                      <td class="image"><img src="https://www.bootdey.com/image/400x300/9932CC" alt=""></td>
+                      <td class="product"><strong>Product 8</strong><br>This is the product description.</td>
+                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span></td>
+                      <td class="price text-right">$1,550</td>
+                    </tr>
+                  </tbody></table>
+                </div>
+                <!-- END TABLE RESULT -->
+                
+                <!-- BEGIN PAGINATION -->
+                <ul class="pagination">
+                  <li class="disabled"><a href="#">«</a></li>
+                  <li class="active"><a href="#">1</a></li>
+                  <li><a href="#">2</a></li>
+                  <li><a href="#">3</a></li>
+                  <li><a href="#">4</a></li>
+                  <li><a href="#">5</a></li>
+                  <li><a href="#">»</a></li>
+                </ul>
+                <!-- END PAGINATION -->
+              </div>
+              <!-- END RESULT -->
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- END SEARCH RESULT -->
+    </div>
+    </div>
+    <!-- End Catalogo -->
+   
+    <!-- Footer -->
+    <footer class=" bg-dark text-center text-white">
+        <!-- Grid container -->
+        <div class="container p-4">
+            <!-- Section: Social media -->
+            <section class="mb-4">
+                <!-- Facebook -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-facebook-f"></i></a>
+
+                <!-- Twitter -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-twitter"></i></a>
+
+                <!-- Google -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-google"></i></a>
+
+                <!-- Instagram -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-instagram"></i></a>
+
+                <!-- Linkedin -->
+                <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i
+                        class="fab fa-linkedin-in"></i></a>
+            </section>
+            <!-- Section: Social media -->
+
+            <!-- Section: Form -->
+            <section class="">
+                <form action="">
+                    <!--Grid row-->
+                    <div class="row d-flex justify-content-center">
+                        <!--Grid column-->
+                        <div class="col-auto">
+                            <p class="pt-2">
+                                <strong>Suscríbete a nuestras ofertas y novedades</strong>
+                            </p>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-md-5 col-12">
+                            <!-- Email input -->
+                            <div class="form-outline form-white mb-4">
+                                <input type="email" id="form5Example2" class="form-control" />
+                                <label class="form-label" for="form5Example2">Email</label>
+                            </div>
+                        </div>
+                        <!--Grid column-->
+
+                        <!--Grid column-->
+                        <div class="col-auto">
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-outline-light mb-4">
+                                Suscribirse
+                            </button>
+                        </div>
+                        <!--Grid column-->
+                    </div>
+                    <!--Grid row-->
+                </form>
+            </section>
+            <!-- Section: Form -->
+
+            <!-- Section: Links -->
+            <section class="">
+                <!--Grid row-->
+                <div class="row">
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Centro de ayuda</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="#!" class="text-white">Problemas con tu pedido</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Información de pago</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Como modificar mis datos</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Métodos de entrega</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Servicio al cliente</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">¿Donde estamos?</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="#!" class="text-white">Av. Gral Bustamante 250</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Providencia, Chile</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Número de contacto: 9 3214 1221</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase">Información legal</h5>
+
+                        <ul class="list-unstyled mb-0">
+                            <li>
+                                <a href="#!" class="text-white">Términos y condiciones</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Legales al día</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Derecho de retracto</a>
+                            </li>
+                            <li>
+                                <a href="#!" class="text-white">Solicitud de revisiones</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--Grid column-->
+
+                    <!--Grid column-->
+                    <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                        <h5 class="text-uppercase mb-4">Horario de atención</h5>
+
+                        <table class="table text-center text-white">
+                            <tbody class="fw-normal">
+                                <tr>
+                                    <td>Lunes - Jueves:</td>
+                                    <td>8am - 9pm</td>
+                                </tr>
+                                <tr>
+                                    <td>Viernes - Sabado:</td>
+                                    <td>8am - 1am</td>
+                                </tr>
+                                <tr>
+                                    <td>Domingo:</td>
+                                    <td>9am - 10pm</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--Grid column-->
+                </div>
+            </section>
+            <!-- Section: Links -->
+        </div>
+        <!-- Grid container -->
+
+        <!-- Copyright -->
+        <div class="text-center p-3" style="background-color: rgba(44, 43, 43, 0.818);">
+            © 2020 Copyright:
+            <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
+
+    <!-- Fin de Footer-->
+
+
+    <script>
+        // Ejecuta el código después de que el DOM esté completamente cargado
+        document.addEventListener('DOMContentLoaded', function () {
+            // Obtén todos los elementos con la clase 'nav-link'
+            var navLink = document.getElementsByClassName('nav-link');
+
+            // Recorre todos los elementos
+            for (var i = 0; i < navLink.length; i++) {
+                // Comprueba si la ruta del href del enlace coincide con la ruta de la ubicación actual
+                if (navLink[i].getAttribute('href') === window.location.pathname) {
+                    // Agrega la clase 'current' al enlace correspondiente
+                    navLink[i].classList.add('current');
+                } else {
+                    // Remueve la clase 'current' si no coincide
+                    navLink[i].classList.remove('current');
+                }
+            }
+        });
+    </script>
+
+    <!-- BootStrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <!-- End BootStrap JS -->
+</body>
+
+</html>
