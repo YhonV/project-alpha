@@ -1,14 +1,14 @@
+/* Variables globales */
 :root {
     --color-font: #000;
-    /* Marfil */
     --bg-color: #E6CA3F;
-    /* Rojo */
     --bg-color-hover: #ffffff;
-    /* Amarillo */
     --link-color-hover: #f19045;
-    /* Amarillo */
   }
+  /* Variables globales */
   
+  
+  /* Inicio de Navbar */
   .navbar {
     background-color: var(--bg-color);
       height: 80px;
@@ -107,13 +107,14 @@
       visibility: visible;
     }
   }
+  /* Fin de Navbar */
 
 
+/* Inicio Contacto */
 
-
-
-  /* Footer CSS */
-
+.container{
+    margin-top: 100px;
+}
 
 .contact {
     padding: 4%;

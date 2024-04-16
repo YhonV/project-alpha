@@ -413,31 +413,7 @@
         </div>
         <!-- Copyright -->
     </footer>
-    <!-- Footer -->
-
-
     <!-- Fin de Footer-->
-
-
-    <script>
-        // Ejecuta el código después de que el DOM esté completamente cargado
-        document.addEventListener('DOMContentLoaded', function () {
-            // Obtén todos los elementos con la clase 'nav-link'
-            var navLink = document.getElementsByClassName('nav-link');
-
-            // Recorre todos los elementos
-            for (var i = 0; i < navLink.length; i++) {
-                // Comprueba si la ruta del href del enlace coincide con la ruta de la ubicación actual
-                if (navLink[i].getAttribute('href') === window.location.pathname) {
-                    // Agrega la clase 'current' al enlace correspondiente
-                    navLink[i].classList.add('current');
-                } else {
-                    // Remueve la clase 'current' si no coincide
-                    navLink[i].classList.remove('current');
-                }
-            }
-        });
-    </script>
 
     <!-- BootStrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"

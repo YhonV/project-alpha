@@ -1,0 +1,181 @@
+/* Variables globales */
+:root {
+  --color-font: #000;
+  --bg-color: #E6CA3F;
+  --bg-color-hover: #ffffff;
+  --link-color-hover: #f19045;
+}
+/* Variables globales */
+
+
+/* Inicio de Navbar */
+.navbar {
+  background-color: var(--bg-color);
+    height: 80px;
+    margin: 20px;
+    border-radius: 16px;
+    padding: 0.5rem;
+}
+
+.navbar-brand {
+  font-weight: 500;
+  color: var(--color-font);
+  font-size: 24px;
+  transition: 0.3s color;
+}
+
+.nav-link.current::before {
+  width: 100%;
+  visibility: visible;
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+  width: 50px;
+}
+
+.offcanvas-title img {
+  margin-right: 10px;
+  width: 50px;
+}
+
+.loggin-button {
+  background-color: var(--bg-color);
+  color: var(--color-font);
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: 0.3s background-color;
+}
+
+.loggin-button:hover {
+  background-color: var(--bg-color-hover);
+  border: 0.5px solid #ae3a00;
+}
+
+.navbar-toggler {
+  border: none;
+  font-size: 1.25rem;
+}
+
+.navbar-toggler:focus,
+.btn-close:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.nav-item {
+  .nav-link {
+    color: #000;
+    font-weight: 500;
+    position: relative;
+    transition: 0.5s;
+  }
+}
+
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--link-color-hover);
+  font-size: 105%;
+}
+
+@media(min-width: 990px) {
+  
+  .nav-link {
+    color: #000;
+  }
+
+  .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--link-color-hover);
+    visibility: hidden;
+    transition: 0.3s ease-in-out;
+  }
+
+  .nav-link:hover::before,
+  .nav-link.active::before {
+    width: 100%;
+    visibility: visible;
+  }
+}
+/* Fin de Navbar */
+
+
+
+/* Inicio de Products Cards */
+.height{
+  height:100vh;
+}
+
+.container{
+  margin-top: 120px;
+}
+.card{
+  width:350px;
+  height:370px;
+  margin: 15px; 
+}
+
+.image{
+  position:absolute;
+  right:12px;
+  top:10px;
+}
+
+.main-heading{
+  font-size:40px;
+  color:red !important;
+}
+
+.ratings i{
+  color:orange;
+}
+
+.user-ratings h6{
+  margin-top:2px;
+}
+
+.colors{
+  display:flex;
+  margin-top:2px;
+}
+
+.colors span{
+  width:15px;
+  height:15px;
+  border-radius:50%;
+  cursor:pointer;
+  display:flex;
+  margin-right:6px;
+}
+
+.colors span:nth-child(1) {
+  background-color:red;
+}
+
+.colors span:nth-child(2) {
+  background-color:blue;
+}
+
+.colors span:nth-child(3) {
+  background-color:yellow;
+}
+
+.colors span:nth-child(4) {
+  background-color:purple;
+}
+
+.btn-danger{
+  height:48px;
+  font-size:18px;
+}
+ /* Fin de Products Cards */
