@@ -118,7 +118,7 @@
 
 .contact {
     padding: 4%;
-    min-height: 700px; /* Cambiado a min-height para permitir el crecimiento del contenido */
+    min-height: 400px; /* Cambiado a min-height para permitir el crecimiento del contenido */
   }
   
   .col-md-3{
@@ -156,7 +156,7 @@
   }
   
   .col-md-9 {
-    background: #ddd8d8;
+    background:  rgb(231, 231, 231);
     padding: 2%;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
@@ -175,6 +175,11 @@
   }
   
   .contact-form button:hover {
-    background-color: #05196f;
+    background-color: #6a6a6a;
     color: #fff;
   }
+
+.contact-form .form-group {
+    margin-bottom: 20px; /* Ajusta este valor según el espacio deseado entre los campos */
+}
+
