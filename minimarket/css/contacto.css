@@ -1,9 +1,9 @@
 /* Variables globales */
 :root {
-    --color-font: #000;
-    --bg-color: #E6CA3F;
+    --color-font: #fff;
+    --bg-color: #0071dc;
     --bg-color-hover: #ffffff;
-    --link-color-hover: #f19045;
+    --link-color-hover: #ffffff;
   }
   /* Variables globales */
   
@@ -112,9 +112,6 @@
 
 /* Inicio Contacto */
 
-.container{
-    margin-top: 100px;
-}
 
 .contact {
     padding: 4%;
@@ -167,8 +164,7 @@
   }
   
   .contact-form button {
-    background: #E6CA3F;
-    color: #000000;
+    color: #fff;
     font-weight: 600;
     width: 100%; /* Ajustado el ancho del botón para ocupar todo el contenedor */
     margin-top: 10px; /* Añadido un margen superior para separar el botón del resto del contenido */

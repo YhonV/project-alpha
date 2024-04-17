@@ -1,11 +1,10 @@
 /*Variables globales */
 :root {
-    --color-font: #000;
-    --bg-color: #E6CA3F;
+    --color-font: #fff;
+    --bg-color: #0071dc;
     --bg-color-hover: #ffffff;
-    --link-color-hover: #f19045;
+    --link-color-hover: #ffffff;
 }
-
 /* Fin de Variables globales */
 
 /* Navbar */
