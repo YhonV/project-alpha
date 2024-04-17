@@ -1,9 +1,9 @@
 /* Variables globales */
 :root {
-  --color-font: #000;
-  --bg-color: #E6CA3F;
+  --color-font: #fff;
+  --bg-color: #0071dc;
   --bg-color-hover: #ffffff;
-  --link-color-hover: #f19045;
+  --link-color-hover: #ffffff;
 }
 /* Variables globales */
 
@@ -35,6 +35,11 @@
 }
 
 .offcanvas-title img {
+  margin-right: 10px;
+  width: 50px;
+}
+
+.offcanvas-title h5{
   margin-right: 10px;
   width: 50px;
 }
@@ -113,35 +118,17 @@
 
 /* Inicio de Products Cards */
 .height{
-  height:100vh;
+  height:70vh;
 }
 
 .container{
-  margin-top: 120px;
-}
-.card{
-  width:350px;
-  height:370px;
-  margin: 15px; 
+  margin-top: 20px;
 }
 
 .image{
   position:absolute;
   right:12px;
   top:10px;
-}
-
-.main-heading{
-  font-size:40px;
-  color:red !important;
-}
-
-.ratings i{
-  color:orange;
-}
-
-.user-ratings h6{
-  margin-top:2px;
 }
 
 .colors{
@@ -157,25 +144,6 @@
   display:flex;
   margin-right:6px;
 }
-
-.colors span:nth-child(1) {
-  background-color:red;
-}
-
-.colors span:nth-child(2) {
-  background-color:blue;
-}
-
-.colors span:nth-child(3) {
-  background-color:yellow;
-}
-
-.colors span:nth-child(4) {
-  background-color:purple;
-}
-
-.btn-danger{
-  height:48px;
-  font-size:18px;
-}
  /* Fin de Products Cards */
+
+ 
