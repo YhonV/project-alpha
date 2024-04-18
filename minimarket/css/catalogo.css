@@ -1,31 +1,148 @@
 /*CSS Catalogo*/
-    .btn {
-        margin-bottom: 5px;
-    }
-    
+
+/*Navbar CSS*/
+
+/* Variables globales */
+:root {
+  --color-font: #fff;
+  --bg-color: #0071dc;
+  --bg-color-hover: #ffffff;
+  --link-color-hover: #ffffff;
+}
+/* Variables globales */
+
+
+/* Inicio de Navbar */
+.navbar {
+  background-color: var(--bg-color);
+    height: 80px;
+    margin: 20px;
+    border-radius: 16px;
+    padding: 0.5rem;
+}
+
+.navbar-brand {
+  font-weight: 500;
+  color: var(--color-font);
+  font-size: 24px;
+  transition: 0.3s color;
+}
+
+.nav-link.current::before {
+  width: 100%;
+  visibility: visible;
+}
+
+.navbar-brand img {
+  margin-right: 10px;
+  width: 50px;
+}
+
+.offcanvas-title img {
+  margin-right: 10px;
+  width: 50px;
+}
+
+.loggin-button {
+  background-color: var(--bg-color);
+  color: var(--color-font);
+  font-size: 14px;
+  font-weight: bold;
+  padding: 8px 20px;
+  border-radius: 50px;
+  text-decoration: none;
+  transition: 0.3s background-color;
+}
+
+.loggin-button:hover {
+  background-color: var(--bg-color-hover);
+  border: 0.5px solid #ae3a00;
+}
+
+.navbar-toggler {
+  border: none;
+  font-size: 1.25rem;
+}
+
+.navbar-toggler:focus,
+.btn-close:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.nav-item {
+  .nav-link {
+    color: #000;
+    font-weight: 500;
+    position: relative;
+    transition: 0.5s;
+  }
+}
+
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--link-color-hover);
+  font-size: 105%;
+}
+
+@media(min-width: 990px) {
+  
+  .nav-link {
+    color: #000;
+  }
+
+  .nav-link::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--link-color-hover);
+    visibility: hidden;
+    transition: 0.3s ease-in-out;
+  }
+
+  .nav-link:hover::before,
+  .nav-link.active::before {
+    width: 100%;
+    visibility: visible;
+  }
+}
+
+
+/* Fin Navbar CSS*/
+        
     .grid {
         position: relative;
         width: 100%;
-        background: #fff;
-        color: #666666;
-        border-radius: 2px;
+        background: #0071dc;
+        color: black;
+        border-radius: 10px;
         margin-bottom: 25px;
+        margin-top: 10px;
         box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
     }
     
-    .grid .grid-body {
-        padding: 120px 20px 15px 20px;
+    .grid-body {
+      
+        padding: 20px 20px 15px 20px;
         font-size: 0.9em;
         line-height: 1.9em;
+        
     }
     
     .search table tr td.rate {
         color: #f39c12;
         line-height: 50px;
+        
     }
     
     .search table tr:hover {
         cursor: pointer;
+        
     }
     
     .search table tr td.image {
@@ -51,6 +168,19 @@
     .search #price2 {
       display: inline;
       font-weight: 600;
+    }
+    .table-responsive{
+      border-radius: 20px;
+      background-color: white;
+      margin-bottom: 10px;
+      margin-top: 10px;
+    }
+    .Categorías{
+      font-size: large;
+    }
+    .btn-primary{
+      background-color: black;
+      
     }
   
   /*Fin CSS Catalogo */

@@ -9,231 +9,381 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="/minimarket/css/catalogo.css">
-    <link rel="stylesheet" href="/minimarket/css/main.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 </head>
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand me-auto" href="#">
-                <img src="/minimarket/img/logo.png" alt="">
-                JMC</a>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
-                aria-labelledby="offcanvasNavbarLabel">
-                <div class="offcanvas-header">
-                    <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
-                        <img src="/minimarket/img/logo.png" alt="">JMC
-                    </h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div class="offcanvas-body">
-                    <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2 active" aria-current="page" href="index.html">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="#">Categorías</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="nosotros.html">Sobre Nosotros</a>
-                        </li>
-                        
-                        <li class="nav-item">
-                            <a class="nav-link mx-lg-2" href="contacto.html">Contacto</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <a href="#" class="loggin-button">Login</a>
+    <nav class="navbar navbar-expand-lg">
+      <div class="container-fluid">
+          <a class="navbar-brand me-auto" href="#">
+              <img src="/minimarket/img/logo.png" alt="">
+              ElVeci</a>
+          <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar"
+              aria-labelledby="offcanvasNavbarLabel">
+              <div class="offcanvas-header">
+                  <h5 class="offcanvas-title" id="offcanvasNavbarLabel">
+                      <img src="/minimarket/img/logo.png" alt="">ElVeci
+                  </h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <div class="offcanvas-body">
+                  <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
+                      <li class="nav-item">
+                          <a class="nav-link mx-lg-2" aria-current="page" href="index.html">Home</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link mx-lg-2" href="catalogo.html">Productos</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link mx-lg-2" href="nosotros.html">Sobre Nosotros</a>
+                      </li>
+                      <li class="nav-item">
+                          <a class="nav-link mx-lg-2 active" href="contacto.html">Contacto</a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+          <a href="#" class="loggin-button text-black ">Login</a>
 
-            <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-        </div>
-    </nav>
+          <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas"
+              data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+      </div>
+  </nav>
     <!-- End Navbar -->
     <!-- Catalogo -->
     
     <div class="container">
     <div class="row">
       <!-- BEGIN SEARCH RESULT -->
-      <div class="col-md-12">
-        <div class="grid search">
-          <div class="grid-body">
+      <div class="col-md-12 ">
+        <div class="grid search" >
+          <div class="grid-body" >
             <div class="row">
               <!-- BEGIN FILTERS -->
-              <div class="col-md-3">
-                <h2 class="grid-title"><i class="fa fa-filter"></i> Filters</h2>
+              <div class="col-md-3" style="background-color: white; border-radius: 20px;" >
+                <h2 class="grid-title"><i class="fa fa-filter" style="color: #dcca00;"></i> Categorías</h2>
                 <hr>
                 
                 <!-- BEGIN FILTER BY CATEGORY -->
-                <h4>By category:</h4>
-                <div class="checkbox">
-                  <label><input type="checkbox" class="icheck"> Application</label>
+                <div class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Congelados
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Pulpas de fruta</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Helados</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Hielo</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Comidas Preparadas</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Botillería
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Bebidas</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Jugos Naturales</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Aguas</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Bebidas Energeticas</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Lacteos
+                      </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Leches</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Quesos</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Cremas</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Yoghurt</label>
+                        </div>
+                      </div>
+                      </div> 
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
+                        Carnicería
+                      </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Pollo</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Pescado</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Vacuno</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Cerdo</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseOne">
+                        Frutas y Verduras
+                      </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Fruta</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Verduras</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Frutos secos</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Semillas</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseOne">
+                        Limpieza
+                      </button>
+                    </h2>
+                    <div id="collapseSix" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Baño y Cocina</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Ropa</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Cuidado Personal</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Desinfectantes</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div><br>
+                  <h4>Precio</h4>
+                  <h6>Mínimo</h6>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">$</span>
+                    <span class="input-group-text">0</span>
+                    <input type="text" class="form-control" aria-label="Monto en pesos (con punto)" placeholder="0">
+                  </div>
+                  <h6>Máximo</h6>
+                  <div class="input-group">
+                    <input type="text" class="form-control" aria-label="Monto en pesos (con punto)" placeholder="999999">
+                    <span class="input-group-text">$</span>
+                    <span class="input-group-text">999.999</span>
+                  </div>
+                  
                 </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" class="icheck"> Design</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" class="icheck"> Desktop</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" class="icheck"> Management</label>
-                </div>
-                <div class="checkbox">
-                  <label><input type="checkbox" class="icheck"> Mobile</label>
-                </div>
-                <!-- END FILTER BY CATEGORY -->
-                
-                <div class="padding"></div>
-                
-                <!-- BEGIN FILTER BY DATE -->
-                <h4>By date:</h4>
-                From
-                <div class="input-group date form_date" data-date="2014-06-14T05:25:07Z" data-date-format="dd-mm-yyyy" data-link-field="dtp_input1">
-                  <input type="text" class="form-control">
-                  <span class="input-group-addon bg-blue"><i class="fa fa-th"></i></span>
-                </div>
-                <input type="hidden" id="dtp_input1" value="">
-                
-                To
-                <div class="input-group date form_date" data-date="2014-06-14T05:25:07Z" data-date-format="dd-mm-yyyy" data-link-field="dtp_input2">
-                  <input type="text" class="form-control">
-                  <span class="input-group-addon bg-blue"><i class="fa fa-th"></i></span>
-                </div>
-                <input type="hidden" id="dtp_input2" value="">
-                <!-- END FILTER BY DATE -->
-                
-                <div class="padding"></div>
-                
-                <!-- BEGIN FILTER BY PRICE -->
-                <h4>By price:</h4>
-                Between <div id="price1">$300</div> to <div id="price2">$800</div>
-                <div class="slider-primary">
-                  <div class="slider slider-horizontal" style="width: 152px;"><div class="slider-track"><div class="slider-selection" style="left: 30%; width: 50%;"></div><div class="slider-handle round" style="left: 30%;"></div><div class="slider-handle round" style="left: 80%;"></div></div><div class="tooltip top hide" style="top: -30px; left: 50.1px;"><div class="tooltip-arrow"></div><div class="tooltip-inner">300 : 800</div></div><input type="text" class="slider" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="1" data-slider-value="[300,800]" data-slider-tooltip="hide"></div>
-                </div>
-                <!-- END FILTER BY PRICE -->
               </div>
               <!-- END FILTERS -->
               <!-- BEGIN RESULT -->
               <div class="col-md-9">
-                <h2><i class="fa fa-file-o"></i> Result</h2>
+                <h2><i class="fa fa-search" style="color: #dcca00;"></i> Resultados</h2>
                 <hr>
                 <!-- BEGIN SEARCH INPUT -->
                 <div class="input-group">
                   <input type="text" class="form-control" placeholder="Ingrese el nombre del producto...">
-                  <span class="input-group-btn">
-                    <button class="btn btn-primary" type="button"><i class="fa fa-search"></i></button>
+                  <span class="input-group-btn" >
+                    <button type="button" class="btn btn-primary">Buscar</button>
                   </span>
+                  
                 </div>
                 <!-- END SEARCH INPUT -->
-                <p>Showing all results matching "Nombre del producto"</p>
+                <p>Mostrando todos los resultados que coincidan con: "Nombre del producto"</p>
                 
                 <div class="padding"></div>
                 
                 <div class="row">
                   <!-- BEGIN ORDER RESULT -->
-                  <div class="col-sm-6">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        Order by <span class="caret"></span>
-                      </button>
-                      <ul class="dropdown-menu" role="menu">
-                        <li><a href="#">Name</a></li>
-                        <li><a href="#">Date</a></li>
-                        <li><a href="#">View</a></li>
-                        <li><a href="#">Rating</a></li>
-                      </ul>
-                    </div>
+                  <div class="dropdown">
+                    <button style="background-color: white; color: black;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Ordenar por:
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Nombre A-Z</a></li>
+                      <li><a class="dropdown-item" href="#">Nombre Z-A</a></li>
+                      <li><a class="dropdown-item" href="#">Precio Mayor a Menor</a></li>
+                      <li><a class="dropdown-item" href="#">Precio Mayor a Menor</a></li>
+                    </ul>
                   </div>
+                  
                   <!-- END ORDER RESULT -->
                   
-                  <div class="col-md-6 text-right">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-default active"><i class="fa fa-list"></i></button>
-                      <button type="button" class="btn btn-default"><i class="fa fa-th"></i></button>
-                    </div>
-                  </div>
-                </div>
+                  
                 
                 <!-- BEGIN TABLE RESULT -->
-                <div class="table-responsive">
-                  <table class="table table-hover">
-                    <tbody><tr>
-                      <td class="number text-center">1</td>
-                      <td class="image"><img src="https://www.bootdey.com/image/400x300/FF8C00" alt=""></td>
-                      <td class="product"><strong>Product 1</strong><br>This is the product description.</td>
-                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span></td>
-                      <td class="price text-right">$350</td>
-                    </tr>
-                    <tr>
-                      <td class="number text-center">2</td>
-                      <td class="image"><img src="https://www.bootdey.com/image/400x300/5F9EA0" alt=""></td>
-                      <td class="product"><strong>Product 2</strong><br>This is the product description.</td>
-                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span></td>
-                      <td class="price text-right">$1,050</td>
-                    </tr>
-                    <tr>
-                      <td class="number text-center">3</td>
-                      <td class="image"><img src="https://www.bootdey.com/image/400x300" alt=""></td>
-                      <td class="product"><strong>Product 3</strong><br>This is the product description.</td>
-                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i></span></td>
-                      <td class="price text-right">$550</td>
-                    </tr>
-                    <tr>
-                      <td class="number text-center">4</td>
-                      <td class="image"><img src="https://www.bootdey.com/image/400x300/8A2BE2" alt=""></td>
-                      <td class="product"><strong>Product 4</strong><br>This is the product description.</td>
-                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i></span></td>
-                      <td class="price text-right">$330</td>
-                    </tr>
-                    <tr>
-                      <td class="number text-center">5</td>
-                      <td class="image"><img src="https://www.bootdey.com/image/400x300" alt=""></td>
-                      <td class="product"><strong>Product 5</strong><br>This is the product description.</td>
-                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i></span></td>
-                      <td class="price text-right">$540</td>
-                    </tr>
-                    <tr>
-                      <td class="number text-center">6</td>
-                      <td class="image"><img src="https://www.bootdey.com/image/400x300/6495ED" alt=""></td>
-                      <td class="product"><strong>Product 6</strong><br>This is the product description.</td>
-                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span></td>
-                      <td class="price text-right">$870</td>
-                    </tr>
-                    <tr>
-                      <td class="number text-center">7</td>
-                      <td class="image"><img src="https://www.bootdey.com/image/400x300/DC143C" alt=""></td>
-                      <td class="product"><strong>Product 7</strong><br>This is the product description.</td>
-                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i></span></td>
-                      <td class="price text-right">$620</td>
-                    </tr>
-                    <tr>
-                      <td class="number text-center">8</td>
-                      <td class="image"><img src="https://www.bootdey.com/image/400x300/9932CC" alt=""></td>
-                      <td class="product"><strong>Product 8</strong><br>This is the product description.</td>
-                      <td class="rate text-right"><span><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half-o"></i></span></td>
-                      <td class="price text-right">$1,550</td>
-                    </tr>
-                  </tbody></table>
-                </div>
+                <div class="container">
+                  <div class="row justify-content-center align-items-center">
+          
+                        <div class="card m-2" style="width: 15rem;">
+                          <img class="card-img-top" src="https://www.agrosuperventas.com/medias/1112580-1-300Wx300H?context=bWFzdGVyfGltYWdlc3wyMTc5NzN8aW1hZ2UvanBlZ3xhRGRrTDJnd1lTODROems1TURZNE5UVXpNalEyTHpFeE1USTFPREJmTVY4ek1EQlhlRE13TUVnfDUxMzM5MGU1YTA5ZmM5OTg2YTRlMTY4NDI0MWRmMTkyMWZiNjY5ZjAwYjQ1MmUzMTA0NDBjZjQ4ZmFkM2QxMGI" alt="Card image cap">
+                          <div class="card-body" style="padding: 1rem 0 0 0;">
+                            <h5 class="card-title">Salmón Atlántico</h5>
+                            <p class="card-text">Salmón Atlántico 500g</p>
+                            <h6>$8990</h6>
+                          </div>
+                          <div style="padding: 0 0 1rem 0;">
+                              <button class="btn btn-primary" style="width: 100%;">Agregar al Carro</button>
+                          </div>
+                        </div>
+          
+                        <div class="card m-2" style="width: 15rem;">
+                          <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjZLdpu9g2fZfkGeJtJogkpaLJjdjEYBng41MLmS-2BQ&s" alt="Card image cap">
+                          <div class="card-body" style="padding: 1rem 0 0 0;">
+                            <h5 class="card-title">Merluza Apanada</h5>
+                            <p class="card-text">Merluza Apanada 500g</p>
+                            <h6>$5990</h6>
+                          </div>
+                          <div style="padding: 0 0 1rem 0;">
+                              <button class="btn btn-primary" style="width: 100%;">Agregar al Carro</button>
+                          </div>
+                        </div>
+          
+                        <div class="card m-2" style="width: 15rem;">
+                          <img class="card-img-top" src="https://unimarc.vtexassets.com/arquivos/ids/215235/000000000000578195-UN-01.jpg?v=637576558977400000" alt="Card image cap">
+                          <div class="card-body" style="padding: 1rem 0 0 0;">
+                            <h5 class="card-title">Filetitos de Pollo</h5>
+                            <p class="card-text">Filetes de Pollo 700g</p>
+                            <h6>$6990</h6>
+                          </div>
+                          <div style="padding: 0 0 1rem 0;">
+                              <button class="btn btn-primary" style="width: 100%;">Agregar al Carro</button>
+                          </div>
+                        </div>
+          
+                        <div class="card m-2" style="width: 15rem;">
+                          <img class="card-img-top" src="https://cdnx.jumpseller.com/megamarina/image/36124001/resize/610/610?1686061360" alt="Card image cap">
+                          <div class="card-body" style="padding: 1rem 0 0 0;">
+                            <h5 class="card-title">Pulpa de Piña</h5>
+                            <p class="card-text">Pulpa de Piña 1 kg</p>
+                            <h6>$4990</h6>
+                          </div>
+                          <div style="padding: 0 0 1rem 0;">
+                              <button class="btn btn-primary" style="width: 100%;">Agregar al Carro</button>
+                          </div>
+                        </div>
+          
+                        <div class="card m-2" style="width: 15rem;">
+                          <img class="card-img-top" src="/minimarket/img/arroz.jpeg" alt="Card image cap">
+                          <div class="card-body" style="padding: 1rem 0 0 0;">
+                            <h5 class="card-title">Arroz</h5>
+                            <p class="card-text">Arroz Grado 2 Grano Largo Delgado Bolsa, 1 Kg</p>
+                            <h6>$1490</h6>
+                          </div>
+                          <div style="padding: 0 0 1rem 0;">
+                              <button class="btn btn-primary" style="width: 100%;">Agregar al Carro</button>
+                          </div>
+                        </div>
+          
+                        <div class="card m-2" style="width: 15rem;">
+                          <img class="card-img-top" src="/minimarket/img/aceite.jpeg" alt="Card image cap">
+                          <div class="card-body" style="padding: 1rem 0 0 0;">
+                            <h5 class="card-title">Aceite Maravilla</h5>
+                            <p class="card-text">Aceite Maravilla 1 L</p>
+                            <h6>$2990</h6>
+                          </div>
+                          <div style="padding: 0 0 1rem 0;">
+                              <button class="btn btn-primary" style="width: 100%;">Agregar al Carro</button>
+                          </div>
+                        </div>
+          
+                        <div class="card m-2" style="width: 15rem;">
+                          <img class="card-img-top" src="/minimarket/img/azucar.png" alt="Card image cap">
+                          <div class="card-body" style="padding: 1rem 0 0 0;">
+                            <h5 class="card-title">Azúcar</h5>
+                            <p class="card-text">Azucark 1 Kg</p>
+                            <h6>$1290</h6>
+                          </div>
+                          <div style="padding: 0 0 1rem 0;">
+                              <button class="btn btn-primary" style="width: 100%;">Agregar al Carro</button>
+                          </div>
+                        </div>
+          
+                        <div class="card m-2" style="width: 15rem;">
+                          <img class="card-img-top" src="https://bodeguitadelavega.cl/wp-content/uploads/2022/08/Leche-entera-sin-tapa-1-L.png" alt="Card image cap">
+                          <div class="card-body" style="padding: 1rem 0 0 0;">
+                            <h5 class="card-title">Leche Descremada</h5>
+                            <p class="card-text">Leche Descremada 1 Kg</p>
+                            <h6>$1100</h6>
+                          </div>
+                          <div style="padding: 0 0 1rem 0;">
+                              <button class="btn btn-primary" style="width: 100%;">Agregar al Carro</button>
+                          </div>
+                        </div>
+                        <div class="card m-2" style="width: 15rem;">
+                          <img class="card-img-top" src="/minimarket/img/cafe.jpeg" alt="Card image cap">
+                          <div class="card-body" style="padding: 1rem 0 0 0;">
+                            <h5 class="card-title">Café Tradición</h5>
+                            <p class="card-text">Café Tradición 170 g</p>
+                            <h6>$1990</h6>
+                          </div>
+                          <div style="padding: 0 0 1rem 0;">
+                              <button class="btn btn-primary" style="width: 100%;">Agregar al Carro</button>
+                          </div>
+                        </div>
+                  </div>
+              </div>
                 <!-- END TABLE RESULT -->
                 
                 <!-- BEGIN PAGINATION -->
-                <ul class="pagination">
-                  <li class="disabled"><a href="#">«</a></li>
-                  <li class="active"><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4</a></li>
-                  <li><a href="#">5</a></li>
-                  <li><a href="#">»</a></li>
-                </ul>
+                <nav aria-label="Page navigation example">
+                  <ul class="pagination">
+                    <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
+                  </ul>
+                </nav>
                 <!-- END PAGINATION -->
               </div>
               <!-- END RESULT -->
@@ -244,6 +394,7 @@
       <!-- END SEARCH RESULT -->
     </div>
     </div>
+
     <!-- End Catalogo -->
    
     <!-- Footer -->
@@ -419,6 +570,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
+
+
     <!-- End BootStrap JS -->
 </body>
 
