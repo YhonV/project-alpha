@@ -111,20 +111,16 @@
 
 
 /* Inicio Contacto */
-
-
 .contact {
     padding: 4%;
-    min-height: 400px; /* Cambiado a min-height para permitir el crecimiento del contenido */
-  }
+    min-height: 400px; /* Cambiado a min-height para permitir el crecimiento del contenido */  
+}
   
-  .col-md-3{
-    background: #E6CA3F;
-    padding: 4%;
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    text-align: center; /* Centra el contenido en todos los tamaños de pantalla */;
-  }
+.col-md-3{
+  background: #fff;
+  padding: 4%;  
+  text-align: center; /* Centra el contenido en todos los tamaños de pantalla */;
+}
   
   @media (min-width: 768px) {
   
@@ -132,6 +128,9 @@
       float: left;
       width: 25%;
       align-items: center;
+      border: 1px solid #000; /* Añade esta línea para agregar bordes al panel */
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
     }
   
     .col-md-9 {
@@ -157,23 +156,19 @@
     padding: 2%;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+    border: 1px solid #000; /* Añade esta línea para agregar bordes al panel */
   }
   
   .contact-form label {
     font-weight: 600;
   }
   
-  .contact-form button {
-    color: #fff;
+  .contact-form button { 
     font-weight: 600;
     width: 100%; /* Ajustado el ancho del botón para ocupar todo el contenedor */
     margin-top: 10px; /* Añadido un margen superior para separar el botón del resto del contenido */
   }
-  
-  .contact-form button:hover {
-    background-color: #6a6a6a;
-    color: #fff;
-  }
+
 
 .contact-form .form-group {
     margin-bottom: 20px; /* Ajusta este valor según el espacio deseado entre los campos */
