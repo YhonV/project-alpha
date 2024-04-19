@@ -118,7 +118,7 @@
     .grid {
         position: relative;
         width: 100%;
-        background: #0071dc;
+        background:  rgb(231, 231, 231);
         color: black;
         border-radius: 10px;
         margin-bottom: 25px;
@@ -175,12 +175,15 @@
       margin-bottom: 10px;
       margin-top: 10px;
     }
+    
     .Categorías{
       font-size: large;
     }
-    .btn-primary{
-      background-color: black;
-      
-    }
+
+  .pagination .page-item .page-link {
+      font-weight: bold; /* Aplica negrita a los números de la lista de paginación */
+  }
+  
+   
   
   /*Fin CSS Catalogo */
