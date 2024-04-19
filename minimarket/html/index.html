@@ -12,18 +12,17 @@
 </head>
 
 <body>
-    <!--Main Navigation-->
     <header class="mb-4 fixed-top">
-        <div class="p-3 text-center bg-white border-bottom">
+        <div class="p-3 text-center bg-white border-bottom header-navbar">
             <div class="container-fluid">
                 <div class="row">
+
                     <!-- Left Elements / Logo and minimarket names -->
                     <div class="col-md-2 d-none d-lg-block">
                         <a href="#!" class="ms-md-2" style="text-decoration: none; font-weight: bold; font-size: 20px;">
                             <img src="/minimarket/img/jmc.png" height="50">
                         </a>
                     </div>
-                    <!-- Left Elements / Logo and minimarket names -->
 
                     <!-- Search element -->
                     <div
@@ -39,73 +38,125 @@
                     <!-- Right elements -->
                     <div class="col-lg-5 d-flex justify-content-center justify-content-md-end align-items-center">
 
+                        <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                            <a href="login.html" style=" text-decoration: none; font-weight: bold;">Ingresar</a>
+                        </button>
+
                         <!-- User -->
                         <div class="dropdown">
                             <a class="text-reset dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
                                 id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
                                 aria-expanded="false">
                                 <img src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-                                    class="rounded-circle" height="22" alt="" loading="lazy" />
+                                    class="rounded-circle" height="32" alt="" loading="lazy" />
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">My profile</a></li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
-                                <li><a class="dropdown-item" href="#">Logout</a></li>
+                                <li><a class="dropdown-item" href="#">Mi perfil</a></li>
+                                <li><a class="dropdown-item" href="#">Configuración</a></li>
+                                <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
                             </ul>
                         </div>
                     </div>
-                    <!-- Right elements -->
                 </div>
             </div>
         </div>
-        <!-- Jumbotron -->
 
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-light bg-white d-none d-lg-block">
+        <nav class="navbar navbar-expand-lg bg-white">
             <!-- Container wrapper -->
-            <div class="container-fluid d-flex justify-content-between">
-                <!-- Left elements -->
-                <div class="d-flex pe-3">
-                    <button class="btn btn-warning" data-mdb-ripple-color="dark" type="button">
-                        <a href="#" style=" text-decoration: none; font-weight: bold; color: #fff;">¡¡ OFERTAS !!</a>
-                    </button>
-                </div>
+            <div class="container-fluid">
+
                 <!-- Center elements -->
-                <div class="d-flex justify-content-center flex-grow-1 pe-3">
-                    <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
-                        <a href="index.html" style=" text-decoration: none; font-weight: bold;">Home</a>
+                <div class="d-flex justify-content-center flex-grow-1 pe-3 d-none d-lg-flex">
+
+                    <button class="btn btn-warning" data-mdb-ripple-color="dark" type="button"
+                        style="margin-right: 800px;">
+                        <a href="#" style="color: #fff;">¡¡ OFERTAS !!</a>
                     </button>
 
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
-                        <a href="catalogo.html" style=" text-decoration: none; font-weight: bold;">Productos</a>
+                        <a href="index.html">Home</a>
                     </button>
-
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
-                        <a href="nosotros.html" style=" text-decoration: none; font-weight: bold;">Sobre nosotros</a>
+                        <a href="catalogo.html">Productos</a>
                     </button>
-
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
-                        <a href="contacto.html" style=" text-decoration: none; font-weight: bold;">Contacto</a>
+                        <a href="nosotros.html">Sobre nosotros</a>
+                    </button>
+                    <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                        <a href="contacto.html">Contacto</a>
                     </button>
                 </div>
+
+                <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="offcanvasNavbar"
+                    aria-labelledby="offcanvasNavbarLabel">
+
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+
+                    <div class="offcanvas-body">
+                        <div class="d-flex flex-column">
+
+                            <a href="#!" class="ms-md-2"
+                                style="text-decoration: none; font-weight: bold; font-size: 20px; text-align: center;">
+                                <img src="/minimarket/img/jmc.png" height="50">
+                            </a>
+
+                            <button class="btn btn-outline-primary m-2" data-mdb-ripple-color="dark" type="button">
+                                <a href="index.html">Home</a>
+                            </button>
+                            <button class="btn btn-outline-primary m-2" data-mdb-ripple-color="dark" type="button">
+                                <a href="catalogo.html">Productos</a>
+                            </button>
+                            <button class="btn btn-outline-primary m-2" data-mdb-ripple-color="dark" type="button">
+                                <a href="nosotros.html">Sobre
+                                    nosotros</a>
+                            </button>
+                            <button class="btn btn-outline-primary m-2" data-mdb-ripple-color="dark" type="button">
+                                <a href="contacto.html">Contacto</a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-toggle="collapse"
+                    data-bs-target="#offcanvasNavbar"data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
             </div>
             <!-- Container wrapper -->
         </nav>
-        </nav>
-        <!-- Navbar -->
+        <!-- End Navbar -->
     </header>
-    <!--Main Navigation-->
-
-    <!--Main layout-->
-    <main id="intro" class="bg-image" style="
+    <main id="intro" class="bg-image main-img" style="
         background-image: url(/minimarket/img/6976007.jpg);
-        height: 100vh;
-        background-repeat: no-repeat;
-        background-size: contain;
+        background-size: cover;
+        height: 400px;
       ">
         <div class="mask" style="background-color: rgba(0, 0, 0, 0.7)"></div>
     </main>
     <!--Main layout-->
+
+
+    <div class="container">
+        <div class="row justify-content-center align-items-center">
+
+              <div class="card m-2" style="width: 15rem;">
+                <img class="card-img-top" src="/minimarket/img/cafe.jpeg" alt="Card image cap">
+                <div class="card-body" style="padding: 1rem 0 0 0;">
+                  <h5 class="card-title">Card title</h5>
+                  <p class="card-text">Arroz Grado 2 Grano Largo Delgado Bolsa, 1 kg</p>
+                  <p>$990</p>
+                </div>
+                <div style="padding: 0 0 1rem 0;">
+                    <button class="btn btn-primary" style="width: 100%;">Add to cart</button>
+                </div>
+              </div>
+        </div>
+    </div>
+
 
     <!-- Footer -->
     <footer class=" bg-dark text-center text-white">

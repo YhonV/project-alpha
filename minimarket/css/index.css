@@ -9,12 +9,8 @@
 
 
 /* Inicio de Navbar */
-.navbar-dark .nav-item .nav-link {
-  color: #fff;
-}
-
 .navbar-dark .nav-item .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgb(254, 254, 254);
   transition: all 0.3s ease;
   border-radius: 0.25rem;
   color: #fff;
@@ -24,6 +20,32 @@
   position: relative;
   left: 0;
 }
+
+.navbar-toggler {
+  border: none;
+  font-size: 1.25rem;
+}
+
+.navbar-toggler:focus,
+.btn-close:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.navbar{
+  a{
+    text-decoration: none;
+    font-weight: bold;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-navbar{
+    display: none;
+  }
+}
+
+
 
 
 /* Inicio de Products Cards */
