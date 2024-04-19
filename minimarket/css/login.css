@@ -2,6 +2,11 @@
 .btn {
     color: #fff; /* Color del texto */
 }
+
+.btn a{
+    color: #fff; /* Color del texto */
+    text-decoration: none;
+}
   
 /* Estilo para el fondo del panel */
 .card {
