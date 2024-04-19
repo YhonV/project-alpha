@@ -13,50 +13,16 @@
 
 
 /* Inicio de Navbar */
-.navbar {
-  background-color: var(--bg-color);
-    height: 80px;
-    margin: 20px;
-    border-radius: 16px;
-    padding: 0.5rem;
+.navbar-dark .nav-item .nav-link:hover {
+  background-color: rgb(254, 254, 254);
+  transition: all 0.3s ease;
+  border-radius: 0.25rem;
+  color: #fff;
 }
 
-.navbar-brand {
-  font-weight: 500;
-  color: var(--color-font);
-  font-size: 24px;
-  transition: 0.3s color;
-}
-
-.nav-link.current::before {
-  width: 100%;
-  visibility: visible;
-}
-
-.navbar-brand img {
-  margin-right: 10px;
-  width: 50px;
-}
-
-.offcanvas-title img {
-  margin-right: 10px;
-  width: 50px;
-}
-
-.loggin-button {
-  background-color: var(--bg-color);
-  color: var(--color-font);
-  font-size: 14px;
-  font-weight: bold;
-  padding: 8px 20px;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: 0.3s background-color;
-}
-
-.loggin-button:hover {
-  background-color: var(--bg-color-hover);
-  border: 0.5px solid #ae3a00;
+.fa-li {
+  position: relative;
+  left: 0;
 }
 
 .navbar-toggler {
@@ -70,55 +36,24 @@
   outline: none;
 }
 
-.nav-item {
-  .nav-link {
-    color: #000;
-    font-weight: 500;
-    position: relative;
-    transition: 0.5s;
+.navbar{
+  a{
+    text-decoration: none;
+    font-weight: bold;
   }
 }
 
-
-.nav-link:hover,
-.nav-link.active {
-  color: var(--link-color-hover);
-  font-size: 105%;
-}
-
-@media(min-width: 990px) {
-  
-  .nav-link {
-    color: #000;
-  }
-
-  .nav-link::before {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 2px;
-    background-color: var(--link-color-hover);
-    visibility: hidden;
-    transition: 0.3s ease-in-out;
-  }
-
-  .nav-link:hover::before,
-  .nav-link.active::before {
-    width: 100%;
-    visibility: visible;
+@media (max-width: 768px) {
+  .header-navbar{
+    display: none;
   }
 }
 
-
-/* Fin Navbar CSS*/
         
     .grid {
         position: relative;
         width: 100%;
-        background: #0071dc;
+        background:  rgb(231, 231, 231);
         color: black;
         border-radius: 10px;
         margin-bottom: 25px;
@@ -175,12 +110,15 @@
       margin-bottom: 10px;
       margin-top: 10px;
     }
+    
     .Categorías{
       font-size: large;
     }
-    .btn-primary{
-      background-color: black;
-      
-    }
+
+  .pagination .page-item .page-link {
+      font-weight: bold; /* Aplica negrita a los números de la lista de paginación */
+  }
+  
+   
   
   /*Fin CSS Catalogo */

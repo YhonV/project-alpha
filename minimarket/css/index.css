@@ -9,55 +9,16 @@
 
 
 /* Inicio de Navbar */
-.navbar {
-  background-color: var(--bg-color);
-    height: 80px;
-    margin: 20px;
-    border-radius: 16px;
-    padding: 0.5rem;
+.navbar-dark .nav-item .nav-link:hover {
+  background-color: rgb(254, 254, 254);
+  transition: all 0.3s ease;
+  border-radius: 0.25rem;
+  color: #fff;
 }
 
-.navbar-brand {
-  font-weight: 500;
-  color: var(--color-font);
-  font-size: 24px;
-  transition: 0.3s color;
-}
-
-.nav-link.current::before {
-  width: 100%;
-  visibility: visible;
-}
-
-.navbar-brand img {
-  margin-right: 10px;
-  width: 50px;
-}
-
-.offcanvas-title img {
-  margin-right: 10px;
-  width: 50px;
-}
-
-.offcanvas-title h5{
-  margin-right: 10px;
-  width: 50px;
-}
-
-.loggin-button {
-  background-color: var(--bg-color);
-  color: var(--color-font);
-  font-size: 14px;
-  font-weight: bold;
-  padding: 8px 20px;
-  border-radius: 50px;
-  text-decoration: none;
-  transition: 0.3s background-color;
-}
-
-.loggin-button:hover {
-  background-color: var(--bg-color-hover);
-  border: 0.5px solid #ae3a00;
+.fa-li {
+  position: relative;
+  left: 0;
 }
 
 .navbar-toggler {
@@ -71,18 +32,19 @@
   outline: none;
 }
 
-.nav-link {
-  font-weight: 500;
-  position: relative;
-  transition: 0.5s;
+.navbar{
+  a{
+    text-decoration: none;
+    font-weight: bold;
+  }
 }
 
-
-.nav-link:hover,
-.nav-link.active {
-  color: var(--link-color-hover);
-  font-size: 105%;
+@media (max-width: 768px) {
+  .header-navbar{
+    display: none;
+  }
 }
+
 
 
 

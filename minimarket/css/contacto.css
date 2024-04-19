@@ -9,122 +9,58 @@
   
   
   /* Inicio de Navbar */
-  .navbar {
-    background-color: var(--bg-color);
-      height: 80px;
-      margin: 20px;
-      border-radius: 16px;
-      padding: 0.5rem;
-  }
-  
-  .navbar-brand {
-    font-weight: 500;
-    color: var(--color-font);
-    font-size: 24px;
-    transition: 0.3s color;
-  }
-  
-  .nav-link.current::before {
-    width: 100%;
-    visibility: visible;
-  }
-  
-  .navbar-brand img {
-    margin-right: 10px;
-    width: 50px;
-  }
-  
-  .offcanvas-title img {
-    margin-right: 10px;
-    width: 50px;
-  }
-  
-  .loggin-button {
-    background-color: var(--bg-color);
-    color: var(--color-font);
-    font-size: 14px;
-    font-weight: bold;
-    padding: 8px 20px;
-    border-radius: 50px;
+
+.navbar-dark .nav-item .nav-link:hover {
+  background-color: rgb(254, 254, 254);
+  transition: all 0.3s ease;
+  border-radius: 0.25rem;
+  color: #fff;
+}
+
+.fa-li {
+  position: relative;
+  left: 0;
+}
+
+.navbar-toggler {
+  border: none;
+  font-size: 1.25rem;
+}
+
+.navbar-toggler:focus,
+.btn-close:focus {
+  box-shadow: none;
+  outline: none;
+}
+
+.navbar{
+  a{
     text-decoration: none;
-    transition: 0.3s background-color;
+    font-weight: bold;
   }
-  
-  .loggin-button:hover {
-    background-color: var(--bg-color-hover);
-    border: 0.5px solid #ae3a00;
+}
+
+@media (max-width: 768px) {
+  .header-navbar{
+    display: none;
   }
-  
-  .navbar-toggler {
-    border: none;
-    font-size: 1.25rem;
+  .container{
+    background-color: #000;
   }
-  
-  .navbar-toggler:focus,
-  .btn-close:focus {
-    box-shadow: none;
-    outline: none;
-  }
-  
-  .nav-item {
-    .nav-link {
-      color: #000;
-      font-weight: 500;
-      position: relative;
-      transition: 0.5s;
-    }
-  }
-  
-  
-  .nav-link:hover,
-  .nav-link.active {
-    color: var(--link-color-hover);
-    font-size: 105%;
-  }
-  
-  @media(min-width: 990px) {
-    
-    .nav-link {
-      color: #000;
-    }
-  
-    .nav-link::before {
-      content: "";
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 2px;
-      background-color: var(--link-color-hover);
-      visibility: hidden;
-      transition: 0.3s ease-in-out;
-    }
-  
-    .nav-link:hover::before,
-    .nav-link.active::before {
-      width: 100%;
-      visibility: visible;
-    }
-  }
-  /* Fin de Navbar */
+}
 
 
 /* Inicio Contacto */
-
-
 .contact {
     padding: 4%;
-    min-height: 400px; /* Cambiado a min-height para permitir el crecimiento del contenido */
-  }
+    min-height: 400px; /* Cambiado a min-height para permitir el crecimiento del contenido */  
+}
   
-  .col-md-3{
-    background: #E6CA3F;
-    padding: 4%;
-    border-top-left-radius: 0.5rem;
-    border-bottom-left-radius: 0.5rem;
-    text-align: center; /* Centra el contenido en todos los tamaños de pantalla */;
-  }
+.col-md-3{
+  background: #fff;
+  padding: 4%;  
+  text-align: center; /* Centra el contenido en todos los tamaños de pantalla */;
+}
   
   @media (min-width: 768px) {
   
@@ -132,6 +68,9 @@
       float: left;
       width: 25%;
       align-items: center;
+      border: 1px solid #000; /* Añade esta línea para agregar bordes al panel */
+      border-top-left-radius: 0.5rem;
+      border-bottom-left-radius: 0.5rem;
     }
   
     .col-md-9 {
@@ -157,23 +96,19 @@
     padding: 2%;
     border-top-right-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
+    border: 1px solid #000; /* Añade esta línea para agregar bordes al panel */
   }
   
   .contact-form label {
     font-weight: 600;
   }
   
-  .contact-form button {
-    color: #fff;
+  .contact-form button { 
     font-weight: 600;
     width: 100%; /* Ajustado el ancho del botón para ocupar todo el contenedor */
     margin-top: 10px; /* Añadido un margen superior para separar el botón del resto del contenido */
   }
-  
-  .contact-form button:hover {
-    background-color: #6a6a6a;
-    color: #fff;
-  }
+
 
 .contact-form .form-group {
     margin-bottom: 20px; /* Ajusta este valor según el espacio deseado entre los campos */
