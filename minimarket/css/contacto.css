@@ -9,6 +9,9 @@
   
   
   /* Inicio de Navbar */
+  #txtAgreProd{
+    color: #f3f5f7;
+}
 
 .navbar-dark .nav-item .nav-link:hover {
   background-color: rgb(254, 254, 254);

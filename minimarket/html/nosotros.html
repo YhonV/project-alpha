@@ -38,8 +38,30 @@
                     <!-- Search element -->
 
                     <!-- Right elements -->
+                    
                     <div class="col-lg-5 d-flex justify-content-center justify-content-md-end align-items-center">
-
+                        <button class="btn btn-outline-primary me-4 position-relative" style="padding-bottom: 10px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"  style="width: 20px;" alt="">
+                            <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
+                                0
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </button>
+                            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                            <div class="offcanvas-header">
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Mi Carrito (0)</h5>
+                                
+                                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                            </div>
+                            <div class="offcanvas-body">
+                                <img src="https://cdn-icons-png.flaticon.com/512/102/102661.png" style="width: 100px; height: 100px;" alt="">
+                                <h5>Tu carro esta vacío</h5><br>
+                                <p>¡Descubre los productos que tenemos para ti!</p>
+                                <button type="button"  class="btn btn-primary">
+                                    <a href="catalogo.html" id="txtAgreProd" style=" font-weight: bold; ">Agregar Productos</a>
+                                </button>
+                            </div>
+                            </div>
+                          
                         <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
                             <a href="contacto.html" style=" text-decoration: none; font-weight: bold;">Ingresar</a>
                         </button>
