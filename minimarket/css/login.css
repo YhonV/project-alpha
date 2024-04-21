@@ -1,10 +1,9 @@
-/* Estilo para los botones */
 .btn {
-    color: #fff; /* Color del texto */
+    color: #fff; 
 }
 
 .btn a{
-    color: #fff; /* Color del texto */
+    color: #fff; 
     text-decoration: none;
 }
   

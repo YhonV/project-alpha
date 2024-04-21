@@ -48,7 +48,15 @@
     .header-navbar{
       display: none;
     }
+    .shopping-cart {
+      display: block; /* o 'flex' si prefieres */
+    }
   }
+
+  .btn-outline-primary {
+    --bs-btn-hover-bg: #fff;
+  }
+
 
 /* Nosotros */
 .light {

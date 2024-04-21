@@ -13,12 +13,12 @@
 
 <body>
     <header class="mb-4 fixed-top">
-        <div class="p-3 text-center bg-white border-bottom header-navbar">
+        <div class="p-3 text-center bg-white border-bottom">
             <div class="container-fluid">
                 <div class="row">
 
                     <!-- Left Elements / Logo and minimarket names -->
-                    <div class="col-md-2 d-none d-lg-block">
+                    <div class="col-md-2 d-none d-lg-block header-navbar">
                         <a href="#!" class="ms-md-2" style="text-decoration: none; font-weight: bold; font-size: 20px;">
                             <img src="/minimarket/img/jmc.png" height="50">
                         </a>
@@ -26,19 +26,17 @@
 
                     <!-- Search element -->
                     <div
-                        class="col-md-5 d-flex justify-content-center justify-content-md-start align-items-center d-none d-lg-flex">
+                        class="col-md-5 d-flex justify-content-center justify-content-md-start align-items-center d-none d-lg-flex header-navbar">
                         <form class="d-flex input-group w-auto my-auto mb-3 mb-md-0">
                             <input autocomplete="off" type="search" class="form-control rounded" placeholder="Search" />
                             <span class="input-group-text border-0 d-none d-lg-flex" style="margin-left: 5px;"><i
                                     class="fas fa-search"></i></span>
                         </form>
                     </div>
-                    <!-- Search element -->
-
-                    <!-- Right elements -->
                     
-                    <div class="col-lg-5 d-flex justify-content-center justify-content-md-end align-items-center">
-                        <button class="btn btn-outline-primary me-4 position-relative" style="padding-bottom: 10px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"  style="width: 20px;" alt="">
+                    <!-- Carrito de compras -->
+                    <div class="col-lg-5 d-flex justify-content-center justify-content-md-end align-items-center shopping-cart">
+                        <button class="btn btn-outline-primary me-4 position-relative" style="padding-bottom: 7px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><img src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"  style="width: 20px;" alt="">
                             <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
                                 0
                                 <span class="visually-hidden">unread messages</span>
@@ -46,8 +44,8 @@
                         </button>
                             <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                             <div class="offcanvas-header">
-                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Mi Carrito (0)</h5>
-                                
+                                <h5 class="offcanvas-title" id="offcanvasRightLabel">Mi Carrito</h5>
+
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
@@ -88,11 +86,7 @@
             <div class="container-fluid">
 
                 <!-- Center elements -->
-                <div class="d-flex flex-grow-1 pe-3 d-none d-lg-flex">
-
-                    <button class="btn btn-warning" data-mdb-ripple-color="dark" type="button">
-                        <a href="#" style="color: #fff;">¡¡ OFERTAS !!</a>
-                    </button>
+                <div class="d-flex flex-grow-1 pe-3 d-none d-lg-flex justify-content-md-end">
 
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
                         <a href="index.html">Home</a>

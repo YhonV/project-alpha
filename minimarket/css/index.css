@@ -1,14 +1,3 @@
-/* Variables globales */
-:root {
-  --color-font: #fff;
-  --bg-color: #0071dc;
-  --bg-color-hover: #ffffff;
-  --link-color-hover: #ffffff;
-}
-/* Variables globales */
-
-
-/* Inicio de Navbar */
 
 #txtAgreProd{
   color: #f3f5f7;
@@ -43,13 +32,22 @@
   }
 }
 
+.shopping-cart {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .header-navbar{
     display: none;
   }
+  .shopping-cart {
+    display: block;
+  }
 }
 
-
+.btn-outline-primary {
+  --bs-btn-hover-bg: #fff;
+}
 
 
 /* Inicio de Products Cards */
@@ -80,6 +78,5 @@
   display:flex;
   margin-right:6px;
 }
- /* Fin de Products Cards */
 
  

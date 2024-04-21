@@ -1,16 +1,7 @@
-/* Variables globales */
-:root {
-    --color-font: #fff;
-    --bg-color: #0071dc;
-    --bg-color-hover: #ffffff;
-    --link-color-hover: #ffffff;
-  }
-  /* Variables globales */
-  
-  
-  /* Inicio de Navbar */
-  #txtAgreProd{
-    color: #f3f5f7;
+
+/* Inicio de Navbar */
+#txtAgreProd{ /* Añadido para cambiar el color del texto para el carrito de compras */
+  color: #f3f5f7;
 }
 
 .navbar-dark .nav-item .nav-link:hover {
@@ -47,73 +38,78 @@
   .header-navbar{
     display: none;
   }
-  .container{
-    background-color: #000;
+  .shopping-cart {
+    display: block; /* o 'flex' si prefieres */
   }
 }
+
+.btn-outline-primary {
+  --bs-btn-hover-bg: #fff;
+}
+
 
 
 /* Inicio Contacto */
 .contact {
     padding: 4%;
-    min-height: 400px; /* Cambiado a min-height para permitir el crecimiento del contenido */  
+    min-height: 400px; 
 }
   
 .col-md-3{
   background: #fff;
   padding: 4%;  
-  text-align: center; /* Centra el contenido en todos los tamaños de pantalla */;
+  text-align: center; 
 }
   
-  @media (min-width: 768px) {
-  
-    .col-md-3 {
-      float: left;
-      width: 25%;
-      align-items: center;
-      border: 1px solid #000; /* Añade esta línea para agregar bordes al panel */
-      border-top-left-radius: 0.5rem;
-      border-bottom-left-radius: 0.5rem;
-    }
-  
-    .col-md-9 {
-      float: left;
-      width: 75%; /* Ajustado el ancho para dispositivos medianos y más grandes */
-    }
+@media (min-width: 768px) {
+
+  .col-md-3 {
+    float: left;
+    width: 25%;
+    align-items: center;
+    border: 1px solid #000;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
   }
-  
-  .contact-info {
-    margin-top: 10%;
-  }
-  
-  .contact-info img {
-    margin-bottom: 15%;
-  }
-  
-  .contact-info h2 {
-    margin-bottom: 10%;
-  }
-  
+
   .col-md-9 {
-    background:  rgb(231, 231, 231);
-    padding: 2%;
-    border-top-right-radius: 0.5rem;
-    border-bottom-right-radius: 0.5rem;
-    border: 1px solid #000; /* Añade esta línea para agregar bordes al panel */
+    float: left;
+    width: 75%; 
   }
-  
-  .contact-form label {
-    font-weight: 600;
-  }
-  
-  .contact-form button { 
-    font-weight: 600;
-    width: 100%; /* Ajustado el ancho del botón para ocupar todo el contenedor */
-    margin-top: 10px; /* Añadido un margen superior para separar el botón del resto del contenido */
-  }
+}
+
+.contact-info {
+  margin-top: 10%;
+}
+
+.contact-info img {
+  margin-bottom: 15%;
+}
+
+.contact-info h2 {
+  margin-bottom: 10%;
+}
+
+.col-md-9 {
+  background:  rgb(231, 231, 231);
+  padding: 2%;
+  border-top-right-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  border: 1px solid #000; /* Añade esta línea para agregar bordes al panel */
+}
+
+.contact-form label {
+  font-weight: 600;
+}
+
+.contact-form button { 
+  font-weight: 600;
+  width: 100%; /* Ajustado el ancho del botón para ocupar todo el contenedor */
+  margin-top: 10px; /* Añadido un margen superior para separar el botón del resto del contenido */
+}
 
 
 .contact-form .form-group {
-    margin-bottom: 20px; /* Ajusta este valor según el espacio deseado entre los campos */
+  margin-bottom: 20px; /* Ajusta este valor según el espacio deseado entre los campos */
 }
 
