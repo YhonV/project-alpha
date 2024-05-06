@@ -55,7 +55,7 @@
                         <div class="offcanvas-body">
                             <img src="https://cdn-icons-png.flaticon.com/512/102/102661.png" style="width: 100px; height: 100px;" alt="">
                             <h5>Tu carro esta vacío</h5><br>
-                            <p>¡Descubre los productos que tenemos para ti!</p>
+                            <p id="productos-agregados">¡Descubre los productos que tenemos para ti!</p>
                             <button type="button"  class="btn btn-primary">
                                 <a href="catalogo.html" id="txtAgreProd" style=" font-weight: bold; ">Agregar Productos</a>
                             </button>
@@ -359,27 +359,27 @@
                 <div class="container">
                   <div class="row justify-content-center align-items-center">
           
-                        <div class="card m-2" style="width: 15rem;">
+                        <div class="card m-2" style="width: 15rem;" id="catalogo">
                           <img class="card-img-top" src="https://www.agrosuperventas.com/medias/1112580-1-300Wx300H?context=bWFzdGVyfGltYWdlc3wyMTc5NzN8aW1hZ2UvanBlZ3xhRGRrTDJnd1lTODROems1TURZNE5UVXpNalEyTHpFeE1USTFPREJmTVY4ek1EQlhlRE13TUVnfDUxMzM5MGU1YTA5ZmM5OTg2YTRlMTY4NDI0MWRmMTkyMWZiNjY5ZjAwYjQ1MmUzMTA0NDBjZjQ4ZmFkM2QxMGI" alt="Card image cap">
                           <div class="card-body" style="padding: 1rem 0 0 0;">
                             <h5 class="card-title">Salmón Atlántico</h5>
                             <p class="card-text">Salmón Atlántico 500g</p>
-                            <h4>$8.990</h4>
+                            <h4 class="price">$8.990</h4>
                           </div>
                           <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg" style="width: 100%;">Agregar</button>
+                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
                           </div>
                         </div>
           
-                        <div class="card m-2" style="width: 15rem;">
+                        <div class="card m-2" style="width: 15rem;" id="catalogo">
                           <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjZLdpu9g2fZfkGeJtJogkpaLJjdjEYBng41MLmS-2BQ&s" alt="Card image cap">
                           <div class="card-body" style="padding: 1rem 0 0 0;">
                             <h5 class="card-title">Merluza Apanada</h5>
                             <p class="card-text">Merluza Apanada 500g</p>
-                            <h4>$5.990</h4>
+                            <h4 class="price">$5.990</h4>
                           </div>
                           <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg" style="width: 100%;">Agregar</button>
+                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
                           </div>
                         </div>
           
@@ -388,10 +388,10 @@
                           <div class="card-body" style="padding: 1rem 0 0 0;">
                             <h5 class="card-title">Filetitos de Pollo</h5>
                             <p class="card-text">Filetes de Pollo 700g</p>
-                            <h4>$6.990</h4>
+                            <h4 class="price">$6.990</h4>
                           </div>
                           <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg" style="width: 100%;">Agregar</button>
+                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
                           </div>
                         </div>
           
@@ -400,10 +400,10 @@
                           <div class="card-body" style="padding: 1rem 0 0 0;">
                             <h5 class="card-title">Pulpa de Piña</h5>
                             <p class="card-text">Pulpa de Piña 1 kg</p>
-                            <h4>$4.990</h4>
+                            <h4 class="price">$4.990</h4>
                           </div>
                           <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg" style="width: 100%;">Agregar</button>
+                              <button class="btn btn-primary btn-lg btn-agregar"style="width: 100%;">Agregar</button>
                           </div>
                         </div> 
 
@@ -412,10 +412,10 @@
                           <div class="card-body" style="padding: 1rem 0 0 0;">
                             <h5 class="card-title">Arroz</h5>
                             <p class="card-text">Arroz Grado2 1 Kg</p>
-                            <h4>$2.990</h4>
+                            <h4 class="price">$2.990</h4>
                           </div>
                           <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg" style="width: 100%;">Agregar</button>
+                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
                           </div>
                         </div> 
 
@@ -424,10 +424,10 @@
                           <div class="card-body" style="padding: 1rem 0 0 0;">
                             <h5 class="card-title">Aceite Maravilla</h5>
                             <p class="card-text">Aceite Maravilla 1 Lt</p>
-                            <h4>$2.990</h4>
+                            <h4 class="price">$2.990</h4>
                           </div>
                           <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg" style="width: 100%;">Agregar</button>
+                              <button class="btn btn-primary btn-lg btn-agregar"  style="width: 100%;">Agregar</button>
                           </div>
                         </div>  
 
@@ -436,10 +436,10 @@
                           <div class="card-body" style="padding: 1rem 0 0 0;">
                             <h5 class="card-title">Azúcar</h5>
                             <p class="card-text">Azucar Iansa 1 Kg</p>
-                            <h4>$1.290</h4>
+                            <h4 class="price">$1.290</h4>
                           </div>
                           <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg" style="width: 100%;">Agregar</button>
+                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
                           </div>
                         </div>
           
@@ -448,10 +448,10 @@
                           <div class="card-body" style="padding: 1rem 0 0 0;">
                             <h5 class="card-title">Leche Descremada</h5>
                             <p class="card-text">Leche Descremada 1 Kg</p>
-                            <h4>$1.190</h4>
+                            <h4 class="price">$1.190</h4>
                           </div>
                           <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg" style="width: 100%;">Agregar</button>
+                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
                           </div>
                         </div>
 
@@ -460,10 +460,10 @@
                           <div class="card-body" style="padding: 1rem 0 0 0;">
                             <h5 class="card-title">Café Tradición</h5>
                             <p class="card-text">Café Tradición 170 g</p>
-                            <h4>$1.990</h4>
+                            <h4 class="price">$1.990</h4>
                           </div>
                           <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg" style="width: 100%;">Agregar</button>
+                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
                           </div>
                         </div>
                   </div>
@@ -666,9 +666,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
-
-
     <!-- End BootStrap JS -->
+
+    <script src="/minimarket/js/app.js"></script>
 </body>
 
 </html>
