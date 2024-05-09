@@ -1,3 +1,31 @@
+// Código de filtrado de productos por categoría
+const aplicarBtn = document.querySelector('#btn-categorias');
+aplicarBtn.addEventListener('click', filtrarProductos);
+
+function filtrarProductos() {
+    const categoriasSeleccionadas = Array.from(document.querySelectorAll('.Categorías input[type="checkbox"]:checked'))
+      .map(checkbox => checkbox.parentNode.textContent.trim());
+  
+    console.log('Categorías seleccionadas:', categoriasSeleccionadas);
+  
+    const productos = Array.from(document.querySelectorAll('.row.justify-content-center.align-items-center > div'));
+    console.log('Productos totales:', productos.length);
+  
+    const productosFiltrados = productos.filter(producto => {
+      const categoria = producto.querySelector('.card-text').textContent.trim();
+      console.log('Categoría del producto:', categoria);
+      return categoriasSeleccionadas.includes(categoria) || categoriasSeleccionadas.length === 0;
+    });
+  
+    console.log('Productos filtrados:', productosFiltrados.length);
+  
+    productos.forEach(producto => producto.style.display = 'none');
+    productosFiltrados.forEach(producto => producto.style.display = 'block');
+  }
+
+
+
+
 //Inicializamos un contador, este precisamente nos servirá
 //para que no se nos rompa el offcanvas cuando agreguemos nuevos productos
 let productContador = 0;
@@ -78,5 +106,6 @@ document.querySelectorAll(".btn-agregar").forEach(button => {
             document.getElementById('total-price').textContent = `Total: ${totalPrice}`;
               card.remove();
           }
-      }
+    }
+
   });
