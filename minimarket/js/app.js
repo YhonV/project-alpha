@@ -109,7 +109,21 @@ document.getElementById("productos-agregados").addEventListener("click", functio
           quantityElement.textContent = `Cantidad: ${quantity - 1}`;
       } else {
           card.remove();
-      }
+
+        //Si el contador llega a 0, mostraremos el mismo offcanvas de antes
+          if (productContador === 0) {
+            let offcanvasBody = document.getElementById("productos-agregados");
+            offcanvasBody.innerHTML = `
+                <img src="https://cdn-icons-png.flaticon.com/512/102/102661.png" style="width: 100px; height: 100px;" alt="">
+                <h5>Tu carro esta vacío</h5><br>
+                <p>¡Descubre los productos que tenemos para ti!</p>
+                <button type="button"  class="btn btn-primary">
+                    <a href="catalogo.html" id="txtAgreProd" style=" font-weight: bold; ">Agregar Productos</a>
+                </button>
+            `;
+        }
+      };
+
   }
 
 });
