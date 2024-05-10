@@ -24,8 +24,6 @@ function filtrarProductos() {
   }
 
 
-
-
 //Inicializamos un contador, este precisamente nos servirá
 //para que no se nos rompa el offcanvas cuando agreguemos nuevos productos
 let productContador = 0;
@@ -51,8 +49,8 @@ document.querySelectorAll(".btn-agregar").forEach(button => {
         <p class="cantidad">Cantidad: 1</p>
         </div>
             <div class="d-flex flex-column align-items-end">
-                <button class="btn btn-primary mb-2">+</button>
-                <button class="btn btn-danger">-</button>
+                <button class="btn btn-primary mb-2" style="width:40px;">+</button>
+                <button class="btn btn-danger" style="width:40px;">-</button>
             </div>
         </div>
         </div>
@@ -95,15 +93,10 @@ document.querySelectorAll(".btn-agregar").forEach(button => {
         let card = e.target.closest('.producto');
         let quantityElement = card.querySelector('.cantidad');
         let quantity = parseInt(quantityElement.textContent.split(': ')[1]);
-        let price = parseFloat(card.querySelector('.price').textContent);
 
             if (quantity > 1) {
-                totalPrice -= price;
-                document.getElementById('total-price').textContent = `Total: ${totalPrice}`;
                 quantityElement.textContent = `Cantidad: ${quantity - 1}`;
           } else {
-            totalPrice -= price;
-            document.getElementById('total-price').textContent = `Total: ${totalPrice}`;
               card.remove();
           }
     }
