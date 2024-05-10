@@ -29,6 +29,9 @@ function filtrarProductos() {
 let productContador = 0;
 
 
+// Seleccionamos el elemento que contiene el número de productos en el carrito
+let productCountElement = document.querySelector('.btn-outline-primary .badge');
+
 
 document.querySelectorAll(".btn-agregar").forEach(button => {
     button.addEventListener("click", function() {
@@ -56,9 +59,12 @@ document.querySelectorAll(".btn-agregar").forEach(button => {
         </div>
         `;
 
-        document.getElementById("productos-agregados").innerHTML += newCardHTML;
+      document.getElementById("productos-agregados").innerHTML += newCardHTML;
        
-        productContador++;
+      productContador++;
+
+      // Actualizamos el número de productos en el carrito
+      productCountElement.textContent = productContador;
     
     //Eliminaremos los elementos innecesarios que tenemos en nuestro offcanvas
     //Elementos como "Tu carrito está vacío" o "Agrega productos a tu carrito"
@@ -79,26 +85,31 @@ document.querySelectorAll(".btn-agregar").forEach(button => {
   });
   
   
-  // Función que nos permitirá agregar o eliminar productos de nuestro carrito
-  document.getElementById("productos-agregados").addEventListener("click", function(e) {
-  
-    if (e.target.matches('.btn-primary')) {
+ // Función que nos permitirá agregar o eliminar productos de nuestro carrito
+document.getElementById("productos-agregados").addEventListener("click", function(e) {
 
-        let card = e.target.closest('.producto');
-        let quantityElement = card.querySelector('.cantidad');
-        let quantity = parseInt(quantityElement.textContent.split(': ')[1]);
-        quantityElement.textContent = `Cantidad: ${quantity + 1}`;
+  if (e.target.matches('.btn-primary')) {
 
-      } else if (e.target.matches('.btn-danger')) {
-        let card = e.target.closest('.producto');
-        let quantityElement = card.querySelector('.cantidad');
-        let quantity = parseInt(quantityElement.textContent.split(': ')[1]);
+      let card = e.target.closest('.producto');
+      let quantityElement = card.querySelector('.cantidad');
+      let quantity = parseInt(quantityElement.textContent.split(': ')[1]);
+      quantityElement.textContent = `Cantidad: ${quantity + 1}`;
+      productContador++;
+      productCountElement.textContent = productContador;
 
-            if (quantity > 1) {
-                quantityElement.textContent = `Cantidad: ${quantity - 1}`;
-          } else {
-              card.remove();
-          }
-    }
+  } else if (e.target.matches('.btn-danger')) {
+      let card = e.target.closest('.producto');
+      let quantityElement = card.querySelector('.cantidad');
+      let quantity = parseInt(quantityElement.textContent.split(': ')[1]);
+      productContador--;
+      productCountElement.textContent = productContador;
 
-  });
+
+      if (quantity > 1) {
+          quantityElement.textContent = `Cantidad: ${quantity - 1}`;
+      } else {
+          card.remove();
+      }
+  }
+
+});
