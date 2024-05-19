@@ -189,3 +189,4 @@ document.getElementById("productos-agregados").addEventListener("click", functio
     }
   }
 });
+
