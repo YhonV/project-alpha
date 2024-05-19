@@ -72,169 +72,168 @@ document.addEventListener('DOMContentLoaded', function() {
 //------------------------------------------------------------------------------------------------------------------------
 
 
-/**
- * Inicializamos variable contador
- * y elemento que muestra el contador
- */
+// Contadores para los productos y los badges
 let productContador = 0;
+let badgeContador = 0;
+
+// Elemento del DOM para el contador de productos
 let productCountElement = document.querySelector('.btn-outline-primary .badge');
 
+// Array para almacenar los productos agregados
+let productosAgregados = [];
 
-/**
- * Creamos la funcion de agregar un producto al carro
- * Extraemos datos de la tarjeta del producto
- * Creamos una nueva tarjeta con la información extraida
- * y la agregamos al offcanvas
-*/
-document.querySelectorAll(".btn-agregar").forEach(button => {
-  button.addEventListener("click", function() {
+// Función para inicializar los productos desde el localStorage
+function inicializarProductos() {
+  // Recuperar los productos del localStorage o inicializar a un array vacío si no existen
+  productosAgregados = localStorage.getItem('productosAgregados') ? JSON.parse(localStorage.getItem('productosAgregados')) : [];
 
-    /**
-     * Extraemos toda la información necesaria de la tarjeta del producto
-     */
-    let card = this.parentElement.parentElement;
-    let imgSrc = card.querySelector('.card-img-top').src;
-    let title = card.querySelector('.card-title').textContent;
-    let priceString = card.querySelector('.price').textContent;
-    let price = parseFloat(priceString.replace('$', ''));
+  // Actualizar los contadores con la cantidad de cada producto
+  productosAgregados.forEach(producto => {
+    productContador += producto.cantidad;
+    badgeContador += producto.cantidad;
+  });
 
+  // Actualizar el texto del contador de productos en el DOM
+  productCountElement.textContent = badgeContador;
+}
 
-    /**
-     * Creamos una nueva tarjeta con la información extraida
-     * y la agregamos al offcanvas
-     * Además de incrementar el contador de productos
-     */
-    let newCardHTML = `
-      <div class="producto m-2 d-flex flex-row">
-        <img class="card-img-top" src="${imgSrc}" alt="Imagen de la tarjeta" style="width: 6rem; height: 7rem;">
-        <div class="card-body d-flex justify-content-between" style="padding: 1rem;">
-          <div>
-            <h5 class="card-title">${title}</h5>
-            <h6 class="price">${priceString}</h6>
-            <p class="cantidad">Cantidad: 1</p>
-            <h6 class="total">Total: $${price.toFixed(2)}</h6>
-          </div>
-          <div class="d-flex flex-column align-items-end">
-            <button class="btn btn-primary mb-2" style="width:40px;">+</button>
-            <button class="btn btn-danger" style="width:40px;">-</button>
-          </div>
-        </div>
+// Función para crear una tarjeta de producto
+function createCard(producto) {
+  // Crear un nuevo elemento div
+  const newCard = document.createElement('div');
+
+  // Asignar clases al div
+  newCard.className = "producto m-2 d-flex flex-row align-items-center";
+
+  // Asignar el HTML interno del div
+  newCard.innerHTML = `
+    <img class="card-img-top" src="${producto.imgSrc}" alt="Imagen de la tarjeta" style="width: 6rem; height: 7rem;">
+    <div class="card-body d-flex justify-content-between flex-grow-1" style="padding: 1rem;">
+      <div>
+        <h5 class="card-title">${producto.title}</h5>
+        <h6 class="price">${producto.priceString}</h6>
+        <p class="cantidad">Cantidad: ${producto.cantidad}</p>
       </div>
-    `;
-    document.getElementById("productos-agregados").innerHTML += newCardHTML;
-    productContador++;
-    productCountElement.textContent = productContador;
+      <div class="d-flex flex-column align-items-end">
+        <button class="btn btn-primary mb-2 btn-incrementar" style="width:40px;">+</button>
+        <button class="btn btn-danger btn-disminuir" style="width:40px;">-</button>
+      </div>
+    </div>
+  `;
 
+  // Devolver la nueva tarjeta
+  return newCard;
+}
 
-    /**
-     * Si es el primer producto agregado
-     * eliminamos el mensaje de carro vacío
-     */
-    if(productContador == 1) {
-      let offcanvasBody = document.getElementById("productos-agregados");
-      let h5 = offcanvasBody.querySelector("h5");
-      let p = offcanvasBody.querySelector("p");
-      let b = offcanvasBody.querySelector("button");
-      let im = offcanvasBody.querySelector("img");
-      if (h5) h5.remove();
-      if (p) p.remove();
-      if (b) b.remove();
-      if (im) im.remove();
+// Función para eliminar el mensaje de carrito vacío
+function eliminarMensajeCarritoVacio() {
+  // Solo eliminar el mensaje si hay al menos un producto
+  if(productContador >= 1){
+    let mensajeVacio = document.getElementById("mensaje-vacio");
+    if (mensajeVacio) mensajeVacio.remove();
+  }
+}
+
+// Función para cargar los productos al DOM
+function cargarProductos() {
+  // Solo cargar los productos si hay al menos uno
+  if (productosAgregados.length > 0) {
+    eliminarMensajeCarritoVacio();
+    productosAgregados.forEach(producto => {
+      document.getElementById("productos-agregados").appendChild(createCard(producto));
+    });
+  }
+}
+
+// Función para actualizar el localStorage con los productos y contadores actuales
+function actualizarLocalStorage() {
+  localStorage.setItem('productContador', productContador);
+  localStorage.setItem('productosAgregados', JSON.stringify(productosAgregados));
+}
+
+// Función para agregar un producto al carrito
+function agregarProducto() {
+  // Agregar un event listener a cada botón de agregar
+  document.querySelectorAll(".btn-agregar").forEach(button => {
+    button.addEventListener("click", function() {
+      // Recuperar los datos del producto desde el DOM
+      let card = this.parentElement.parentElement;
+      let imgSrc = card.querySelector('.card-img-top').src;
+      let title = card.querySelector('.card-title').textContent;
+      let priceString = card.querySelector('.price').textContent;
+
+      // Verificar si el producto ya existe en el carrito
+      let productoExistente = productosAgregados.find(producto => producto.title === title);
+
+      // Si el producto ya existe, incrementar su cantidad
+      if (productoExistente) {
+        productoExistente.cantidad++;
+        let existingCard = Array.from(document.getElementById("productos-agregados").children).find(card => card.querySelector('.card-title').textContent === title);
+        existingCard.querySelector('.cantidad').textContent = `Cantidad: ${productoExistente.cantidad}`;
+      } else {
+        // Si el producto no existe, crear uno nuevo y agregarlo al carrito
+        let newProduct = { imgSrc, title, priceString, cantidad: 1 };
+        productosAgregados.push(newProduct);
+        document.getElementById("productos-agregados").appendChild(createCard(newProduct));
+      }
+
+      // Incrementar el contador de productos y actualizar el DOM y el localStorage
+      productContador++;
+      productCountElement.textContent = productContador;
+      actualizarLocalStorage();
+
+      // Eliminar el mensaje de carrito vacío si existe
+      eliminarMensajeCarritoVacio();
+    });
+  });
+}
+
+// Función para manejar la cantidad de un producto en el carrito
+function manejarCantidad() {
+  // Agregar un event listener al contenedor de productos
+  document.getElementById("productos-agregados").addEventListener("click", function(e) {
+    // Recuperar la tarjeta del producto desde el DOM
+    let card = e.target.closest('.producto');
+    if (!card) return;
+
+    // Recuperar la cantidad actual del producto
+    let quantityElement = card.querySelector('.cantidad');
+    let quantity = parseInt(quantityElement.textContent.split(': ')[1]);
+
+    // Si se presionó el botón de incrementar, incrementar la cantidad del producto
+    if (e.target.matches('.btn-incrementar')) {
+      quantityElement.textContent = `Cantidad: ${quantity + 1}`;
+      let index = productosAgregados.findIndex(producto => producto.title === card.querySelector('.card-title').textContent);
+      productosAgregados[index].cantidad++;
+      actualizarLocalStorage();
+      productContador++;
+      productCountElement.textContent = productContador;
+    } else if (e.target.matches('.btn-disminuir')) {
+      // Si se presionó el botón de disminuir, disminuir la cantidad del producto
+      if (quantity > 1) {
+        quantityElement.textContent = `Cantidad: ${quantity - 1}`;
+        let index = productosAgregados.findIndex(producto => producto.title === card.querySelector('.card-title').textContent);
+        productosAgregados[index].cantidad--;
+        actualizarLocalStorage();
+      } else {
+        // Si la cantidad es 1, eliminar el producto del carrito
+        card.remove();
+        let index = productosAgregados.findIndex(producto => producto.title === card.querySelector('.card-title').textContent);
+        productosAgregados.splice(index, 1);
+        actualizarLocalStorage();
+      }
+      // Decrementar el contador de productos y actualizar el DOM y el localStorage
+      productContador--;
+      productCountElement.textContent = productContador;
+      actualizarLocalStorage();
     }
   });
-});
+}
 
+// Inicializar los productos y cargarlos al iniciar la página
+inicializarProductos();
+cargarProductos();
 
-/**
- * Creamos una función para incrementar y decrementar la cantidad de productos
- * 
- */
-document.getElementById("productos-agregados").addEventListener("click", function(e) {
-
-  /**
-   * Si e.target es igual a .btn-primary
-   * asignamos card con el elemento más cercano con la clase .producto(busca el contenedor que fue clickeado)
-   * asignamos quantityElement con el elemento que contiene la cantidad
-   * asignamos quantity con el valor de la cantidad
-   * incrementamos la cantidad
-   * actualizamos el contador de productos junto con el elemento que lo muestra
-   */
-  if (e.target.matches('.btn-primary')) {
-
-    let card = e.target.closest('.producto');
-    let quantityElement = card.querySelector('.cantidad');
-    let quantity = parseInt(quantityElement.textContent.split(': ')[1]);
-    quantityElement.textContent = `Cantidad: ${quantity + 1}`;
-    productContador++;
-    productCountElement.textContent = productContador;
-
-
-    /**
-     * Extraemos el precio del producto (precio en String)
-     * Convertimos el precio a un número flotante reemplazando el signo de dolar
-     * Lo multiplicamos por la cantidad + 1
-     * Creamos un elemento totalElement que contiene el precio total
-     * Si el elemento total no existe, lo creamos
-     * y lo agregamos al contenedor de la tarjeta 
-    */
-    let priceString = card.querySelector('.price').textContent;
-    let price = parseFloat(priceString.replace('$', ''));
-    let total = price * (quantity + 1);
-    let totalElement = card.querySelector('.total') || document.createElement('h6');
-    totalElement.textContent = `Total: $${total.toFixed(2)}`;
-    totalElement.classList.add('total');
-    card.querySelector('.card-body').appendChild(totalElement);
-
-
-    /**
-     * En caso de que el target sea igual a .btn-danger
-     * Realizamos el mismo proceso que en el caso anterior
-     * Pero decrementando la cantidad en vez de incrementar
-     */
-  } else if (e.target.matches('.btn-danger')) {
-
-    let card = e.target.closest('.producto');
-    let quantityElement = card.querySelector('.cantidad');
-    let quantity = parseInt(quantityElement.textContent.split(': ')[1]);
-    productContador--;
-    productCountElement.textContent = productContador;
-    
-
-    /**
-     * Si la cantidad es mayor a 1
-     * decrementamos la cantidad
-     * volvemos a calcular el precio total
-     * y actualizamos el elemento total
-     */
-    if (quantity > 1) {
-      quantityElement.textContent = `Cantidad: ${quantity - 1}`;
-
-      let priceString = card.querySelector('.price').textContent;
-      let price = parseFloat(priceString.replace('$', ''));
-      let total = price * (quantity - 1);
-      let totalElement = card.querySelector('.total');
-      totalElement.textContent = `Total: $${total.toFixed(2)}`;
-
-      /**
-       * En caso contrario
-       * eliminamos la tarjeta del producto
-       * y si el contador de productos es igual a 0
-       * mostramos un mensaje de carro vacío
-       */
-    } else {
-      card.remove();
-      if (productContador === 0) {
-        let offcanvasBody = document.getElementById("productos-agregados");
-        offcanvasBody.innerHTML = `
-          <img src="https://cdn-icons-png.flaticon.com/512/102/102661.png" style="width: 100px; height: 100px;" alt="">
-          <h5>Tu carro esta vacío</h5><br>
-          <p>¡Descubre los productos que tenemos para ti!</p>
-          <button type="button" class="btn btn-primary">
-            <a href="catalogo.html" id="txtAgreProd" style=" font-weight: bold; ">Agregar Productos</a>
-          </button>
-        `;
-      }
-    }
-  }
-});
-
+// Agregar los eventos de agregar producto y manejar cantidad
+agregarProducto();
+manejarCantidad();

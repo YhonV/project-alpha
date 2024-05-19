@@ -52,13 +52,18 @@
 
                             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                         </div>
-                        <div class="offcanvas-body" id="productos-agregados">
-                            <img src="https://cdn-icons-png.flaticon.com/512/102/102661.png" style="width: 100px; height: 100px;" alt="">
-                            <h5>Tu carro esta vacío</h5><br>
-                            <p>¡Descubre los productos que tenemos para ti!</p>
-                            <button type="button"  class="btn btn-primary">
-                                <a href="catalogo.html" id="txtAgreProd" style=" font-weight: bold; ">Agregar Productos</a>
+                        <div class="offcanvas-body">
+                          <div id="mensaje-vacio">
+                            <img src="https://cdn-icons-png.flaticon.com/512/102/102661.png" class="carro-vacio" style="width: 100px; height: 100px;" alt="">
+                            <h5 class="carro-vacio">Tu carro esta vacío</h5><br>
+                            <p class="carro-vacio">¡Descubre los productos que tenemos para ti!</p>
+                            <button type="button"  class="btn btn-primary carro-vacio">
+                              <a href="catalogo.html" id="txtAgreProd" style=" font-weight: bold; ">Agregar Productos</a>
                             </button>
+                          </div>
+                          <div id="productos-agregados">
+                            
+                          </div>
                         </div>
                         </div>
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
