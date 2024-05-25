@@ -69,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 });
-//------------------------------------------------------------------------------------------------------------------------
 
 
 // Contadores para los productos y los badges
