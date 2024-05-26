@@ -1,0 +1,80 @@
+#txtAgreProd{
+    color: #f3f5f7;
+  }
+  .navbar-dark .nav-item .nav-link:hover {
+    background-color: rgb(254, 254, 254);
+    transition: all 0.3s ease;
+    border-radius: 0.25rem;
+    color: #fff;
+  }
+  
+  .fa-li {
+    position: relative;
+    left: 0;
+  }
+  
+  .navbar-toggler {
+    border: none;
+    font-size: 1.25rem;
+  }
+  
+  .navbar-toggler:focus,
+  .btn-close:focus {
+    box-shadow: none;
+    outline: none;
+  }
+  
+  .navbar{
+    a{
+      text-decoration: none;
+      font-weight: bold;
+    }
+  }
+  
+  .shopping-cart {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .header-navbar{
+      display: none;
+    }
+    .shopping-cart {
+      display: block;
+    }
+  }
+  
+  .btn-outline-primary {
+    --bs-btn-hover-bg: #fff;
+  }
+  
+  
+  /* Inicio de Products Cards */
+  .height{
+    height:70vh;
+  }
+  
+  .container{
+    margin-top: 20px;
+  }
+  
+  .image{
+    position:absolute;
+    right:12px;
+    top:10px;
+  }
+  
+  .colors{
+    display:flex;
+    margin-top:2px;
+  }
+  
+  .colors span{
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    cursor:pointer;
+    display:flex;
+    margin-right:6px;
+  }
+  
