@@ -5,6 +5,7 @@ from minimarket import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index),
-    path('catalogo/', views.catalogo)
+    path('',views.inicio),
+    path('catalogo/', views.catalogo),
+    path('nosotros/', views.nosotros)
 ]

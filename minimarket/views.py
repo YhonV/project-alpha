@@ -7,3 +7,6 @@ def index(request):
 
 def catalogo(request):
     return render(request, 'catalogo.html')
+
+def nosotros(request):
+    return render(request, 'nosotros.html')
