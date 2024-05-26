@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 # Create your views here.
 
-def index(request):
+def inicio(request):
     return render(request,'index.html')
 
 def catalogo(request):
