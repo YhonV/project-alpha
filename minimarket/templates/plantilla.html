@@ -52,15 +52,16 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
-                                <img src="{% static 'img/logo_carrito_off.png'%}" style="width: 100px; height: 100px;" alt="">
-                                <h5>Tu carro esta vacío</h5><br>
-                                <p>¡Descubre los productos que tenemos para ti!</p>
-                                <button type="button"  class="btn btn-primary">
-                                    <a href="/catalogo" id="txtAgreProd" style=" font-weight: bold; ">Agregar Productos</a>
-                                </button>
-                            </div>
+                                <div id="mensaje-vacio">
+                                    <img src="{% static 'img/logo_carrito_off.png'%}" style="width: 100px; height: 100px;" alt="">
+                                    <h5>Tu carro esta vacío</h5><br>
+                                    <p>¡Descubre los productos que tenemos para ti!</p>
+                                    <button type="button"  class="btn btn-primary">
+                                        <a href="/catalogo" id="txtAgreProd" style=" font-weight: bold; ">Agregar Productos</a>
+                                    </button>
+                                </div>
                             <div id="productos-agregados">
-                            
+                            </div>
                             </div>
                             </div>
                     <!--Fin de Carrito de compras-->

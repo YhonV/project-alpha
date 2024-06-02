@@ -1,16 +1,11 @@
 // Contadores para los productos y los badges
 let productContador = 0;
 let badgeContador = 0;
-
-// Elemento del DOM para el contador de productos
 let productCountElement = document.querySelector('.btn-outline-primary .badge');
-
-// Array para almacenar los productos agregados
 let productosAgregados = [];
 
 // Función para inicializar los productos desde el localStorage
 function inicializarProductos() {
-  // Recuperar los productos del localStorage o inicializar a un array vacío si no existen
   productosAgregados = localStorage.getItem('productosAgregados') ? JSON.parse(localStorage.getItem('productosAgregados')) : [];
 
   // Actualizar los contadores con la cantidad de cada producto
@@ -19,19 +14,13 @@ function inicializarProductos() {
     badgeContador += producto.cantidad;
   });
 
-  // Actualizar el texto del contador de productos en el DOM
   productCountElement.textContent = badgeContador;
 }
 
-// Función para crear una tarjeta de producto
 function createCard(producto) {
-  // Crear un nuevo elemento div
   const newCard = document.createElement('div');
 
-  // Asignar clases al div
   newCard.className = "producto m-2 d-flex flex-row align-items-center";
-
-  // Asignar el HTML interno del div
   newCard.innerHTML = `
     <img class="card-img-top" src="${producto.imgSrc}" alt="Imagen de la tarjeta" style="width: 6rem; height: 7rem;">
     <div class="card-body d-flex justify-content-between flex-grow-1" style="padding: 1rem;">
@@ -46,8 +35,6 @@ function createCard(producto) {
       </div>
     </div>
   `;
-
-  // Devolver la nueva tarjeta
   return newCard;
 }
 
@@ -60,7 +47,6 @@ function eliminarMensajeCarritoVacio() {
   }
 }
 
-// Función para cargar los productos al DOM
 function cargarProductos() {
   // Solo cargar los productos si hay al menos uno
   if (productosAgregados.length > 0) {
