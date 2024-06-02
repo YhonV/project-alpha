@@ -210,122 +210,33 @@
                   
                   
                 
-                <!-- BEGIN TABLE RESULT -->
+                <!-- Inicio Cartas de productos -->
                 <div class="container">
                   <div class="row justify-content-center align-items-center">
-          
-                        <div class="card m-2" style="width: 15rem;" id="catalogo">
-                          <img class="card-img-top" src="https://www.agrosuperventas.com/medias/1112580-1-300Wx300H?context=bWFzdGVyfGltYWdlc3wyMTc5NzN8aW1hZ2UvanBlZ3xhRGRrTDJnd1lTODROems1TURZNE5UVXpNalEyTHpFeE1USTFPREJmTVY4ek1EQlhlRE13TUVnfDUxMzM5MGU1YTA5ZmM5OTg2YTRlMTY4NDI0MWRmMTkyMWZiNjY5ZjAwYjQ1MmUzMTA0NDBjZjQ4ZmFkM2QxMGI" alt="Card image cap">
-                          <div class="card-body" style="padding: 1rem 0 0 0;">
-                            <h5 class="card-title">Salmón Atlántico 500gr</h5>
-                            <p class="card-text">Pescados</p>
-                            <h4 class="price">$8.990</h4>
-                          </div>
-                          <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
-                          </div>
-                        </div>
-          
-                        <div class="card m-2" style="width: 15rem;" id="catalogo">
-                          <img class="card-img-top" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjZLdpu9g2fZfkGeJtJogkpaLJjdjEYBng41MLmS-2BQ&s" alt="Card image cap">
-                          <div class="card-body" style="padding: 1rem 0 0 0;">
-                            <h5 class="card-title">Merluza 500gr</h5>
-                            <p class="card-text">Pescados</p>
-                            <h4 class="price">$5.990</h4>
-                          </div>
-                          <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
-                          </div>
-                        </div>
-          
-                        <div class="card m-2" style="width: 15rem;">
-                          <img class="card-img-top" src="https://unimarc.vtexassets.com/arquivos/ids/215235/000000000000578195-UN-01.jpg?v=637576558977400000" alt="Card image cap">
-                          <div class="card-body" style="padding: 1rem 0 0 0;">
-                            <h5 class="card-title">Filetitos de Pollo 700gr</h5>
-                            <p class="card-text">Pollo</p>
-                            <h4 class="price">$6.990</h4>
-                          </div>
-                          <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
-                          </div>
-                        </div>
-          
-                        <div class="card m-2" style="width: 15rem;">
-                          <img class="card-img-top" src="https://cdnx.jumpseller.com/megamarina/image/36124001/resize/610/610?1686061360" alt="Card image cap">
-                          <div class="card-body" style="padding: 1rem 0 0 0;">
-                            <h5 class="card-title">Pulpa de Piña 1kg</h5>
-                            <p class="card-text">Pulpas de fruta</p>
-                            <h4 class="price">$4.990</h4>
-                          </div>
-                          <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg btn-agregar"style="width: 100%;">Agregar</button>
-                          </div>
-                        </div> 
+                    {% for producto in productos %}
+                      <div class="card m-2" style="width: 15rem;" id="catalogo">
+                        
+                        {% if i.imagen %}
+                        <img class="card-img-top" src="{{ producto.imagen.url }}">
+                        {% else %}
+                        <img class="imagen" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png">
+                        {% endif %}
 
-                        <div class="card m-2" style="width: 15rem;">
-                          <img class="card-img-top" src="{% static 'img/arroz.jpeg'%}" alt="Card image cap">
-                          <div class="card-body" style="padding: 1rem 0 0 0;">
-                            <h5 class="card-title">Arroz Grado 2 1kg</h5>
-                            <p class="card-text">Arroz</p>
-                            <h4 class="price">$2.990</h4>
-                          </div>
-                          <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
-                          </div>
-                        </div> 
-
-                        <div class="card m-2" style="width: 15rem;">
-                          <img class="card-img-top" src="{% static 'img/aceite.jpeg'%}" alt="Card image cap">
-                          <div class="card-body" style="padding: 1rem 0 0 0;">
-                            <h5 class="card-title">Aceite Maravilla 1lt</h5>
-                            <p class="card-text">Aceites y Aderezos</p>
-                            <h4 class="price">$2.990</h4>
-                          </div>
-                          <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg btn-agregar"  style="width: 100%;">Agregar</button>
-                          </div>
-                        </div>  
-
-                        <div class="card m-2" style="width: 15rem;">
-                          <img class="card-img-top" src="{% static 'img/azucar.png'%}" alt="Card image cap">
-                          <div class="card-body" style="padding: 1rem 0 0 0;">
-                            <h5 class="card-title">Azúcar Iansa 1kg</h5>
-                            <p class="card-text">Azúcar y Endulzantes</p>
-                            <h4 class="price">$1.290</h4>
-                          </div>
-                          <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
-                          </div>
+                        <div class="card-body" style="padding: 1rem 0 0 0;">
+                          <h5 class="card-title">{{ producto.nombre }}</h5>
+                          <p class="card-text">{{ producto.nombre_categoria }}</p>
+                          <h4 class="price">${{ producto.precio }}</h4>
                         </div>
-          
-                        <div class="card m-2" style="width: 15rem;">
-                          <img class="card-img-top" src="https://bodeguitadelavega.cl/wp-content/uploads/2022/08/Leche-entera-sin-tapa-1-L.png" alt="Card image cap">
-                          <div class="card-body" style="padding: 1rem 0 0 0;">
-                            <h5 class="card-title">Leche Entera 1lt</h5>
-                            <p class="card-text">Leches</p>
-                            <h4 class="price">$1.190</h4>
-                          </div>
-                          <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
-                          </div>
+                        <div style="padding: 0 0 1rem 0;">
+                            <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
                         </div>
-
-                        <div class="card m-2" style="width: 15rem;">
-                          <img class="card-img-top" src="{% static 'img/cafe.jpeg'%}" alt="Card image cap">
-                          <div class="card-body" style="padding: 1rem 0 0 0;">
-                            <h5 class="card-title">Café Tradición 170gr</h5>
-                            <p class="card-text">Café y Té</p>
-                            <h4 class="price">$1.990</h4>
-                          </div>
-                          <div style="padding: 0 0 1rem 0;">
-                              <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
-                          </div>
-                        </div>
+                      </div>
+                    {% endfor %}
                   </div>
-              </div>
-                <!-- END TABLE RESULT -->
+                </div>
+                <!-- Final Cartas de productos -->
                 
-                <!-- BEGIN PAGINATION -->
+                <!-- INICIO PAGINACION -->
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center"> 
                   <ul class="pagination">
                     <li class="page-item"><a class="page-link" href="#"><</a></li>
@@ -335,7 +246,7 @@
                     <li class="page-item"><a class="page-link" href="#">></a></li>
                   </ul>
                 </nav>
-                <!-- END PAGINATION -->
+                <!-- FINAL PAGINACION -->
               </div>
               <!-- END RESULT -->
             </div>
