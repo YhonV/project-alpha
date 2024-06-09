@@ -208,7 +208,33 @@
                   </div>                                    
                   <!-- END ORDER RESULT -->
                   
-                  
+                <!-- INICIO PAGINACION -->
+                <nav aria-label="Page navigation example" class="d-flex justify-content-center"> 
+                  <ul class="pagination">
+                    {% if productos.has_previous %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ productos.previous_page_number }}">Anterior</a>
+                      </li>
+                    {% endif %}
+
+                    {% for i in productos.paginator.page_range %}
+                      {% if productos.number == i %}
+                        <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                      {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if productos.has_next %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ productos.next_page_number }}">Siguiente</a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+                <!-- FINAL PAGINACION -->
+                
+                
                 
                 <!-- Inicio Cartas de productos -->
                 <div class="container">
@@ -236,15 +262,28 @@
                 </div>
                 <!-- Final Cartas de productos -->
                 
-                
                 <!-- INICIO PAGINACION -->
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center"> 
                   <ul class="pagination">
-                    <li class="page-item"><a class="page-link" href="#"><</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">></a></li>
+                    {% if productos.has_previous %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ productos.previous_page_number }}">Anterior</a>
+                      </li>
+                    {% endif %}
+
+                    {% for i in productos.paginator.page_range %}
+                      {% if productos.number == i %}
+                        <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                      {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if productos.has_next %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ productos.next_page_number }}">Siguiente</a>
+                      </li>
+                    {% endif %}
                   </ul>
                 </nav>
                 <!-- FINAL PAGINACION -->
