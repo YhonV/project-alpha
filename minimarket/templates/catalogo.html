@@ -213,19 +213,19 @@
                 <!-- Inicio Cartas de productos -->
                 <div class="container">
                   <div class="row justify-content-center align-items-center">
-                    {% for producto in productos %}
+                    {% for i in productos %}
                       <div class="card m-2" style="width: 15rem;" id="catalogo">
                         
                         {% if i.imagen %}
-                        <img class="card-img-top" src="{{ producto.imagen.url }}">
+                        <img class="card-img-top" src="{{ i.imagen.url }}">
                         {% else %}
                         <img class="imagen" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png">
                         {% endif %}
 
                         <div class="card-body" style="padding: 1rem 0 0 0;">
-                          <h5 class="card-title">{{ producto.nombre }}</h5>
-                          <p class="card-text">{{ producto.nombre_categoria }}</p>
-                          <h4 class="price">${{ producto.precio }}</h4>
+                          <h5 class="card-title">{{ i.nombre }}</h5>
+                          <p class="card-text">{{ i.nombre_categoria }}</p>
+                          <h4 class="price">${{ i.precio }}</h4>
                         </div>
                         <div style="padding: 0 0 1rem 0;">
                             <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
@@ -235,6 +235,7 @@
                   </div>
                 </div>
                 <!-- Final Cartas de productos -->
+                
                 
                 <!-- INICIO PAGINACION -->
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center"> 
