@@ -66,8 +66,10 @@ def creaCuenta(request):
 
 def view_login(request):
     if request.method == 'POST':
-        usuario = request.POST.get('usuario')
+        usuario = request.POST.get('email')
         password = request.POST.get('password')
+        print(usuario)
+        print(password)
 
         if(len(usuario) < 1):
             messages.error(request,'Debe ingresar un nombre de usuario')
@@ -79,7 +81,7 @@ def view_login(request):
         if usuario is None:
             messages.error(request,'Usuario o contraseña incorrecto')
         else:
-            login(request,usuario)
+            login(request)
             return redirect('index')
 
     return render(request,'login.html')
