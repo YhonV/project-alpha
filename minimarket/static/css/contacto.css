@@ -44,7 +44,7 @@
   padding: 2%;
   border-top-right-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
-  border: 1px solid #000; /* Añade esta línea para agregar bordes al panel */
+  border: 1px solid #000; 
 }
 
 .contact-form label {
@@ -53,12 +53,12 @@
 
 .contact-form button { 
   font-weight: 600;
-  width: 100%; /* Ajustado el ancho del botón para ocupar todo el contenedor */
-  margin-top: 10px; /* Añadido un margen superior para separar el botón del resto del contenido */
+  width: 100%; 
+  margin-top: 10px;
 }
 
 
 .contact-form .form-group {
-  margin-bottom: 20px; /* Ajusta este valor según el espacio deseado entre los campos */
+  margin-bottom: 20px;
 }
 

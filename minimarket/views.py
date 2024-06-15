@@ -36,38 +36,6 @@ def nosotros(request):
 def contacto(request):
     return render(request, 'contacto.html')
 
-def login(request):
- return render(request,'login.html')
-
-# def creaCuenta(request):
-
-#     form = RegistroForm()
-
-#     if request.method == 'POST':
-#         form = RegistroForm(request.POST)
-
-#         if form.is_valid():
-#             usuario = form.cleaned_data.get('usuario')
-#             pass1 = form.cleaned_data.get('password')
-#             pass2 = form.cleaned_data.get('password2')
-
-#             if pass1 == pass2:
-                
-#                 if User.objects.filter(username = usuario).all().exists():
-#                     messages.error(request,'El usuario ya esta registrado!')
-#                 else:
-#                     user = User.objects.create_user(username = usuario, email= usuario,password = pass1)
-#                     user.save()
-#                     return redirect('login')
-
-#             else:
-#                 messages.error(request,'Las contraseñas deben coincidir')
-
-
-#     else:
-#         form = RegistroForm()
-
-#     return render(request,'creaCuenta.html',{"form":form})
 
 def creaCuenta(request):
     form = RegistroForm()
@@ -112,29 +80,27 @@ def creaCuenta(request):
 
     return render(request, 'creaCuenta.html', {"form": form})
 
+from django.http import JsonResponse
+
 def view_login(request):
     if request.method == 'POST':
         usuario = request.POST.get('email')
         password = request.POST.get('password')
-        print(usuario)
-        print(password)
 
-        if(len(usuario) < 1):
-            messages.error(request,'Debe ingresar un nombre de usuario')
+        if not usuario:
+            return JsonResponse({'status': 'error', 'message': 'Debe ingresar un nombre de usuario'}, status=400)
 
-        if(len(password) < 1):
-            messages.error(request,'Debe ingresar la contraseña')
+        if not password:
+            return JsonResponse({'status': 'error', 'message': 'Debe ingresar la contraseña'}, status=400)
 
-        usuario = authenticate(username=usuario,password = password)
-        if usuario is None:
-            messages.error(request,'Usuario o contraseña incorrecto')
+        user = authenticate(request, username=usuario, password=password)
+        if user is None:
+            return JsonResponse({'status': 'error', 'message': 'Usuario o contraseña incorrecto'}, status=400)
         else:
-            login(request)
-            return redirect('index')
+            login(request, user)
+            return JsonResponse({'status': 'success', 'redirect': reverse('index')})
 
     return render(request,'login.html')
-
-
 
 
     
