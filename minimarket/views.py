@@ -80,7 +80,6 @@ def creaCuenta(request):
 
     return render(request, 'creaCuenta.html', {"form": form})
 
-from django.http import JsonResponse
 
 def view_login(request):
     if request.method == 'POST':
