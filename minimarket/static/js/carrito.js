@@ -63,48 +63,85 @@ function actualizarLocalStorage() {
   localStorage.setItem('productosAgregados', JSON.stringify(productosAgregados));
 }
 
-// Función para agregar un producto al carrito
 function agregarProducto() {
-  // Agregar un event listener a cada botón de agregar
+  // Seleccionar todos los botones de agregar
   document.querySelectorAll(".btn-agregar").forEach(button => {
+    // Agregar evento click a cada botón
     button.addEventListener("click", function() {
-      // Recuperar los datos del producto desde el DOM
-      let card = this.parentElement.parentElement;
-      let imgSrc = card.querySelector('.card-img-top').src;
-      let title = card.querySelector('.card-title').textContent;
-      let priceString = card.querySelector('.price').textContent;
+      // Encontrar la tarjeta más cercana que contiene el botón clickeado
+      let card = this.closest(".card");
 
-      // Verificar si el producto ya existe en el carrito
+      // Verificar que card no sea null
+      if (!card) {
+        console.error("No se pudo encontrar la tarjeta asociada con el botón.");
+        return;
+      }
+
+      // Extraer el ID del producto de la tarjeta (asumiendo que está en un atributo data-product-id)
+      let productId = card.dataset.productId;
+
+      // Verificar que todos los elementos necesarios están presentes
+      let imgElement = card.querySelector('.card-img-top');
+      if (!imgElement) {
+        console.error("No se encontró el elemento de imagen en la tarjeta del producto.");
+        return;
+    }
+      let titleElement = card.querySelector('.card-title');
+      let priceElement = card.querySelector('.price');
+
+      // Si cualquiera de los elementos es null, registramos un error y salimos de la función
+      if (!imgElement || !titleElement || !priceElement) {
+        console.error("Faltan elementos en la tarjeta del producto.");
+        return;
+      }
+
+      let imgSrc = imgElement.src;
+      let title = titleElement.textContent;
+      let priceString = priceElement.textContent;
       let productoExistente = productosAgregados.find(producto => producto.title === title);
 
-      // Si el producto ya existe, incrementar su cantidad
       if (productoExistente) {
         productoExistente.cantidad++;
-        let existingCard = Array.from(document.getElementById("productos-agregados").children).find(card => card.querySelector('.card-title').textContent === title);
-        existingCard.querySelector('.cantidad').textContent = `Cantidad: ${productoExistente.cantidad}`;
+        let existingCard = Array.from(document.getElementById("productos-agregados").children)
+                                .find(card => card.querySelector('.card-title').textContent === title);
+        if (existingCard) {
+          existingCard.querySelector('.cantidad').textContent = `Cantidad: ${productoExistente.cantidad}`;
+        }
       } else {
-        // Si el producto no existe, crear uno nuevo y agregarlo al carrito
         let newProduct = { imgSrc, title, priceString, cantidad: 1 };
         productosAgregados.push(newProduct);
         document.getElementById("productos-agregados").appendChild(createCard(newProduct));
       }
 
-      // Incrementar el contador de productos y actualizar el DOM y el localStorage
+      // Incrementar el contador de productos
       productContador++;
       productCountElement.textContent = productContador;
       actualizarLocalStorage();
 
       // Eliminar el mensaje de carrito vacío si existe
       eliminarMensajeCarritoVacio();
+
+      // Enviar el producto al servidor a través de una petición AJAX
+      $.ajax({
+        type: 'POST',
+        url: '/agregar-al-carrito/',
+        data: {
+          'product_id': productId,
+          'csrfmiddlewaretoken': CSRF_TOKEN  
+        },
+        success: function(response) {
+          // Manejo de la respuesta de la petición AJAX
+        }
+      });
     });
   });
 }
 
-// Función para manejar la cantidad de un producto en el carrito
+
+
 function manejarCantidad() {
-  // Agregar un event listener al contenedor de productos
   document.getElementById("productos-agregados").addEventListener("click", function(e) {
-    // Recuperar la tarjeta del producto desde el DOM
+  
     let card = e.target.closest('.producto');
     if (!card) return;
 

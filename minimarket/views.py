@@ -11,7 +11,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from minimarket.forms import RegistroForm
-from django.contrib import messages
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -20,15 +20,22 @@ from django.contrib import messages
 def inicio(request):
     return render(request,'index.html')
 
+@csrf_exempt
+def agregar_al_carrito(request):
+    if request.method == 'POST':
+        product_id = request.POST.get('product_id')
+        return JsonResponse({'status': 'success'})
+
 def catalogo(request):
-    productos = Producto.objects.all()
-    paginator = Paginator(productos, 6) 
+    productos = Producto.objects.all().order_by('id_producto') 
+    paginator = Paginator(productos, 6)  
 
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    contexto = {'productos': page_obj}  
+    contexto = {'productos': page_obj}
     return render(request, 'catalogo.html', contexto)
+
 
 def nosotros(request):
     return render(request, 'nosotros.html')
