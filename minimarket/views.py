@@ -20,11 +20,11 @@ from django.views.decorators.csrf import csrf_exempt
 def inicio(request):
     return render(request,'index.html')
 
-@csrf_exempt
-def agregar_al_carrito(request):
-    if request.method == 'POST':
-        product_id = request.POST.get('product_id')
-        return JsonResponse({'status': 'success'})
+# @csrf_exempt
+# def agregar_al_carrito(request):
+#     if request.method == 'POST':
+#         product_id = request.POST.get('product_id')
+#         return JsonResponse({'status': 'success'})
 
 def catalogo(request):
     productos = Producto.objects.all().order_by('id_producto') 
@@ -36,13 +36,11 @@ def catalogo(request):
     contexto = {'productos': page_obj}
     return render(request, 'catalogo.html', contexto)
 
-
 def nosotros(request):
     return render(request, 'nosotros.html')
 
 def contacto(request):
     return render(request, 'contacto.html')
-
 
 def creaCuenta(request):
     form = RegistroForm()
@@ -86,7 +84,6 @@ def creaCuenta(request):
         form = RegistroForm()
 
     return render(request, 'creaCuenta.html', {"form": form})
-
 
 def view_login(request):
     if request.method == 'POST':
