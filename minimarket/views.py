@@ -49,9 +49,12 @@ def creaCuenta(request):
         form = RegistroForm(request.POST)
 
         if form.is_valid():
-            usuario = form.cleaned_data.get('usuario')
+            usuario = form.cleaned_data.get('email')
             pass1 = form.cleaned_data.get('password')
             pass2 = form.cleaned_data.get('password2')
+            nombre = form.cleaned_data.get('nombre')
+            telefono = form.cleaned_data.get('telefono')
+            direccion = form.cleaned_data.get('direccion')
 
             if pass1 == pass2:
                 if User.objects.filter(username=usuario).exists():
@@ -60,7 +63,11 @@ def creaCuenta(request):
                         'message': 'El usuario ya está registrado!'
                     }
                 else:
-                    user = User.objects.create_user(username=usuario, email=usuario, password=pass1)
+                    user = User.objects.create_user(username=usuario, 
+                                                    email=usuario, 
+                                                    password=pass1,
+                                                    first_name=nombre,
+                                                    last_name=direccion)
                     user.save()
                     response = {
                         'status': 'success',

@@ -64,6 +64,9 @@
                                     <!-- Aquí se agregarán las tarjetas de productos -->
                                 </div>
                                 <button type="button" class="btn btn-success" id="precio-total-carrito">Tu precio total es de: $0</button>
+                                <div>
+                                    <button type="button" class="btn btn-primary" id="comprar" style='margin-top : 10px'>Comprar</button>     
+                                </div>
                             </div>
                         </div>
                         <!--Fin de Carrito de compras-->
@@ -72,7 +75,7 @@
                         </button>
                     </div>
 
-                        <!-- User -->
+                        {% comment %} <!-- User -->
                         <div class="dropdown">
                             <a class="text-reset dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
                                 id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
@@ -85,7 +88,7 @@
                                 <li><a class="dropdown-item" href="#">Configuración</a></li>
                                 <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
                             </ul>
-                        </div>
+                        </div> {% endcomment %}
                     </div>
                 </div>
             </div>
@@ -331,13 +334,30 @@
 
 
     <!-- BootStrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="{% static 'js/carrito.js'%}"></script>
     <!-- End BootStrap JS -->
 
     <script src="{% static 'js/catalogo.js'%}"></script>
+
+    <script> 
+        document.getElementById('comprar').addEventListener('click', function() {
+            if (productosAgregados.length === 0) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Primero debes seleccionar un producto!',
+              });
+            } else {
+              
+            }
+          });
+    </script>
 </body>
 
 </html>

@@ -11,7 +11,7 @@ function inicializarProductos() {
     productContador += producto.cantidad;
     badgeContador += producto.cantidad;
   });
-
+  agregarBotonCompra();
   productCountElement.textContent = badgeContador;
 }
 
@@ -83,7 +83,7 @@ function agregarProducto() {
       productCountElement.textContent = productContador;
       totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
       actualizarLocalStorage();
-
+      agregarBotonCompra();
       eliminarMensajeCarritoVacio();
 
       // $.ajax({
@@ -153,7 +153,6 @@ function manejarCantidad() {
         let index = productosAgregados.findIndex(producto => producto.title === card.querySelector('.card-title').textContent);
         productosAgregados.splice(index, 1);
         actualizarLocalStorage();
-
         if (productosAgregados.length === 0) {
           productContador = 0;
           productCountElement.textContent = productContador;
@@ -165,6 +164,7 @@ function manejarCantidad() {
       }
       totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
       actualizarLocalStorage();
+      agregarBotonCompra();
     }
   });
 }
@@ -175,6 +175,19 @@ function calcularTotal() {
     total += producto.price * producto.cantidad;
   });
   return total;
+}
+
+function agregarBotonCompra() {
+  const botonCompraDiv = document.getElementById('boton-comprar');
+  if (productContador > 0 && !botonCompraDiv.children.length) {
+    const botonCompra = document.createElement('button');
+    botonCompra.type = 'button';
+    botonCompra.classList.add('btn', 'btn-primary');
+    botonCompra.id = 'comprar';
+    botonCompra.textContent = 'Comprar';
+    botonCompraDiv.appendChild(botonCompra);
+    console.log('Botón de compra agregado');
+  }
 }
 
 inicializarProductos();
