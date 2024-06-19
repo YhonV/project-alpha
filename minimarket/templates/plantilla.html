@@ -70,25 +70,16 @@
                             </div>
                         </div>
                         <!--Fin de Carrito de compras-->
-                        <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
-                            <a href="/login" style="text-decoration: none; font-weight: bold;">Ingresar</a>
-                        </button>
+                        {% if request.user.is_authenticated %}
+                            <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                                <a href="{% url 'exit' %}" style="text-decoration: none; font-weight: bold;">Salir</a>
+                            </button>
+                        {% else %}
+                            <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                                <a href="{% url 'login' %}" style="text-decoration: none; font-weight: bold;">Ingresar</a>
+                            </button>
+                        {% endif %}
                     </div>
-
-                        {% comment %} <!-- User -->
-                        <div class="dropdown">
-                            <a class="text-reset dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
-                                id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <img src="{% static 'img/user.png'%}"
-                                    class="rounded-circle" height="32" alt="" loading="lazy" />
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Mi perfil</a></li>
-                                <li><a class="dropdown-item" href="#">Configuración</a></li>
-                                <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-                            </ul>
-                        </div> {% endcomment %}
                     </div>
                 </div>
             </div>
@@ -103,6 +94,9 @@
                 <div class="d-flex flex-grow-1 pe-3 d-none d-lg-flex justify-content-md-end">
 
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                        <a href="/">{{user.username | upper}}</a>
+                    </button>
+                    <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
                         <a href="/">Home</a>
                     </button>
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
@@ -114,6 +108,7 @@
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
                         <a href="/contacto">Contacto</a>
                     </button>
+                    
                 </div>
 
                 <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="offcanvasNavbar"
@@ -158,6 +153,7 @@
         </nav>
         <!-- End Navbar -->
     </header>
+
 
     {% block content %}
       

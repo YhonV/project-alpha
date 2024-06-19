@@ -110,7 +110,10 @@ def view_login(request):
             login(request, user)
             return JsonResponse({'status': 'success', 'redirect': reverse('index')})
 
-    return render(request,'login.html')
+    return render(request,'registration/login.html')
 
+def exit(request):
+    logout(request)
+    return redirect('index')
 
     
