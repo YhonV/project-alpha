@@ -78,3 +78,14 @@
     margin-right:6px;
   }
   
+
+  #productos-agregados {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+  }
+  
+  #precio-total-carrito {
+    margin-top: 20px;
+    align-self: flex-end; 
+  }

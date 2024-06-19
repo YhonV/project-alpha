@@ -1,19 +1,17 @@
-// Contadores para los productos y los badges
 let productContador = 0;
 let badgeContador = 0;
 let productCountElement = document.querySelector('.btn-outline-primary .badge');
 let productosAgregados = [];
+let precioTotal = 0;
+let totalCarritoElement = document.getElementById('precio-total-carrito');
 
-// Función para inicializar los productos desde el localStorage
 function inicializarProductos() {
   productosAgregados = localStorage.getItem('productosAgregados') ? JSON.parse(localStorage.getItem('productosAgregados')) : [];
-
-  // Actualizar los contadores con la cantidad de cada producto
   productosAgregados.forEach(producto => {
     productContador += producto.cantidad;
     badgeContador += producto.cantidad;
   });
-
+  agregarBotonCompra();
   productCountElement.textContent = badgeContador;
 }
 
@@ -26,7 +24,7 @@ function createCard(producto) {
     <div class="card-body d-flex justify-content-between flex-grow-1" style="padding: 1rem;">
       <div>
         <h5 class="card-title">${producto.title}</h5>
-        <h6 class="price">${producto.priceString}</h6>
+        <h6 class="price $">${producto.priceString}</h6>
         <p class="cantidad">Cantidad: ${producto.cantidad}</p>
       </div>
       <div class="d-flex flex-column align-items-end">
@@ -38,9 +36,71 @@ function createCard(producto) {
   return newCard;
 }
 
-// Función para eliminar el mensaje de carrito vacío
+function agregarProducto() {
+  document.querySelectorAll(".btn-agregar").forEach(button => {
+    button.addEventListener("click", function() {
+      let card = this.closest(".card");
+
+      if (!card) {
+        console.error("No se pudo encontrar la tarjeta asociada con el botón.");
+        return;
+      }
+      let productId = card.dataset.productId;
+      let imgElement = card.querySelector('.card-img-top');
+      if (!imgElement) {
+        console.error("No se encontró el elemento de imagen en la tarjeta del producto.");
+        return;
+    }
+      let titleElement = card.querySelector('.card-title');
+      let priceElement = card.querySelector('.price');
+
+      if (!imgElement || !titleElement || !priceElement) {
+        console.error("Faltan elementos en la tarjeta del producto.");
+        return;
+      }
+
+      let imgSrc = imgElement.src;
+      let title = titleElement.textContent;
+      let priceString = priceElement.textContent;
+      let price = parseFloat(priceString.replace('$', ''));
+      let productoExistente = productosAgregados.find(producto => producto.title === title);
+
+      if (productoExistente) {
+        productoExistente.cantidad++;
+        let existingCard = Array.from(document.getElementById("productos-agregados").children)
+                                .find(card => card.querySelector('.card-title').textContent === title);
+        if (existingCard) {
+          existingCard.querySelector('.cantidad').textContent = `Cantidad: ${productoExistente.cantidad}`;
+        }
+      } else {
+        let newProduct = { imgSrc, title, priceString: '$' + priceString, cantidad: 1, price };
+        productosAgregados.push(newProduct);
+        document.getElementById("productos-agregados").appendChild(createCard(newProduct));
+        totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
+      }
+
+      productContador++;
+      productCountElement.textContent = productContador;
+      totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
+      actualizarLocalStorage();
+      agregarBotonCompra();
+      eliminarMensajeCarritoVacio();
+
+      // $.ajax({
+      //   type: 'POST',
+      //   url: '/agregar-al-carrito/',
+      //   data: {
+      //     'product_id': productId,
+      //     'csrfmiddlewaretoken': CSRF_TOKEN  
+      //   },
+      //   success: function(response) {
+      //   }
+      // });
+    });
+  });
+}
+
 function eliminarMensajeCarritoVacio() {
-  // Solo eliminar el mensaje si hay al menos un producto
   if(productContador >= 1){
     let mensajeVacio = document.getElementById("mensaje-vacio");
     if (mensajeVacio) mensajeVacio.remove();
@@ -54,65 +114,25 @@ function cargarProductos() {
     productosAgregados.forEach(producto => {
       document.getElementById("productos-agregados").appendChild(createCard(producto));
     });
+    totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
   }
 }
 
-// Función para actualizar el localStorage con los productos y contadores actuales
 function actualizarLocalStorage() {
   localStorage.setItem('productContador', productContador);
   localStorage.setItem('productosAgregados', JSON.stringify(productosAgregados));
 }
 
-// Función para agregar un producto al carrito
-function agregarProducto() {
-  // Agregar un event listener a cada botón de agregar
-  document.querySelectorAll(".btn-agregar").forEach(button => {
-    button.addEventListener("click", function() {
-      // Recuperar los datos del producto desde el DOM
-      let card = this.parentElement.parentElement;
-      let imgSrc = card.querySelector('.card-img-top').src;
-      let title = card.querySelector('.card-title').textContent;
-      let priceString = card.querySelector('.price').textContent;
-
-      // Verificar si el producto ya existe en el carrito
-      let productoExistente = productosAgregados.find(producto => producto.title === title);
-
-      // Si el producto ya existe, incrementar su cantidad
-      if (productoExistente) {
-        productoExistente.cantidad++;
-        let existingCard = Array.from(document.getElementById("productos-agregados").children).find(card => card.querySelector('.card-title').textContent === title);
-        existingCard.querySelector('.cantidad').textContent = `Cantidad: ${productoExistente.cantidad}`;
-      } else {
-        // Si el producto no existe, crear uno nuevo y agregarlo al carrito
-        let newProduct = { imgSrc, title, priceString, cantidad: 1 };
-        productosAgregados.push(newProduct);
-        document.getElementById("productos-agregados").appendChild(createCard(newProduct));
-      }
-
-      // Incrementar el contador de productos y actualizar el DOM y el localStorage
-      productContador++;
-      productCountElement.textContent = productContador;
-      actualizarLocalStorage();
-
-      // Eliminar el mensaje de carrito vacío si existe
-      eliminarMensajeCarritoVacio();
-    });
-  });
-}
-
-// Función para manejar la cantidad de un producto en el carrito
 function manejarCantidad() {
-  // Agregar un event listener al contenedor de productos
   document.getElementById("productos-agregados").addEventListener("click", function(e) {
-    // Recuperar la tarjeta del producto desde el DOM
     let card = e.target.closest('.producto');
     if (!card) return;
 
-    // Recuperar la cantidad actual del producto
     let quantityElement = card.querySelector('.cantidad');
     let quantity = parseInt(quantityElement.textContent.split(': ')[1]);
+    let priceElement = card.querySelector('.price');
+    let price = parseFloat(priceElement.textContent.replace('$', ''));
 
-    // Si se presionó el botón de incrementar, incrementar la cantidad del producto
     if (e.target.matches('.btn-incrementar')) {
       quantityElement.textContent = `Cantidad: ${quantity + 1}`;
       let index = productosAgregados.findIndex(producto => producto.title === card.querySelector('.card-title').textContent);
@@ -120,32 +140,57 @@ function manejarCantidad() {
       actualizarLocalStorage();
       productContador++;
       productCountElement.textContent = productContador;
+      totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
     } else if (e.target.matches('.btn-disminuir')) {
-      // Si se presionó el botón de disminuir, disminuir la cantidad del producto
       if (quantity > 1) {
         quantityElement.textContent = `Cantidad: ${quantity - 1}`;
         let index = productosAgregados.findIndex(producto => producto.title === card.querySelector('.card-title').textContent);
         productosAgregados[index].cantidad--;
         actualizarLocalStorage();
+        totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
       } else {
-        // Si la cantidad es 1, eliminar el producto del carrito
         card.remove();
         let index = productosAgregados.findIndex(producto => producto.title === card.querySelector('.card-title').textContent);
         productosAgregados.splice(index, 1);
         actualizarLocalStorage();
+        if (productosAgregados.length === 0) {
+          productContador = 0;
+          productCountElement.textContent = productContador;
+          totalCarritoElement.textContent = 'Tu precio total es de: $0';
+        } else {
+          productContador--;
+          productCountElement.textContent = productContador;
+        }
       }
-      // Decrementar el contador de productos y actualizar el DOM y el localStorage
-      productContador--;
-      productCountElement.textContent = productContador;
+      totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
       actualizarLocalStorage();
+      agregarBotonCompra();
     }
   });
 }
 
-// Inicializar los productos y cargarlos al iniciar la página
+function calcularTotal() {
+  let total = 0;
+  productosAgregados.forEach(producto => {
+    total += producto.price * producto.cantidad;
+  });
+  return total;
+}
+
+function agregarBotonCompra() {
+  const botonCompraDiv = document.getElementById('boton-comprar');
+  if (productContador > 0 && !botonCompraDiv.children.length) {
+    const botonCompra = document.createElement('button');
+    botonCompra.type = 'button';
+    botonCompra.classList.add('btn', 'btn-primary');
+    botonCompra.id = 'comprar';
+    botonCompra.textContent = 'Comprar';
+    botonCompraDiv.appendChild(botonCompra);
+    console.log('Botón de compra agregado');
+  }
+}
+
 inicializarProductos();
 cargarProductos();
-
-// Agregar los eventos de agregar producto y manejar cantidad
 agregarProducto();
 manejarCantidad();

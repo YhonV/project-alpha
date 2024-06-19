@@ -3,8 +3,7 @@
 {% load static%}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/catalogo.css' %}">
-
- <!-- Catalogo -->  
+ 
  <div class="container" style="margin-top: 150px;">
     <div class="row">
       <!-- BEGIN SEARCH RESULT -->
@@ -19,7 +18,7 @@
                 
                 <!-- BEGIN FILTER BY CATEGORY -->
                 
-                <div class="accordion" id="accordionExample">
+              <div class="accordion" id="accordionExample">
                   <div class="accordion-item">
                     <h2 class="accordion-header">
                       <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -175,8 +174,9 @@
                 </div>
               </div>
               <!-- END FILTERS -->
+
               <!-- BEGIN RESULT -->
-              <div class="col-md-9">
+                <div class="col-md-9">
                 <h2>Buscar Productos</h2>
                 <hr>
                 <!-- BEGIN SEARCH INPUT -->
@@ -206,7 +206,8 @@
                   </div>                                    
                   <!-- END ORDER RESULT -->
                   
-                <!-- INICIO PAGINACION BEFORE CARDS-->
+                
+                  <!-- INICIO PAGINACION BEFORE CARDS-->
                 <nav aria-label="Page navigation example" class="d-flex justify-content-center"> 
                   <ul class="pagination">
                     {% if productos.has_previous %}
@@ -235,27 +236,26 @@
                 
                 
                 <!-- Inicio Cartas de productos -->
-                <div class="container" style="max-width: 1200px;"> <!-- Ajusta este valor según tus necesidades -->
+                <div class="container" style="max-width: 1200px;">
                   <div class="row justify-content-center align-items-center">
                     {% for i in productos %}
-                      <div class="card m-2" style="width: 15rem; height: 100%;" id="catalogo">
-                        
-                        {% if i.imagen %}
-                        <img class="card-img-top" src="{{ i.imagen.url }}">
-                        {% else %}
-                        <img class="card-img-top" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png">
-                        {% endif %}
-                        <div class="card-body" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
-                          <div>
-                            <h5 class="card-title">{{ i.nombre }}</h5>
-                            <p class="card-text">{{ i.nombre_categoria }}</p>
-                            <h4 class="price">${{ i.precio }}</h4>
-                          </div>
-                          <div style="padding: 0 0 1rem 0;">
-                            <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
-                          </div>
+                    <div class="card m-2" style="width: 15rem; height: 100%;" data-product-id="{{ i.id }}">
+                      {% if i.imagen %}
+                      <img class="card-img-top" src="{{ i.imagen.url }}">
+                      {% else %}
+                      <img class="card-img-top" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png">
+                      {% endif %}
+                      <div class="card-body" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                          <h5 class="card-title">{{ i.nombre }}</h5>
+                          <p class="card-text">{{ i.nombre_categoria }}</p>
+                          <h4 class="price">{{ i.precio|floatformat:"-1" }}</h4>
+                        </div>
+                        <div style="padding: 0 0 1rem 0;">
+                          <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
                         </div>
                       </div>
+                    </div>                    
                     {% endfor %}
                   </div>
                 </div>
@@ -287,12 +287,10 @@
                 </nav>
                 <!-- FINAL PAGINACION -->
               </div>
-              <!-- END RESULT -->
             </div>
           </div>
         </div>
       </div>
-      <!-- END SEARCH RESULT -->
     </div>
     </div>
     </div>

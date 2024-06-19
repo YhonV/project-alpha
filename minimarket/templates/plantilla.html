@@ -39,50 +39,47 @@
                     
                     <!-- Carrito de compras -->
                     <div class="col-lg-5 d-flex justify-content-center justify-content-md-end align-items-center shopping-cart">
-                        <button class="btn btn-outline-primary me-4 position-relative" style="padding-bottom: 7px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight"><img src="{% static 'img/logo_carrito.png' %}"  style="width: 20px;" alt="">
+                        <button class="btn btn-outline-primary me-4 position-relative" style="padding-bottom: 7px;" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                            <img src="{% static 'img/logo_carrito.png' %}" style="width: 20px;" alt="">
                             <span class="position-absolute start-100 translate-middle badge rounded-pill bg-danger">
                                 0
                                 <span class="visually-hidden">unread messages</span>
                             </span>
                         </button>
-                            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+                        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
                             <div class="offcanvas-header">
                                 <h5 class="offcanvas-title" id="offcanvasRightLabel">Mi Carrito</h5>
-
                                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                             </div>
                             <div class="offcanvas-body">
                                 <div id="mensaje-vacio">
-                                    <img src="{% static 'img/logo_carrito_off.png'%}" style="width: 100px; height: 100px;" alt="">
+                                    <img src="{% static 'img/logo_carrito_off.png' %}" style="width: 100px; height: 100px;" alt="">
                                     <h5>Tu carro esta vacío</h5><br>
                                     <p>¡Descubre los productos que tenemos para ti!</p>
-                                    <button type="button"  class="btn btn-primary">
-                                        <a href="/catalogo" id="txtAgreProd" style=" font-weight: bold; ">Agregar Productos</a>
+                                    <button type="button" class="btn btn-primary">
+                                        <a href="/catalogo" id="txtAgreProd" style="font-weight: bold;">Agregar Productos</a>
                                     </button>
                                 </div>
-                            <div id="productos-agregados">
+                                <div id="productos-agregados">
+                                    <!-- Aquí se agregarán las tarjetas de productos -->
+                                </div>
+                                <button type="button" class="btn btn-success" id="precio-total-carrito">Tu precio total es de: $0</button>
+                                <div>
+                                    <button type="button" class="btn btn-primary" id="comprar" style='margin-top : 10px'>Comprar</button>     
+                                </div>
                             </div>
-                            </div>
-                            </div>
-                    <!--Fin de Carrito de compras-->
-                        <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
-                            <a href="/login" style=" text-decoration: none; font-weight: bold;">Ingresar</a>
-                        </button>
-
-                        <!-- User -->
-                        <div class="dropdown">
-                            <a class="text-reset dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
-                                id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                <img src="{% static 'img/user.png'%}"
-                                    class="rounded-circle" height="32" alt="" loading="lazy" />
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" href="#">Mi perfil</a></li>
-                                <li><a class="dropdown-item" href="#">Configuración</a></li>
-                                <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
-                            </ul>
                         </div>
+                        <!--Fin de Carrito de compras-->
+                        {% if request.user.is_authenticated %}
+                            <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                                <a href="{% url 'exit' %}" style="text-decoration: none; font-weight: bold;">Salir</a>
+                            </button>
+                        {% else %}
+                            <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                                <a href="{% url 'login' %}" style="text-decoration: none; font-weight: bold;">Ingresar</a>
+                            </button>
+                        {% endif %}
+                    </div>
                     </div>
                 </div>
             </div>
@@ -97,6 +94,9 @@
                 <div class="d-flex flex-grow-1 pe-3 d-none d-lg-flex justify-content-md-end">
 
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                        <a href="/">{{user.username | upper}}</a>
+                    </button>
+                    <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
                         <a href="/">Home</a>
                     </button>
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
@@ -108,6 +108,7 @@
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
                         <a href="/contacto">Contacto</a>
                     </button>
+                    
                 </div>
 
                 <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="offcanvasNavbar"
@@ -152,6 +153,7 @@
         </nav>
         <!-- End Navbar -->
     </header>
+
 
     {% block content %}
       
@@ -328,11 +330,30 @@
 
 
     <!-- BootStrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
     <script src="{% static 'js/carrito.js'%}"></script>
     <!-- End BootStrap JS -->
+
+    <script src="{% static 'js/catalogo.js'%}"></script>
+
+    <script> 
+        document.getElementById('comprar').addEventListener('click', function() {
+            if (productosAgregados.length === 0) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Primero debes seleccionar un producto!',
+              });
+            } else {
+              
+            }
+          });
+    </script>
 </body>
 
 </html>

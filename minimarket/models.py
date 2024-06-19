@@ -18,3 +18,21 @@ class Producto(models.Model):
     def __str__(self):
         return self.nombre  
     
+class Cliente (models.Model):
+    id_cliente = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
+    nombre_completo = models.CharField(max_length=100)
+    correo = models.EmailField()
+    direccion = models.CharField(max_length=100)
+    telefono = models.CharField(max_length=100)
+    
+    def __str__(self):
+        return self.nombre_completo
+    
+class detalleCompra(models.Model):
+    id_detalle = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
+    id_producto = models.ForeignKey('Producto', on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+    total = models.FloatField()
+    
+    def __str__(self):
+        return self.id_detalle
