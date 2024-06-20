@@ -75,8 +75,12 @@ function actualizarProductoEnUI(title, cantidad) {
 
 // Actualizar contadores y total
 function actualizarContadoresYTotal() {
-  productContador++;
-  badgeContador++;
+  productContador = 0;
+  badgeContador = 0;
+  productosAgregados.forEach(producto => {
+    productContador += producto.cantidad;
+    badgeContador += producto.cantidad;
+  });
   productCountElement.textContent = badgeContador;
   totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
   actualizarLocalStorage();
@@ -146,6 +150,7 @@ function agregarBotonCompra() {
     botonCompra.classList.add('btn', 'btn-primary');
     botonCompra.id = 'comprar';
     botonCompra.textContent = 'Comprar';
+    botonCompra.style.marginTop = '10px'; // Agregado margen superior de 10px
     botonCompraDiv.appendChild(botonCompra);
   }
 }
