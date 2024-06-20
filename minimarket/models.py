@@ -36,3 +36,27 @@ class detalleCompra(models.Model):
     
     def __str__(self):
         return self.id_detalle
+
+class formularioContacto(models.Model):
+    CONSULTA = 'CONSULTA'
+    RECLAMO = 'RECLAMO'
+    SUGERENCIA = 'SUGERENCIA'
+    OTRO = 'OTRO'
+
+    OPCIONES_SOLICITUD = [
+        (CONSULTA, 'Consulta'),
+        (RECLAMO, 'Reclamo'),
+        (SUGERENCIA, 'Sugerencia'),
+        (OTRO, 'Otro'),
+    ]
+    
+    id_formulario = models.AutoField(primary_key=True)
+    nombre = models.CharField(max_length=50)
+    apellido = models.CharField(max_length=50)
+    correo = models.EmailField()
+    tipo_solicitud = models.CharField(max_length=10, choices=OPCIONES_SOLICITUD)
+    comentario = models.CharField(max_length=300)
+
+    def __str__(self):
+        return str(self.tipo_solicitud)
+

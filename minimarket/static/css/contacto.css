@@ -1,4 +1,9 @@
 /* Inicio Contacto */
+
+
+.tamaño-texto {
+  height: 100px;  /* Puedes ajustar el tamaño según sea necesario */
+}
 .contact {
     padding: 4%;
     min-height: 400px; 

@@ -3,14 +3,14 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 
-from .models import Producto
+from .models import Producto, formularioContacto
 from django.core.paginator import Paginator
 from django.contrib.auth import login,authenticate
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
-from minimarket.forms import RegistroForm
+from minimarket.forms import RegistroForm, formContacto
 from django.views.decorators.csrf import csrf_exempt
 
 
@@ -40,7 +40,23 @@ def nosotros(request):
     return render(request, 'nosotros.html')
 
 def contacto(request):
-    return render(request, 'contacto.html')
+    if request.method == 'POST':
+        form = formContacto(request.POST)
+        if form.is_valid():
+            contacto = formularioContacto(
+                nombre=form.cleaned_data['nombre'],
+                apellido=form.cleaned_data['apellido'],
+                correo=form.cleaned_data['correo'],
+                tipo_solicitud=form.cleaned_data['tipo_solicitud'],
+                comentario=form.cleaned_data['comentario']
+            )
+            contacto.save()
+            form = formContacto()
+            return redirect('/?enviado=true')
+    else:
+        form = formContacto()
+
+    return render(request, 'contacto.html', {'form': form})
 
 def creaCuenta(request):
     form = RegistroForm()
