@@ -5,19 +5,20 @@ let productosAgregados = [];
 let precioTotal = 0;
 let totalCarritoElement = document.getElementById('precio-total-carrito');
 
+// Inicialización de productos desde localStorage y actualización de la UI
 function inicializarProductos() {
   productosAgregados = localStorage.getItem('productosAgregados') ? JSON.parse(localStorage.getItem('productosAgregados')) : [];
   productosAgregados.forEach(producto => {
     productContador += producto.cantidad;
     badgeContador += producto.cantidad;
   });
-  agregarBotonCompra();
   productCountElement.textContent = badgeContador;
+  agregarBotonCompra();
 }
 
+// Creación de la tarjeta de producto
 function createCard(producto) {
   const newCard = document.createElement('div');
-
   newCard.className = "producto m-2 d-flex flex-row align-items-center";
   newCard.innerHTML = `
     <img class="card-img-top" src="${producto.imgSrc}" alt="Imagen de la tarjeta" style="width: 6rem; height: 7rem;">
@@ -36,70 +37,58 @@ function createCard(producto) {
   return newCard;
 }
 
+// Agregar producto al carrito
 function agregarProducto() {
   document.querySelectorAll(".btn-agregar").forEach(button => {
     button.addEventListener("click", function() {
       let card = this.closest(".card");
-
-      if (!card) {
-        console.error("No se pudo encontrar la tarjeta asociada con el botón.");
-        return;
-      }
-      let productId = card.dataset.productId;
-      let imgElement = card.querySelector('.card-img-top');
-      if (!imgElement) {
-        console.error("No se encontró el elemento de imagen en la tarjeta del producto.");
-        return;
-    }
-      let titleElement = card.querySelector('.card-title');
-      let priceElement = card.querySelector('.price');
-
-      if (!imgElement || !titleElement || !priceElement) {
-        console.error("Faltan elementos en la tarjeta del producto.");
-        return;
-      }
-
-      let imgSrc = imgElement.src;
-      let title = titleElement.textContent;
-      let priceString = priceElement.textContent;
+      if (!card) return console.error("No se pudo encontrar la tarjeta asociada con el botón.");
+      
+      let imgSrc = card.querySelector('.card-img-top').src;
+      let title = card.querySelector('.card-title').textContent;
+      let priceString = card.querySelector('.price').textContent;
       let price = parseFloat(priceString.replace('$', ''));
       let productoExistente = productosAgregados.find(producto => producto.title === title);
 
       if (productoExistente) {
         productoExistente.cantidad++;
-        let existingCard = Array.from(document.getElementById("productos-agregados").children)
-                                .find(card => card.querySelector('.card-title').textContent === title);
-        if (existingCard) {
-          existingCard.querySelector('.cantidad').textContent = `Cantidad: ${productoExistente.cantidad}`;
-        }
+        actualizarProductoEnUI(title, productoExistente.cantidad);
       } else {
         let newProduct = { imgSrc, title, priceString: '$' + priceString, cantidad: 1, price };
         productosAgregados.push(newProduct);
         document.getElementById("productos-agregados").appendChild(createCard(newProduct));
-        totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
       }
 
-      productContador++;
-      productCountElement.textContent = productContador;
-      totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
-      actualizarLocalStorage();
-      agregarBotonCompra();
-      eliminarMensajeCarritoVacio();
-
-      // $.ajax({
-      //   type: 'POST',
-      //   url: '/agregar-al-carrito/',
-      //   data: {
-      //     'product_id': productId,
-      //     'csrfmiddlewaretoken': CSRF_TOKEN  
-      //   },
-      //   success: function(response) {
-      //   }
-      // });
+      actualizarContadoresYTotal();
     });
   });
 }
 
+// Actualizar producto en la UI
+function actualizarProductoEnUI(title, cantidad) {
+  let existingCard = Array.from(document.getElementById("productos-agregados").children)
+                          .find(card => card.querySelector('.card-title').textContent === title);
+  if (existingCard) {
+    existingCard.querySelector('.cantidad').textContent = `Cantidad: ${cantidad}`;
+  }
+}
+
+// Actualizar contadores y total
+function actualizarContadoresYTotal() {
+  productContador = 0;
+  badgeContador = 0;
+  productosAgregados.forEach(producto => {
+    productContador += producto.cantidad;
+    badgeContador += producto.cantidad;
+  });
+  productCountElement.textContent = badgeContador;
+  totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
+  actualizarLocalStorage();
+  agregarBotonCompra();
+  eliminarMensajeCarritoVacio();
+}
+
+// Eliminar mensaje de carrito vacío
 function eliminarMensajeCarritoVacio() {
   if(productContador >= 1){
     let mensajeVacio = document.getElementById("mensaje-vacio");
@@ -107,8 +96,8 @@ function eliminarMensajeCarritoVacio() {
   }
 }
 
+// Cargar productos al iniciar
 function cargarProductos() {
-  // Solo cargar los productos si hay al menos uno
   if (productosAgregados.length > 0) {
     eliminarMensajeCarritoVacio();
     productosAgregados.forEach(producto => {
@@ -118,65 +107,41 @@ function cargarProductos() {
   }
 }
 
+// Actualizar localStorage
 function actualizarLocalStorage() {
-  localStorage.setItem('productContador', productContador);
   localStorage.setItem('productosAgregados', JSON.stringify(productosAgregados));
 }
 
+// Manejar cantidad de productos
 function manejarCantidad() {
   document.getElementById("productos-agregados").addEventListener("click", function(e) {
     let card = e.target.closest('.producto');
     if (!card) return;
 
-    let quantityElement = card.querySelector('.cantidad');
-    let quantity = parseInt(quantityElement.textContent.split(': ')[1]);
-    let priceElement = card.querySelector('.price');
-    let price = parseFloat(priceElement.textContent.replace('$', ''));
+    let title = card.querySelector('.card-title').textContent;
+    let index = productosAgregados.findIndex(producto => producto.title === title);
+    if (index === -1) return;
 
     if (e.target.matches('.btn-incrementar')) {
-      quantityElement.textContent = `Cantidad: ${quantity + 1}`;
-      let index = productosAgregados.findIndex(producto => producto.title === card.querySelector('.card-title').textContent);
       productosAgregados[index].cantidad++;
-      actualizarLocalStorage();
-      productContador++;
-      productCountElement.textContent = productContador;
-      totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
     } else if (e.target.matches('.btn-disminuir')) {
-      if (quantity > 1) {
-        quantityElement.textContent = `Cantidad: ${quantity - 1}`;
-        let index = productosAgregados.findIndex(producto => producto.title === card.querySelector('.card-title').textContent);
-        productosAgregados[index].cantidad--;
-        actualizarLocalStorage();
-        totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
-      } else {
-        card.remove();
-        let index = productosAgregados.findIndex(producto => producto.title === card.querySelector('.card-title').textContent);
+      productosAgregados[index].cantidad--;
+      if (productosAgregados[index].cantidad === 0) {
         productosAgregados.splice(index, 1);
-        actualizarLocalStorage();
-        if (productosAgregados.length === 0) {
-          productContador = 0;
-          productCountElement.textContent = productContador;
-          totalCarritoElement.textContent = 'Tu precio total es de: $0';
-        } else {
-          productContador--;
-          productCountElement.textContent = productContador;
-        }
+        card.remove();
       }
-      totalCarritoElement.textContent = `Tu precio total es de: $${calcularTotal()}`;
-      actualizarLocalStorage();
-      agregarBotonCompra();
     }
+
+    actualizarContadoresYTotal();
   });
 }
 
+// Calcular total del carrito
 function calcularTotal() {
-  let total = 0;
-  productosAgregados.forEach(producto => {
-    total += producto.price * producto.cantidad;
-  });
-  return total;
+  return productosAgregados.reduce((total, producto) => total + producto.price * producto.cantidad, 0);
 }
 
+// Agregar botón de compra si hay productos
 function agregarBotonCompra() {
   const botonCompraDiv = document.getElementById('boton-comprar');
   if (productContador > 0 && !botonCompraDiv.children.length) {
@@ -185,11 +150,12 @@ function agregarBotonCompra() {
     botonCompra.classList.add('btn', 'btn-primary');
     botonCompra.id = 'comprar';
     botonCompra.textContent = 'Comprar';
+    botonCompra.style.marginTop = '10px'; // Agregado margen superior de 10px
     botonCompraDiv.appendChild(botonCompra);
-    console.log('Botón de compra agregado');
   }
 }
 
+// Inicialización
 inicializarProductos();
 cargarProductos();
 agregarProducto();
