@@ -94,13 +94,13 @@
                 <!-- Left elements -->
                 {% if request.user.is_authenticated %}     
                 <div class="d-flex align-items-center">
-                    <h5 class="me-3" style="color: #0d6efd;">¡Bienvenido {{ user.first_name}} a nuestro Minimarket!</h2>
+                    <h5 class="me-3 text-primary fw-bold fs-6">¡Bienvenid@, {{ user.first_name }} a nuestro Minimarket!</h5>
                 </div>
                 {% else %}
                 <div class="d-flex align-items-center">
-                    <h5 class="me-3" style="color: #0d6efd;">¡Bienvenido, te invitamos a iniciar sesión! </h5>
+                    <h5 class="me-3 text-primary fw-bold fs-6">¡Bienvenid@, te invitamos a iniciar sesión!</h5>
                 </div>
-                {% endif %}
+                {% endif %}
                 
 
                 <!-- Center elements -->
