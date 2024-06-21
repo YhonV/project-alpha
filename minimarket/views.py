@@ -3,10 +3,10 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 
-from .models import Producto, formularioContacto
+from .models import Producto, formularioContacto,detalleCompra
 from django.core.paginator import Paginator
 from django.contrib.auth import login,authenticate
-
+from django.db import transaction
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
@@ -19,12 +19,6 @@ from django.views.decorators.csrf import csrf_exempt
 
 def inicio(request):
     return render(request,'index.html')
-
-# @csrf_exempt
-# def agregar_al_carrito(request):
-#     if request.method == 'POST':
-#         product_id = request.POST.get('product_id')
-#         return JsonResponse({'status': 'success'})
 
 def catalogo(request):
     productos = Producto.objects.all().order_by('id_producto') 
@@ -132,4 +126,36 @@ def exit(request):
     logout(request)
     return redirect('index')
 
+@csrf_exempt
+@transaction.atomic
+def procesar_compra(request):
+    if request.method == 'POST':
+        nombres_productos = request.POST.getlist('nombresProductos[]')
+        cantidades = request.POST.getlist('cantidades[]')
+        total = float(request.POST.get('total'))
+        detalles_compra = []
+        
+        for nombre_producto, cantidad in zip(nombres_productos, cantidades):
+            cantidad = int(cantidad)
+            try:
+                producto = Producto.objects.get(nombre=nombre_producto)
+            except Producto.DoesNotExist:
+                return JsonResponse({'success': False, 'message': f'Producto no encontrado: {nombre_producto}'})
+            
+            if producto.stock < cantidad:
+                return JsonResponse({'success': False, 'message': f'Stock insuficiente para {nombre_producto}'})
+            
+            producto.stock -= cantidad
+            producto.save()
+            
+            detalle = detalleCompra(
+                id_producto=producto,
+                cantidad=cantidad,
+                total=producto.precio * cantidad
+            )
+            detalles_compra.append(detalle)
+        
+        detalleCompra.objects.bulk_create(detalles_compra)
+        return JsonResponse({'success': True})
     
+    return JsonResponse({'success': False, 'message': 'Método no permitido'})

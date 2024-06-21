@@ -48,13 +48,15 @@ function agregarProducto() {
       let title = card.querySelector('.card-title').textContent;
       let priceString = card.querySelector('.price').textContent;
       let price = parseFloat(priceString.replace('$', ''));
+      // Asegúrate de obtener el id_producto de alguna manera, por ejemplo, como un atributo data-id en la tarjeta
+      let id_producto = card.getAttribute('data-id'); // Asumiendo que cada tarjeta tiene un atributo data-id
       let productoExistente = productosAgregados.find(producto => producto.title === title);
 
       if (productoExistente) {
         productoExistente.cantidad++;
         actualizarProductoEnUI(title, productoExistente.cantidad);
       } else {
-        let newProduct = { imgSrc, title, priceString: '$' + priceString, cantidad: 1, price };
+        let newProduct = { id_producto, imgSrc, title, priceString: '$' + priceString, cantidad: 1, price };
         productosAgregados.push(newProduct);
         document.getElementById("productos-agregados").appendChild(createCard(newProduct));
       }
@@ -124,11 +126,14 @@ function manejarCantidad() {
 
     if (e.target.matches('.btn-incrementar')) {
       productosAgregados[index].cantidad++;
+      actualizarProductoEnUI(title, productosAgregados[index].cantidad); // Asegúrate de actualizar la UI con la nueva cantidad
     } else if (e.target.matches('.btn-disminuir')) {
       productosAgregados[index].cantidad--;
       if (productosAgregados[index].cantidad === 0) {
         productosAgregados.splice(index, 1);
-        card.remove();
+        card.remove(); // Elimina la tarjeta del producto si la cantidad es 0
+      } else {
+        actualizarProductoEnUI(title, productosAgregados[index].cantidad); // Actualiza la UI si la cantidad no es 0
       }
     }
 
@@ -153,6 +158,55 @@ function agregarBotonCompra() {
     botonCompra.style.marginTop = '10px'; // Agregado margen superior de 10px
     botonCompraDiv.appendChild(botonCompra);
   }
+}
+
+
+document.getElementById('boton-comprar').addEventListener('click', function() {
+  const nombresProductos = productosAgregados.map(p => encodeURIComponent(p.title));
+  const cantidades = productosAgregados.map(p => p.cantidad);
+  const total = calcularTotal();
+  const csrftoken = getCookie('csrftoken');
+
+  fetch('/procesar_compra/', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'X-CSRFToken': csrftoken
+      },
+      body: `nombresProductos[]=${nombresProductos.join('&nombresProductos[]=')}&cantidades[]=${cantidades.join('&cantidades[]=')}&total=${total}`
+  })
+  .then(response => response.json())
+  .then(data => {
+      if(data.success) {
+          // Mostrar el modal
+          var myModal = new bootstrap.Modal(document.getElementById('modalCompraExitosa'), {
+            keyboard: false
+          });
+          myModal.show();
+
+          // Limpiar el carrito
+          productosAgregados = [];
+          actualizarContadoresYTotal();
+          document.getElementById("productos-agregados").innerHTML = '';
+      } else {
+          alert(data.message || 'Hubo un error al procesar la compra');
+      }
+  });
+});
+
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+          const cookie = cookies[i].trim();
+          if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+          }
+      }
+  }
+  return cookieValue;
 }
 
 // Inicialización

@@ -1,5 +1,5 @@
 {% extends "plantilla.html" %}
-
+{% csrf_token %}
 {% load static%}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/catalogo.css' %}">
@@ -252,7 +252,7 @@
                           <h4 class="price">{{ i.precio|floatformat:"-1" }}</h4>
                         </div>
                         <div style="padding: 0 0 1rem 0;">
-                          <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;">Agregar</button>
+                          <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;" data-product-id="{{ producto.id_producto }}">Agregar</button>
                         </div>
                       </div>
                     </div>                    
@@ -293,6 +293,25 @@
       </div>
     </div>
     </div>
+    </div>
+
+    <!-- Modal de Compra Exitosa -->
+    <div class="modal fade" id="modalCompraExitosa" tabindex="-1" aria-labelledby="modalCompraExitosaLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalCompraExitosaLabel">Compra Exitosa</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>¡Tu compra ha sido procesada con éxito!</p>
+            <p>Gracias por tu compra.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="{% static 'js/catalogo.js'%}"></script>

@@ -10,7 +10,8 @@ urlpatterns = [
     path('contacto/', views.contacto),
     path('login/', views.view_login, name='login'),
     path('creaCuenta/',views.creaCuenta, name='creaCuenta'),
-    path('logout/', views.exit , name= 'exit')
+    path('logout/', views.exit , name= 'exit'),
+    path('procesar_compra/', views.procesar_compra, name='procesar_compra'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
     
