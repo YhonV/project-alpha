@@ -44,8 +44,8 @@
     }
   }
   
-  .btn-outline-primary {
-    --bs-btn-hover-bg: #fff;
+  .btn-outline-primary:hover {
+    color: #fff;
   }
   
   

@@ -101,13 +101,12 @@
                     <h5 class="me-3" style="color: #0d6efd;">¡Bienvenido, te invitamos a iniciar sesión! </h5>
                 </div>
                 {% endif %}
+                
 
                 <!-- Center elements -->
                 <div class="d-flex flex-grow-1 pe-3 d-none d-lg-flex justify-content-md-end">
 
-                    <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
-                        <a href="/">{{user.username | upper}}</a>
-                    </button>
+                    
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
                         <a href="/">Home</a>
                     </button>
@@ -119,8 +118,10 @@
                     </button>
                     <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
                         <a href="/contacto">Contacto</a>
-                    </button>
-                    
+                    </button> 
+                    <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                        <i class="fas fa-user"></i>  
+                    </button>                      
                 </div>
 
                 <div class="offcanvas offcanvas-end d-lg-none" tabindex="-1" id="offcanvasNavbar"
@@ -151,6 +152,9 @@
                             </button>
                             <button class="btn btn-outline-primary m-2" data-mdb-ripple-color="dark" type="button">
                                 <a href="/contacto">Contacto</a>
+                            </button>
+                            <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                                <i class="fas fa-user"></i>  
                             </button>
                         </div>
                     </div>
