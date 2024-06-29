@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from minimarket.forms import RegistroForm, formContacto
 from django.views.decorators.csrf import csrf_exempt
+from django.forms.models import model_to_dict
 
 
 

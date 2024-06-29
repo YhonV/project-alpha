@@ -48,8 +48,8 @@ function agregarProducto() {
       let title = card.querySelector('.card-title').textContent;
       let priceString = card.querySelector('.price').textContent;
       let price = parseFloat(priceString.replace('$', ''));
-      // Asegúrate de obtener el id_producto de alguna manera, por ejemplo, como un atributo data-id en la tarjeta
-      let id_producto = card.getAttribute('data-id'); // Asumiendo que cada tarjeta tiene un atributo data-id
+      
+      let id_producto = card.getAttribute('data-id');
       let productoExistente = productosAgregados.find(producto => producto.title === title);
 
       if (productoExistente) {
@@ -168,29 +168,51 @@ document.getElementById('boton-comprar').addEventListener('click', function() {
   const csrftoken = getCookie('csrftoken');
 
   fetch('/procesar_compra/', {
-      method: 'POST',
-      headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'X-CSRFToken': csrftoken
-      },
-      body: `nombresProductos[]=${nombresProductos.join('&nombresProductos[]=')}&cantidades[]=${cantidades.join('&cantidades[]=')}&total=${total}`
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'X-CSRFToken': csrftoken
+    },
+    body: `nombresProductos[]=${nombresProductos.join('&nombresProductos[]=')}&cantidades[]=${cantidades.join('&cantidades[]=')}&total=${total}`
   })
   .then(response => response.json())
   .then(data => {
-      if(data.success) {
-          // Mostrar el modal
-          var myModal = new bootstrap.Modal(document.getElementById('modalCompraExitosa'), {
-            keyboard: false
-          });
-          myModal.show();
+    if (data.success) {
+      // Mostrar el modal de compra exitosa
+      var myModal = new bootstrap.Modal(document.getElementById('modalCompraExitosa'), {
+        keyboard: false
+      });
+      myModal.show();
 
-          // Limpiar el carrito
-          productosAgregados = [];
-          actualizarContadoresYTotal();
-          document.getElementById("productos-agregados").innerHTML = '';
+      // Vaciar el carrito
+      productosAgregados = [];
+      actualizarContadoresYTotal();
+      document.getElementById("productos-agregados").innerHTML = '';
+    } else {
+      // Mostrar el mensaje de error con SweetAlert2
+      if (data.message && data.message.includes('Stock insuficiente')) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Stock insuficiente',
+          text: data.message
+        });
       } else {
-          alert(data.message || 'Hubo un error al procesar la compra');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Error al procesar la compra'
+        });
       }
+    }
+  })
+  .catch((error) => {
+    // Capturar errores que puedan ocurrir durante la solicitud
+    console.error('Error en la solicitud:', error);
+    Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Error inesperado, por favor intente nuevamente.'
+    });
   });
 });
 
