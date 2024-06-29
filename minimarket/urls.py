@@ -12,6 +12,7 @@ urlpatterns = [
     path('creaCuenta/',views.creaCuenta, name='creaCuenta'),
     path('logout/', views.exit , name= 'exit'),
     path('procesar_compra/', views.procesar_compra, name='procesar_compra'),
+    path('inventario/', views.inventario, name='inventario'),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
     

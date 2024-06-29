@@ -160,3 +160,8 @@ def procesar_compra(request):
         return JsonResponse({'success': True})
     
     return JsonResponse({'success': False, 'message': 'Método no permitido'})
+
+def inventario(request):
+    productos = Producto.objects.all().order_by('id_producto') 
+    contexto = {'productos': productos}
+    return render(request, 'inventario.html', contexto)
