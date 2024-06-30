@@ -34,6 +34,7 @@ def nosotros(request):
     return render(request, 'nosotros.html')
 
 def contacto(request):
+
     if request.method == 'POST':
         form = formContacto(request.POST)
         if form.is_valid():
@@ -44,13 +45,21 @@ def contacto(request):
                 tipo_solicitud=form.cleaned_data['tipo_solicitud'],
                 comentario=form.cleaned_data['comentario']
             )
+            response = {
+                        'status': 'success',
+                        'message': 'Registro exitoso!',
+                        'redirect': reverse('index')
+                    }
             contacto.save()
             form = formContacto()
-            return redirect('/?enviado=true')
+            return JsonResponse(response)
     else:
         form = formContacto()
-
-    return render(request, 'contacto.html', {'form': form})
+        response = {
+                        'status': 'error',
+                        'message': 'Formulario invalido!'
+                    }
+        return render(request, 'contacto.html', {'form': form})
 
 def creaCuenta(request):
     form = RegistroForm()

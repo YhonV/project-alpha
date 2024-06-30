@@ -15,7 +15,7 @@
             </div>
         </div>
         <div class="col-md-9">
-            <form method="post">
+            <form id="contact-form" method="POST">
             {% csrf_token %}
             {{form|crispy}}
                   <div class="col-sm-offset-2 col-sm-10">
@@ -26,5 +26,47 @@
     </div>
 </div>
 <!-- Fin Formulario de contacto -->
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script>
+    $(document).ready(function() {
+        $('#contact-form').submit(function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: '{% url "contacto" %}',
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.status === 'success') {
+                        Swal.fire({
+                            title: '¡Formulario enviado con exito!',
+                            text: 'Serás redirigido a la página de inicio en unos segundos.',
+                            icon: 'success',
+                            showConfirmButton: true,
+                            timer: 3000
+                        }).then(() => {
+                            window.location.href = response.redirect;
+                        });
+                    } else {
+                        Swal.fire({
+                            title: 'Error',
+                            text: response.message,
+                            icon: 'error',
+                            confirmButtonText: 'Cerrar'
+                        });
+                    }
+                },
+                error: function() {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'Ocurrió un error inesperado. Inténtalo de nuevo.',
+                        icon: 'error',
+                        confirmButtonText: 'Cerrar'
+                    });
+                }
+            });
+        });
+    });
+</script>
 {% endblock content %}
