@@ -3,7 +3,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 
 
-from .models import Producto, formularioContacto,detalleCompra
+from .models import Producto, formularioContacto,detalleCompra, Categoria
 from django.core.paginator import Paginator
 from django.contrib.auth import login,authenticate
 from django.db import transaction
@@ -12,8 +12,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from minimarket.forms import RegistroForm, formContacto
 from django.views.decorators.csrf import csrf_exempt
-from django.forms.models import model_to_dict
-
+import json
 
 
 # Create your views here.
@@ -161,7 +160,44 @@ def procesar_compra(request):
     
     return JsonResponse({'success': False, 'message': 'Método no permitido'})
 
+@csrf_exempt
+@transaction.atomic
 def inventario(request):
     productos = Producto.objects.all().order_by('id_producto') 
+    
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        nombreNuevo = data.get('nombre') 
+        nombre_categoria = data.get('nombre_categoria')
+        precio = data.get('precio')
+        stock = data.get('stock')
+        imagen = data.get('imagen')
+        
+        # Verificar si el producto existe
+        if Producto.objects.filter(nombre=nombreNuevo).exists():
+            producto = Producto.objects.get(nombre=nombreNuevo)
+            categoria_objeto = Categoria.objects.get(nombre_categoria=nombre_categoria)
+            producto.nombre_categoria = categoria_objeto
+            producto.precio = precio
+            producto.stock = stock
+            producto.imagen = imagen
+            producto.save()
+            return JsonResponse({"success": True, "message": "Producto actualizado correctamente."})
+        else:
+            # Manejar el caso en que el producto no existe
+            return JsonResponse({"success": False, "message": "Producto no encontrado."})
+    
+    if request.method == 'DELETE':
+        print("Cuerpo de la solicitud:", request.body)
+        data = json.loads(request.body)
+        print("Datos decodificados:", data)
+        nombre = data.get('nombre') 
+        try:
+            producto = Producto.objects.get(nombre=nombre)
+            producto.delete()
+            return JsonResponse({"success": True, "message": "Producto eliminado correctamente."})
+        except Producto.DoesNotExist:
+            return JsonResponse({"success": False, "message": "Producto no encontrado."})
+    
     contexto = {'productos': productos}
     return render(request, 'inventario.html', contexto)
