@@ -101,6 +101,8 @@
             </div>
         `,
         confirmButtonText: 'Agregar',
+        cancelButtonText: 'Cancelar',
+        showCancelButton: true,
         focusConfirm: false,
         preConfirm: () => {
           const nombre = document.getElementById('nombre').value;
@@ -139,11 +141,16 @@
             return response.json();
           })
           .then(data => {
-            Swal.fire('¡Agregado!', 'El producto ha sido agregado exitosamente.', 'success')
+            if(data.success){
+              Swal.fire('¡Agregado!', 'El producto ha sido agregado exitosamente.', 'success')
             .then(() => {
               location.reload(); 
             });
+            } else {
+              Swal.fire('Error', 'No se pudo agregar el producto: ' + data.message, 'error');
+            }
           })
+          
           .catch(error => {
             Swal.fire('Error', 'No se pudo agregar el producto: ' + error.message, 'error');
           });

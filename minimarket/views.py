@@ -186,6 +186,10 @@ def inventario(request):
         except ValueError:
             return JsonResponse({"success": False, "message": "Precio debe ser un número entero."}) 
         
+         # Validación de existencia del producto
+        if Producto.objects.filter(nombre=nombreNuevo).exists():
+            return JsonResponse({"success": False, "message": "Producto ya existe."})
+        
         if Producto.objects.filter(nombre=nombreNuevo).exists():
             producto = Producto.objects.get(nombre=nombreNuevo)
             categoria_objeto = Categoria.objects.get(nombre_categoria=nombre_categoria)
@@ -219,18 +223,34 @@ def inventario(request):
         precio = request.POST.get('precio')
         stock = request.POST.get('stock')
         imagen = request.FILES.get('imagen')
-        
+
+            # Validación de existencia del producto
         if Producto.objects.filter(nombre=nombre).exists():
             return JsonResponse({"success": False, "message": "Producto ya existe."})
-        
+
+        try:
+            stock = int(stock)
+        except ValueError:
+            return JsonResponse({"success": False, "message": "Stock debe ser un número entero positivo."})
+
+        try:
+            precio = float(precio)
+        except ValueError:
+            return JsonResponse({"success": False, "message": "Precio debe ser un número positivo."})
+
         categoria_objeto = Categoria.objects.get(nombre_categoria=nombre_categoria)
         producto = Producto(
             nombre=nombre,
             nombre_categoria=categoria_objeto,
-            precio=float(precio),
-            stock=int(stock),
+            precio=precio,
+            stock=stock,
             imagen=imagen
         )
+        if producto.precio < 0:
+            return JsonResponse({"success": False, "message": "Precio no puede ser negativo."})
+        
+        if producto.stock < 0:
+            return JsonResponse({"success": False, "message": "Stock no puede ser negativo."})
         producto.save()
         return JsonResponse({"success": True, "message": "Producto creado correctamente."})
     
