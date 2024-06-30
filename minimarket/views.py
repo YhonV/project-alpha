@@ -173,7 +173,7 @@ def procesar_compra(request):
 @transaction.atomic
 def inventario(request):
     productos = Producto.objects.all().order_by('id_producto') 
-    
+    categorias = Categoria.objects.all().order_by('nombre_categoria') 
     if request.method == 'PUT':
         data = json.loads(request.body)
         nombreNuevo = data.get('nombre') 
@@ -197,7 +197,7 @@ def inventario(request):
         
          # Validación de existencia del producto
         if Producto.objects.filter(nombre=nombreNuevo).exists():
-            return JsonResponse({"success": False, "message": "Producto ya existe."})
+            return JsonResponse({"success": False, "message": "No puedes agregar un producto cuyo nombre ya exista."})
         
         if Producto.objects.filter(nombre=nombreNuevo).exists():
             producto = Producto.objects.get(nombre=nombreNuevo)
@@ -235,7 +235,7 @@ def inventario(request):
 
             # Validación de existencia del producto
         if Producto.objects.filter(nombre=nombre).exists():
-            return JsonResponse({"success": False, "message": "Producto ya existe."})
+            return JsonResponse({"success": False, "message": "No puedes agregar un producto cuyo nombre ya exista."})
 
         try:
             stock = int(stock)
@@ -263,5 +263,5 @@ def inventario(request):
         producto.save()
         return JsonResponse({"success": True, "message": "Producto creado correctamente."})
     
-    contexto = {'productos': productos}
+    contexto = {'productos': productos, 'categorias': categorias}
     return render(request, 'inventario.html', contexto)

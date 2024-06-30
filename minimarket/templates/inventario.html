@@ -50,6 +50,12 @@
     var editarBtns = document.querySelectorAll('.editar-btn');
     var agregarProductoBtn = document.querySelector('.agregarProducto');
 
+    var categorias = [
+    {% for categoria in categorias %}
+    "{{ categoria.nombre_categoria }}",
+    {% endfor %}
+    ];
+
     agregarProductoBtn.addEventListener('click', function() {
       function getCookie(name) {
         let cookieValue = null;
@@ -87,7 +93,10 @@
               <div class="form-row">
                 <div class="swal2-form-group">
                   <label for="categoria">Categoría</label>
-                  <input type="text" id="categoria" class="swal2-input custom-swal-input" placeholder="Categoría" value="">
+                  <select id="categoria" class="swal2-input custom-swal-input">
+                    <option value="">Seleccione una categoría...</option>
+                    ${categorias.map(categoria => `<option value="${categoria}">${categoria}</option>`).join('')}
+                  </select>
                 </div>
                 <div class="swal2-form-group">
                   <label for="precio">Precio</label>
@@ -277,7 +286,10 @@
               <div class="form-row">
                 <div class="swal2-form-group">
                   <label for="categoria">Categoría</label>
-                  <input type="text" id="categoria" class="swal2-input custom-swal-input" placeholder="Categoría" value="${categoria}">
+                  <select id="categoria" class="swal2-input custom-swal-input">
+                    <option value="">${categoria}</option>
+                    ${categorias.map(categoria => `<option value="${categoria}">${categoria}</option>`).join('')}
+                  </select>
                 </div>
                 <div class="swal2-form-group">
                   <label for="precio">Precio</label>
