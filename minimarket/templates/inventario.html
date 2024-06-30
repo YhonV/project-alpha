@@ -9,7 +9,7 @@
 <div class="container mt-10" style="margin-top: 200px;">
   <!-- Botón Agregar -->
   <div class="mb-2">
-    <a href="#" class="btn btn-success">Agregar Producto</a>
+    <a href="#" class="btn btn-success agregarProducto" data-id="{{ producto.id }}" data-nombre="{{ producto.nombre }}" data-categoria="{{ producto.nombre_categoria_id }}" data-stock="{{ producto.stock }}" data-precio="{{ producto.precio }}" data-precio="{{ producto.imagen }}">Agregar Producto</a>
   </div>
 
   <div class="table-responsive">
@@ -48,18 +48,121 @@
   document.addEventListener('DOMContentLoaded', function () {
     var eliminarBtns = document.querySelectorAll('.eliminar-btn');
     var editarBtns = document.querySelectorAll('.editar-btn');
+    var agregarProductoBtn = document.querySelector('.agregarProducto');
+
+    agregarProductoBtn.addEventListener('click', function() {
+      function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+          const cookies = document.cookie.split(';');
+          for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // ¿Este cookie es el que buscamos?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+              cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+            }
+          }
+        }
+        return cookieValue;
+      }
+
+      const csrftoken = getCookie('csrftoken');
+
+
+      Swal.fire({
+        title: 'Agregar Producto',
+        html: `
+          <div class="swal2-form">
+              <div class="form-row">
+                <div class="swal2-form-group">
+                  <label for="nombre">Nombre</label>
+                  <input type="text" id="nombre" class="swal2-input custom-swal-input" placeholder="Nombre" value="">
+                </div>
+                <div class="swal2-form-group">
+                  <label for="stock">Stock</label>
+                  <input type="number" id="stock" class="swal2-input custom-swal-input" placeholder="Stock" value="">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="swal2-form-group">
+                  <label for="categoria">Categoría</label>
+                  <input type="text" id="categoria" class="swal2-input custom-swal-input" placeholder="Categoría" value="">
+                </div>
+                <div class="swal2-form-group">
+                  <label for="precio">Precio</label>
+                  <input type="text" id="precio" class="swal2-input custom-swal-input" placeholder="Precio" value="">
+                </div>
+                <div class=swal2-form-group">
+                  <label for="imagen">Imagen</label>
+                  <input type="file" id="imagen" class="swal2-input custom-swal-input" placeholder="Imagen" value="">
+                </div>
+              </div>
+            </div>
+        `,
+        confirmButtonText: 'Agregar',
+        focusConfirm: false,
+        preConfirm: () => {
+          const nombre = document.getElementById('nombre').value;
+          const stock = document.getElementById('stock').value;
+          const categoria = document.getElementById('categoria').value;
+          const precio = document.getElementById('precio').value;
+          const imagen = document.getElementById('imagen').files[0];
+        
+          if (!nombre || !stock || !categoria || !precio || !imagen) {
+            Swal.showValidationMessage('Por favor, rellena todos los campos');
+            return false;
+          }
+        
+          let formData = new FormData();
+          formData.append('nombre', nombre);
+          formData.append('stock', stock);
+          formData.append('nombre_categoria', categoria);
+          formData.append('precio', precio);
+          formData.append('imagen', imagen);
+        
+          return formData;
+        }
+      }).then((result) => {
+        if (result.value) {
+          fetch('/inventario/', {
+            method: 'POST',
+            headers: {
+              'X-CSRFToken': csrftoken
+            },
+            body: result.value
+          })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Error al agregar el producto');
+            }
+            return response.json();
+          })
+          .then(data => {
+            Swal.fire('¡Agregado!', 'El producto ha sido agregado exitosamente.', 'success')
+            .then(() => {
+              location.reload(); 
+            });
+          })
+          .catch(error => {
+            Swal.fire('Error', 'No se pudo agregar el producto: ' + error.message, 'error');
+          });
+        }
+      });
+    });
+
     eliminarBtns.forEach(function(btn) { 
       btn.addEventListener('click', function (event) {
-        event.preventDefault(); // Prevenir el comportamiento por defecto del enlace
+        event.preventDefault();
   
-        // Extraer los datos del atributo data-*
+        
         var id = this.getAttribute('data-id');
         var nombre = this.getAttribute('data-nombre');
         var categoria = this.getAttribute('data-categoria');
         var stock = this.getAttribute('data-stock');
         var precio = this.getAttribute('data-precio');
   
-        // Obtener el token CSRF de las cookies
+        
         function getCookie(name) {
           let cookieValue = null;
           if (document.cookie && document.cookie !== '') {
@@ -90,7 +193,6 @@
           cancelButtonColor: '#6c757d'
         }).then((result) => {
           if (result.isConfirmed) {
-            // Enviar la solicitud de eliminación al servidor
             fetch('/inventario/', {
               method: 'DELETE',
               headers: {
@@ -109,7 +211,7 @@
             .then(data => {
               if (data.success) {
                 Swal.fire('Eliminado', data.message, 'success').then(() => {
-                  location.reload(); // Recargar la página para reflejar los cambios
+                  location.reload(); 
                 });
               } else {
                 Swal.fire('Error', data.message, 'error');
@@ -123,8 +225,6 @@
         });
       });
     });
-  
-
 
     editarBtns.forEach(function(btn) {
       btn.addEventListener('click', function () {
@@ -200,9 +300,9 @@
             const categoria = Swal.getPopup().querySelector('#categoria').value;
             const stock = Swal.getPopup().querySelector('#stock').value;
             const precio = Swal.getPopup().querySelector('#precio').value;
-
+          
             return fetch('/inventario/', {
-              method: 'POST',
+              method: 'PUT',
               headers: {
                 'Content-Type': 'application/json',
                 'X-CSRFToken': csrftoken 
@@ -215,15 +315,21 @@
               }
               return response.json();
             })
-            .catch(error => {
-              Swal.showValidationMessage(`Request failed: ${error}`);
-            });
+            .then(data => {
+              if (data.success) {
+                Swal.fire('Editado', data.message, 'success').then(() => {
+                  location.reload(); 
+                });
+              } 
+              if (!data.success) {
+                Swal.fire({icon: 'error', title:'Error', text: data.message});
+              }
+            })
           }
+
         });
       });
     });
-
-    
   });
   </script>
 

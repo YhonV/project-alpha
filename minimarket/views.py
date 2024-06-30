@@ -165,26 +165,40 @@ def procesar_compra(request):
 def inventario(request):
     productos = Producto.objects.all().order_by('id_producto') 
     
-    if request.method == 'POST':
+    if request.method == 'PUT':
         data = json.loads(request.body)
         nombreNuevo = data.get('nombre') 
         nombre_categoria = data.get('nombre_categoria')
         precio = data.get('precio')
         stock = data.get('stock')
-        imagen = data.get('imagen')
         
-        # Verificar si el producto existe
+        
+        if not all([nombreNuevo, nombre_categoria, precio, stock]):
+            return JsonResponse({"success": False, "message": "No puede haber campos vacíos."})
+        
+        try:
+            stock = int(stock)
+        except ValueError:
+            return JsonResponse({"success": False, "message": "Stock debe ser un número entero."})
+        
+        try:
+            precio = float(precio)
+        except ValueError:
+            return JsonResponse({"success": False, "message": "Precio debe ser un número entero."}) 
+        
         if Producto.objects.filter(nombre=nombreNuevo).exists():
             producto = Producto.objects.get(nombre=nombreNuevo)
             categoria_objeto = Categoria.objects.get(nombre_categoria=nombre_categoria)
             producto.nombre_categoria = categoria_objeto
             producto.precio = precio
+            if producto.precio < 0:
+                return JsonResponse({"success": False, "message": "Precio no puede ser negativo."})
             producto.stock = stock
-            producto.imagen = imagen
+            if producto.stock < 0:
+                return JsonResponse({"success": False, "message": "Stock no puede ser negativo."})
             producto.save()
             return JsonResponse({"success": True, "message": "Producto actualizado correctamente."})
         else:
-            # Manejar el caso en que el producto no existe
             return JsonResponse({"success": False, "message": "Producto no encontrado."})
     
     if request.method == 'DELETE':
@@ -198,6 +212,27 @@ def inventario(request):
             return JsonResponse({"success": True, "message": "Producto eliminado correctamente."})
         except Producto.DoesNotExist:
             return JsonResponse({"success": False, "message": "Producto no encontrado."})
+    
+    if request.method == 'POST':
+        nombre = request.POST.get('nombre')
+        nombre_categoria = request.POST.get('nombre_categoria')
+        precio = request.POST.get('precio')
+        stock = request.POST.get('stock')
+        imagen = request.FILES.get('imagen')
+        
+        if Producto.objects.filter(nombre=nombre).exists():
+            return JsonResponse({"success": False, "message": "Producto ya existe."})
+        
+        categoria_objeto = Categoria.objects.get(nombre_categoria=nombre_categoria)
+        producto = Producto(
+            nombre=nombre,
+            nombre_categoria=categoria_objeto,
+            precio=float(precio),
+            stock=int(stock),
+            imagen=imagen
+        )
+        producto.save()
+        return JsonResponse({"success": True, "message": "Producto creado correctamente."})
     
     contexto = {'productos': productos}
     return render(request, 'inventario.html', contexto)
