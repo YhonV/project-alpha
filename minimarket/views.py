@@ -174,8 +174,16 @@ def procesar_compra(request):
 @csrf_exempt
 @transaction.atomic
 def inventario(request):
-    productos = Producto.objects.all().order_by('id_producto') 
+    
+    orden = request.GET.get('orden', 'id_producto')
+    direccion = request.GET.get('direccion', 'asc')
+    
+    if direccion == 'desc':
+        orden = f'-{orden}'
+    
+    productos = Producto.objects.all().order_by(orden) 
     categorias = Categoria.objects.all().order_by('nombre_categoria') 
+    
     if request.method == 'PUT':
         data = json.loads(request.body)
         nombreNuevo = data.get('nombre') 
