@@ -34,31 +34,33 @@ def nosotros(request):
     return render(request, 'nosotros.html')
 
 def contacto(request):
-
     if request.method == 'POST':
         form = formContacto(request.POST)
         if form.is_valid():
             contacto = formularioContacto(
-                nombre=form.cleaned_data['nombre'],
                 apellido=form.cleaned_data['apellido'],
                 correo=form.cleaned_data['correo'],
                 tipo_solicitud=form.cleaned_data['tipo_solicitud'],
                 comentario=form.cleaned_data['comentario']
             )
+            contacto.set_nombre(form.cleaned_data['nombre']) #Aca obtenemos y encriptamos el nombre ingresado en el formulario para registrarlo en la base de datos
+            nombre_desencriptado = contacto.get_nombre()  #Aca desencriptamos el nombre 
+            message = f"{nombre_desencriptado}, tu solicitud de contacto fue enviada con éxito." #Generamos un mensaje de respuesta para ser usado en el JSON
+            #Generamos un JSON de respuesta para ser enviado al frontend
             response = {
-                        'status': 'success',
-                        'message': 'Registro exitoso!',
-                        'redirect': reverse('index')
-                    }
+                'status': 'success',
+                'message': message,
+                'redirect': reverse('index')
+            }
             contacto.save()
             form = formContacto()
             return JsonResponse(response)
     else:
         form = formContacto()
         response = {
-                        'status': 'error',
-                        'message': 'Formulario invalido!'
-                    }
+            'status': 'error',
+            'message': 'Formulario invalido!'
+        }
         return render(request, 'contacto.html', {'form': form})
 
 def creaCuenta(request):

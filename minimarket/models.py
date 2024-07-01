@@ -1,4 +1,6 @@
 from django.db import models
+from cryptography.fernet import Fernet
+from django.conf import settings
 import uuid
 
 class Categoria(models.Model):
@@ -51,7 +53,7 @@ class formularioContacto(models.Model):
     ]
     
     id_formulario = models.AutoField(primary_key=True)
-    nombre = models.CharField(max_length=50)
+    nombre = models.BinaryField()
     apellido = models.CharField(max_length=50)
     correo = models.EmailField()
     tipo_solicitud = models.CharField(max_length=10, choices=OPCIONES_SOLICITUD)
@@ -59,4 +61,14 @@ class formularioContacto(models.Model):
 
     def __str__(self):
         return str(self.tipo_solicitud)
+    #Metodo para encriptar el nombre
+    def set_nombre(self, nombre):
+        cipher = Fernet(settings.KEY) # Se obtiene la clave de settings.py
+        self.nombre = cipher.encrypt(nombre.encode('utf-8'))
+    #Metodo para desencriptar el nombre
+    def get_nombre(self):
+        cipher = Fernet(settings.KEY) # Se obtiene la clave de settings.py
+        return cipher.decrypt(self.nombre).decode('utf-8')
+    
+    
 

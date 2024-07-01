@@ -40,7 +40,7 @@
                 success: function(response) {
                     if (response.status === 'success') {
                         Swal.fire({
-                            title: '¡Formulario enviado con exito!',
+                            title: response.message,
                             text: 'Serás redirigido a la página de inicio en unos segundos.',
                             icon: 'success',
                             showConfirmButton: true,
