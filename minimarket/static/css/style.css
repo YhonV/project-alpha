@@ -1,17 +1,7 @@
 #txtAgreProd{
     color: #f3f5f7;
-  }
-  .navbar-dark .nav-item .nav-link:hover {
-    background-color: rgb(254, 254, 254);
-    transition: all 0.3s ease;
-    border-radius: 0.25rem;
-    color: #fff;
-  }
-  
-  .fa-li {
-    position: relative;
-    left: 0;
-  }
+    text-decoration: none;
+  } 
   
   .navbar-toggler {
     border: none;
@@ -28,7 +18,12 @@
     a{
       text-decoration: none;
       font-weight: bold;
+      transition: 0.2s;
     }
+  }
+
+  .button-navbar:hover a {
+    color: #fff;
   }
   
   .shopping-cart {
@@ -42,10 +37,6 @@
     .shopping-cart {
       display: block;
     }
-  }
-  
-  .btn-outline-primary:hover {
-    color: #fff;
   }
   
   

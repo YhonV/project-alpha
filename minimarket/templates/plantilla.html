@@ -108,20 +108,20 @@
                 <div class="d-flex flex-grow-1 pe-3 d-none d-lg-flex justify-content-md-end">
 
                     
-                    <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button"">
+                    <button class="btn btn-outline-primary me-4 button-navbar" data-mdb-ripple-color="dark" type="button">
                         <a href="/">Home</a>
                     </button>
-                    <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                    <button class="btn btn-outline-primary me-4 button-navbar" data-mdb-ripple-color="dark" type="button">
                         <a href="/catalogo">Productos</a>
                     </button>
-                    <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                    <button class="btn btn-outline-primary me-4 button-navbar" data-mdb-ripple-color="dark" type="button">
                         <a href="/nosotros">Sobre nosotros</a>
                     </button>
-                    <button class="btn btn-outline-primary me-4" data-mdb-ripple-color="dark" type="button">
+                    <button class="btn btn-outline-primary me-4 button-navbar" data-mdb-ripple-color="dark" type="button">
                         <a href="/contacto">Contacto</a>
                     </button> 
                     {% if request.user.is_superuser %}
-                    <button class="btn btn-outline-danger me-4" data-mdb-ripple-color="dark" type="button">
+                    <button class="btn btn-outline-danger me-4 button-navbar" data-mdb-ripple-color="dark" type="button">
                         <a href="/inventario">Inventario</a>
                     </button> 
                     {% endif %}
@@ -379,6 +379,19 @@
             } 
           });
     </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const buttons = document.querySelectorAll('.navbar .button-navbar');
+      
+          buttons.forEach(button => {
+            button.addEventListener('click', function() {
+              const url = button.querySelector('a').getAttribute('href');
+              window.location.href = url;
+            });
+          });
+        });
+      </script>
 </body>
 
 </html>
