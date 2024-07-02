@@ -182,12 +182,12 @@
                 <!-- BEGIN SEARCH INPUT -->
                 <div class="input-group">
                   <input id="buscar-pro" type="text" class="form-control" placeholder="Ingrese el nombre del producto...">
+                  <div id="sugerencias" class="dropdown-menu" style="display: none;"></div>
                   <span class="input-group-btn">
                     <button id="btn-buscar" type="button" class="btn btn-primary btn-lg"><i class="fa fa-search"></i></button>
                   </span>
                 </div>
                 <!-- END SEARCH INPUT -->
-                <p>Mostrando todos los resultados que coincidan con: "Nombre del producto"</p>
                 
                 <div class="padding"></div>
                 
@@ -204,36 +204,7 @@
                       <li><a class="dropdown-item" href="#">Precio Menor a Mayor</a></li>
                     </ul>
                   </div>                                    
-                  <!-- END ORDER RESULT -->
-                  
-                
-                  <!-- INICIO PAGINACION BEFORE CARDS-->
-                <nav aria-label="Page navigation example" class="d-flex justify-content-center"> 
-                  <ul class="pagination">
-                    {% if productos.has_previous %}
-                      <li class="page-item">
-                        <a class="page-link" href="?page={{ productos.previous_page_number }}">Anterior</a>
-                      </li>
-                    {% endif %}
-
-                    {% for i in productos.paginator.page_range %}
-                      {% if productos.number == i %}
-                        <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-                      {% else %}
-                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
-                      {% endif %}
-                    {% endfor %}
-
-                    {% if productos.has_next %}
-                      <li class="page-item">
-                        <a class="page-link" href="?page={{ productos.next_page_number }}">Siguiente</a>
-                      </li>
-                    {% endif %}
-                  </ul>
-                </nav>
-                <!-- FINAL PAGINACION -->
-                
-                
+                  <!-- END ORDER RESULT -->                
                 
                 <!-- Inicio Cartas de productos -->
                 <div class="container" style="max-width: 1200px;">
@@ -262,7 +233,7 @@
                 <!-- Final Cartas de productos -->
                 
                 <!-- INICIO PAGINACION AFTER CARDS-->
-                <nav aria-label="Page navigation example" class="d-flex justify-content-center"> 
+                <nav id="paginacion" aria-label="Page navigation example" class="d-flex justify-content-center"> 
                   <ul class="pagination">
                     {% if productos.has_previous %}
                       <li class="page-item">
@@ -316,9 +287,6 @@
     </div>
 
     <script src="{% static 'js/catalogo.js'%}"></script>
-
-
-
 
 
 {% endblock content %}

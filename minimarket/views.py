@@ -12,6 +12,7 @@ from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from minimarket.forms import RegistroForm, formContacto
 from django.views.decorators.csrf import csrf_exempt
+from django.db.models import Q
 import json
 
 
@@ -21,14 +22,53 @@ def inicio(request):
     return render(request,'index.html')
 
 def catalogo(request):
-    productos = Producto.objects.all().order_by('id_producto') 
-    paginator = Paginator(productos, 6)  
-
+    productos = Producto.objects.all().order_by('id_producto')
+    
+    categorias = request.GET.getlist('categoria')
+    if categorias:
+        productos = productos.filter(nombre_categoria__nombre_categoria__in=categorias)
+    
+    precio_min = request.GET.get('precio_min')
+    precio_max = request.GET.get('precio_max')
+    if precio_min:
+        productos = productos.filter(precio__gte=float(precio_min))
+    if precio_max:
+        productos = productos.filter(precio__lte=float(precio_max))
+    
+    query = request.GET.get('q')
+    if query:
+        productos = productos.filter(
+            Q(nombre__icontains=query) | 
+            Q(nombre_categoria__nombre_categoria__icontains=query)
+        )
+    
+    paginator = Paginator(productos, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
-    contexto = {'productos': page_obj}
+    contexto = {
+        'productos': page_obj,
+        'categorias': Categoria.objects.all(),
+    }
     return render(request, 'catalogo.html', contexto)
+
+def api_productos(request):
+    query = request.GET.get('q', '')
+    if len(query) < 2:
+        return JsonResponse([], safe=False)
+    
+    productos = Producto.objects.filter(
+        Q(nombre__icontains=query) | 
+        Q(nombre_categoria__nombre_categoria__icontains=query)
+    )[:5]
+    
+    data = [{
+        'id': str(p.id_producto),  
+        'nombre': p.nombre, 
+        'categoria': p.nombre_categoria
+    } for p in productos]
+    
+    return JsonResponse(data, safe=False)
 
 def nosotros(request):
     return render(request, 'nosotros.html')
