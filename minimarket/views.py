@@ -179,7 +179,7 @@ def exit(request):
 
 @csrf_exempt
 @transaction.atomic
-@login_required
+@login_required(login_url='/login')
 def procesar_compra(request):
     if request.method == 'POST':
         nombres_productos = request.POST.getlist('nombresProductos[]')
@@ -245,10 +245,6 @@ def inventario(request):
             precio = float(precio)
         except ValueError:
             return JsonResponse({"success": False, "message": "Precio debe ser un número entero."}) 
-        
-         # Validación de existencia del producto
-        if Producto.objects.filter(nombre=nombreNuevo).exists():
-            return JsonResponse({"success": False, "message": "No puedes agregar un producto cuyo nombre ya exista."})
         
         if Producto.objects.filter(nombre=nombreNuevo).exists():
             producto = Producto.objects.get(nombre=nombreNuevo)

@@ -286,10 +286,7 @@
               <div class="form-row">
                 <div class="swal2-form-group">
                   <label for="categoria">Categoría</label>
-                  <select id="categoria" class="swal2-input custom-swal-input">
-                    <option value="">${categoria}</option>
-                    ${categorias.map(categoria => `<option value="${categoria}">${categoria}</option>`).join('')}
-                  </select>
+                  <input type="text" id="categoria" class="swal2-input custom-swal-input" placeholder="Categoría" value="${categoria}">
                 </div>
                 <div class="swal2-form-group">
                   <label for="precio">Precio</label>

@@ -178,7 +178,6 @@ document.getElementById('boton-comprar').addEventListener('click', function() {
   .then(response => response.json())
   .then(data => {
     if (data.success) {
-      // Mostrar el modal de compra exitosa
       var myModal = new bootstrap.Modal(document.getElementById('modalCompraExitosa'), {
         keyboard: false
       });
