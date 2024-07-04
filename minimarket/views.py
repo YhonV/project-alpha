@@ -179,6 +179,7 @@ def exit(request):
 
 @csrf_exempt
 @transaction.atomic
+@login_required
 def procesar_compra(request):
     if request.method == 'POST':
         nombres_productos = request.POST.getlist('nombresProductos[]')
