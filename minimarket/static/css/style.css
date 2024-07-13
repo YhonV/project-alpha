@@ -1,0 +1,82 @@
+#txtAgreProd{
+    color: #f3f5f7;
+    text-decoration: none;
+  } 
+  
+  .navbar-toggler {
+    border: none;
+    font-size: 1.25rem;
+  }
+  
+  .navbar-toggler:focus,
+  .btn-close:focus {
+    box-shadow: none;
+    outline: none;
+  }
+  
+  .navbar{
+    a{
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.2s;
+    }
+  }
+
+  .button-navbar:hover a {
+    color: #fff;
+  }
+  
+  .shopping-cart {
+    display: none;
+  }
+  
+  @media (max-width: 768px) {
+    .header-navbar{
+      display: none;
+    }
+    .shopping-cart {
+      display: block;
+    }
+  }
+  
+  
+  /* Inicio de Products Cards */
+  .height{
+    height:70vh;
+  }
+  
+  .container{
+    margin-top: 20px;
+  }
+  
+  .image{
+    position:absolute;
+    right:12px;
+    top:10px;
+  }
+  
+  .colors{
+    display:flex;
+    margin-top:2px;
+  }
+  
+  .colors span{
+    width:15px;
+    height:15px;
+    border-radius:50%;
+    cursor:pointer;
+    display:flex;
+    margin-right:6px;
+  }
+  
+
+  #productos-agregados {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
+  }
+  
+  #precio-total-carrito {
+    margin-top: 20px;
+    align-self: flex-end; 
+  }

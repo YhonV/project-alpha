@@ -1,0 +1,292 @@
+{% extends "plantilla.html" %}
+{% csrf_token %}
+{% load static%}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/catalogo.css' %}">
+ 
+ <div class="container" style="margin-top: 150px;">
+    <div class="row">
+      <!-- BEGIN SEARCH RESULT -->
+      <div class="col-md-12 ">
+        <div class="grid search" >
+          <div class="grid-body" >
+            <div class="row">
+              <!-- BEGIN FILTERS -->
+              <div class="col-md-3" style="background-color: white; border-radius: 20px;" >
+                <h2 class="grid-title"><i class="fa fa-filter" style="color: #077cd0;"></i> Categorías</h2>
+                <hr>
+                
+                <!-- BEGIN FILTER BY CATEGORY -->
+                
+              <div class="accordion" id="accordionExample">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        Congelados
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Pulpas de fruta</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Helados</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Pescados</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Pollo</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        Despensa
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Arroz</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Aceites y Aderezos</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Azúcar y Endulzantes</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Café y Té</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                        Lacteos
+                      </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Leches</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Quesos</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Cremas</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Yoghurt</label>
+                        </div>
+                      </div>
+                      </div> 
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="true" aria-controls="collapseOne">
+                        Carnicería
+                      </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Pollo</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Pescado</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Vacuno</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Cerdo</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="true" aria-controls="collapseOne">
+                        Frutas y Verduras
+                      </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Fruta</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Verduras</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Frutos secos</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Semillas</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="accordion-item">
+                    <h2 class="accordion-header">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="true" aria-controls="collapseOne">
+                        Limpieza
+                      </button>
+                    </h2>
+                    <div id="collapseSix" class="accordion-collapse collapse " data-bs-parent="#accordionExample">
+                      <div class="accordion-body">
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Baño y Cocina</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Ropa</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Cuidado Personal</label>
+                        </div>
+                        <div class="checkbox">
+                          <label class="Categorías"><input type="checkbox" class="icheck"> Desinfectantes</label>
+                        </div>
+                      </div>
+                    </div>
+                  </div><br>
+                  <h4>Precio</h4>
+                  <h6>Mínimo</h6>
+                  <div class="input-group mb-3">
+                    <span class="input-group-text">$</span>
+                    <span class="input-group-text">0</span>
+                    <input type="text" class="form-control" aria-label="Monto en pesos (con punto)" placeholder="0">
+                  </div>
+                  <h6>Máximo</h6>
+                  <div class="input-group">
+                    <input type="text" class="form-control" aria-label="Monto en pesos (con punto)" placeholder="999999">
+                    <span class="input-group-text">$</span>
+                    <span class="input-group-text">999.999</span>
+                  </div><br>
+                  <button id="btn-categorias" style="margin-bottom: 10px;" type="button" class="btn btn-primary">Aplicar</button>
+                </div>
+              </div>
+              <!-- END FILTERS -->
+
+              <!-- BEGIN RESULT -->
+                <div class="col-md-9">
+                <h2>Buscar Productos</h2>
+                <hr>
+                <!-- BEGIN SEARCH INPUT -->
+                <div class="input-group">
+                  <input id="buscar-pro" type="text" class="form-control" placeholder="Ingrese el nombre del producto...">
+                  <div id="sugerencias" class="dropdown-menu" style="display: none;"></div>
+                  <span class="input-group-btn">
+                    <button id="btn-buscar" type="button" class="btn btn-primary btn-lg"><i class="fa fa-search"></i></button>
+                  </span>
+                </div>
+                <!-- END SEARCH INPUT -->
+                
+                <div class="padding"></div>
+                
+                <div class="row">
+                  <!-- BEGIN ORDER RESULT -->
+                  <div class="dropdown d-flex justify-content-end mb-3">
+                    <button style="background-color: rgb(178, 220, 240); color: black;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Ordenar por:
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#">Nombre A-Z</a></li>
+                      <li><a class="dropdown-item" href="#">Nombre Z-A</a></li>
+                      <li><a class="dropdown-item" href="#">Precio Mayor a Menor</a></li>
+                      <li><a class="dropdown-item" href="#">Precio Menor a Mayor</a></li>
+                    </ul>
+                  </div>                                    
+                  <!-- END ORDER RESULT -->                
+                
+                <!-- Inicio Cartas de productos -->
+                <div class="container" style="max-width: 1200px;">
+                  <div class="row justify-content-center align-items-center">
+                    {% for i in productos %}
+                    <div class="card m-2" style="width: 15rem; height: 100%;" data-product-id="{{ i.id }}">
+                      {% if i.imagen %}
+                      <img class="card-img-top" src="{{ i.imagen.url }}">
+                      {% else %}
+                      <img class="card-img-top" src="https://developers.elementor.com/docs/assets/img/elementor-placeholder-image.png">
+                      {% endif %}
+                      <div class="card-body" style="height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                          <h5 class="card-title">{{ i.nombre }}</h5>
+                          <p class="card-text">{{ i.nombre_categoria }}</p>
+                          <h4 class="price">{{ i.precio|floatformat:"-1" }}</h4>
+                        </div>
+                        <div style="padding: 0 0 1rem 0;">
+                          <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;" data-product-id="{{ producto.id_producto }}">Agregar</button>
+                        </div>
+                      </div>
+                    </div>                    
+                    {% endfor %}
+                  </div>
+                </div>
+                <!-- Final Cartas de productos -->
+                
+                <!-- INICIO PAGINACION AFTER CARDS-->
+                <nav id="paginacion" aria-label="Page navigation example" class="d-flex justify-content-center"> 
+                  <ul class="pagination">
+                    {% if productos.has_previous %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ productos.previous_page_number }}">Anterior</a>
+                      </li>
+                    {% endif %}
+
+                    {% for i in productos.paginator.page_range %}
+                      {% if productos.number == i %}
+                        <li class="page-item active"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                      {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                      {% endif %}
+                    {% endfor %}
+
+                    {% if productos.has_next %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ productos.next_page_number }}">Siguiente</a>
+                      </li>
+                    {% endif %}
+                  </ul>
+                </nav>
+                <!-- FINAL PAGINACION -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Modal de Compra Exitosa -->
+    <div class="modal fade" id="modalCompraExitosa" tabindex="-1" aria-labelledby="modalCompraExitosaLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalCompraExitosaLabel">Compra Exitosa</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>¡Tu compra ha sido procesada con éxito!</p>
+            <p>Te hemos enviado un correo con los detalles de tu compra.</p>
+            <p>Gracias por tu compra.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="{% static 'js/catalogo.js'%}"></script>
+
+
+{% endblock content %}
