@@ -2,6 +2,7 @@ from django.db import models
 from cryptography.fernet import Fernet
 from django.conf import settings
 import uuid
+from django.contrib.auth.models import User
 
 class Categoria(models.Model):
     nombre_categoria = models.CharField(primary_key=True,max_length=100)
@@ -31,13 +32,23 @@ class Cliente (models.Model):
         return self.nombre_completo
     
 class detalleCompra(models.Model):
-    id_detalle = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
+    id_detalle = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     id_producto = models.ForeignKey('Producto', on_delete=models.CASCADE)
+    cliente = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
+    email_cliente = models.EmailField(null=True)
+    direccion_cliente = models.CharField(max_length=255,null=True) 
     cantidad = models.IntegerField()
     total = models.FloatField()
     
     def __str__(self):
-        return self.id_detalle
+        return f"{self.cliente.email} - {self.id_producto.nombre}"
+
+    def save(self, *args, **kwargs):
+        if not self.email_cliente:
+            self.email_cliente = self.cliente.email
+        if not self.direccion_cliente:
+            self.direccion_cliente = self.cliente.last_name
+        super().save(*args, **kwargs)
 
 class formularioContacto(models.Model):
     CONSULTA = 'CONSULTA'

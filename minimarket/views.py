@@ -50,6 +50,13 @@ def catalogo(request):
         'productos': page_obj,
         'categorias': Categoria.objects.all(),
     }
+    
+    if request.user.is_authenticated:
+        contexto['usuario'] = {
+            'email': request.user.email,
+            'direccion': request.user.last_name, 
+        }
+        
     return render(request, 'catalogo.html', contexto)
 
 def api_productos(request):
@@ -182,6 +189,10 @@ def exit(request):
 @login_required(login_url='/login')
 def procesar_compra(request):
     if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({'success': False, 'message': 'Usuario no autenticado'})
+
+        usuario_logueado = request.user
         nombres_productos = request.POST.getlist('nombresProductos[]')
         cantidades = request.POST.getlist('cantidades[]')
         total = float(request.POST.get('total'))
@@ -202,6 +213,9 @@ def procesar_compra(request):
             
             detalle = detalleCompra(
                 id_producto=producto,
+                cliente=usuario_logueado,
+                email_cliente=usuario_logueado.email,
+                direccion_cliente=usuario_logueado.last_name, 
                 cantidad=cantidad,
                 total=producto.precio * cantidad
             )
