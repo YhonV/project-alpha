@@ -3,6 +3,7 @@
 {% load static%}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/catalogo.css' %}">
+<script src="{% static 'js/catalogo.js' %}"></script>
  
  <div class="container" style="margin-top: 150px;">
     <div class="row">
@@ -160,51 +161,30 @@
                   <h4>Precio</h4>
                   <h6>Mínimo</h6>
                   <div class="input-group mb-3">
-                    <span class="input-group-text">$</span>
-                    <span class="input-group-text">0</span>
-                    <input type="text" class="form-control" aria-label="Monto en pesos (con punto)" placeholder="0">
+                  <span class="input-group-text">$</span>
+                  <span class="input-group-text">0</span>
+                  <input type="text" class="form-control" aria-label="Monto en pesos (con punto)" placeholder="0" id="precio_min" name="precio_min">
                   </div>
                   <h6>Máximo</h6>
                   <div class="input-group">
-                    <input type="text" class="form-control" aria-label="Monto en pesos (con punto)" placeholder="999999">
-                    <span class="input-group-text">$</span>
-                    <span class="input-group-text">999.999</span>
-                  </div><br>
-                  <button id="btn-categorias" style="margin-bottom: 10px;" type="button" class="btn btn-primary">Aplicar</button>
+                      <input type="text" class="form-control" aria-label="Monto en pesos (con punto)" placeholder="999999" id="precio_max" name="precio_max">
+                      <span class="input-group-text">$</span>
+                      <span class="input-group-text">999.999</span>
+                  </div>
+                  <br>
+                  <button id="btn-aplicar" style="margin-bottom: 10px;" type="button" class="btn btn-primary">Aplicar</button>
                 </div>
               </div>
               <!-- END FILTERS -->
 
               <!-- BEGIN RESULT -->
                 <div class="col-md-9">
-                <h2>Buscar Productos</h2>
-                <hr>
-                <!-- BEGIN SEARCH INPUT -->
-                <div class="input-group">
-                  <input id="buscar-pro" type="text" class="form-control" placeholder="Ingrese el nombre del producto...">
-                  <div id="sugerencias" class="dropdown-menu" style="display: none;"></div>
-                  <span class="input-group-btn">
-                    <button id="btn-buscar" type="button" class="btn btn-primary btn-lg"><i class="fa fa-search"></i></button>
-                  </span>
-                </div>
-                <!-- END SEARCH INPUT -->
-                
+                <h2>Resultado de Productos</h2>
+                <hr>               
                 <div class="padding"></div>
                 
                 <div class="row">
-                  <!-- BEGIN ORDER RESULT -->
-                  <div class="dropdown d-flex justify-content-end mb-3">
-                    <button style="background-color: rgb(178, 220, 240); color: black;" class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Ordenar por:
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">Nombre A-Z</a></li>
-                      <li><a class="dropdown-item" href="#">Nombre Z-A</a></li>
-                      <li><a class="dropdown-item" href="#">Precio Mayor a Menor</a></li>
-                      <li><a class="dropdown-item" href="#">Precio Menor a Mayor</a></li>
-                    </ul>
-                  </div>                                    
-                  <!-- END ORDER RESULT -->                
+                                 
                 
                 <!-- Inicio Cartas de productos -->
                 <div class="container" style="max-width: 1200px;">
@@ -220,7 +200,7 @@
                         <div>
                           <h5 class="card-title">{{ i.nombre }}</h5>
                           <p class="card-text">{{ i.nombre_categoria }}</p>
-                          <h4 class="price">{{ i.precio|floatformat:"-1" }}</h4>
+                           <h4 class="price">${{ i.precio|floatformat:"-1" }}</h4>
                         </div>
                         <div style="padding: 0 0 1rem 0;">
                           <button class="btn btn-primary btn-lg btn-agregar" style="width: 100%;" data-product-id="{{ producto.id_producto }}">Agregar</button>
