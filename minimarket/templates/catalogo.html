@@ -286,7 +286,11 @@
       </div>
     </div>
 
-    <script src="{% static 'js/catalogo.js'%}"></script>
-
+    <script>
+      var usuario = {
+        email: "{{ usuario.email|safe }}",
+        direccion: "{{ usuario.direccion|safe }}"
+      };
+    </script>
 
 {% endblock content %}

@@ -117,3 +117,30 @@
   text-decoration: none;
   background-color: #f8f9fa;
 }
+
+
+
+
+.custom-swal-container {
+  font-size: 14px;
+}
+.custom-swal-popup {
+  width: 90%;
+  max-width: 600px;
+}
+.custom-swal-title {
+  font-size: 20px;
+}
+.custom-swal-content {
+  text-align: left;
+}
+.custom-swal-input {
+  font-size: 14px;
+  height: 30px;
+  margin-bottom: 10px;
+}
+.custom-swal-confirm,
+.custom-swal-cancel {
+  font-size: 14px;
+  padding: 8px 16px;
+}

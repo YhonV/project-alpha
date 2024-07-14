@@ -21,43 +21,6 @@ import json
 def inicio(request):
     return render(request,'index.html')
 
-def catalogo(request):
-    productos = Producto.objects.all().order_by('id_producto')
-    
-    categorias = request.GET.getlist('categoria')
-    if categorias:
-        productos = productos.filter(nombre_categoria__nombre_categoria__in=categorias)
-    
-    precio_min = request.GET.get('precio_min')
-    precio_max = request.GET.get('precio_max')
-    if precio_min:
-        productos = productos.filter(precio__gte=float(precio_min))
-    if precio_max:
-        productos = productos.filter(precio__lte=float(precio_max))
-    
-    query = request.GET.get('q')
-    if query:
-        productos = productos.filter(
-            Q(nombre__icontains=query) | 
-            Q(nombre_categoria__nombre_categoria__icontains=query)
-        )
-    
-    paginator = Paginator(productos, 9)
-    page_number = request.GET.get('page')
-    page_obj = paginator.get_page(page_number)
-
-    contexto = {
-        'productos': page_obj,
-        'categorias': Categoria.objects.all(),
-    }
-    
-    if request.user.is_authenticated:
-        contexto['usuario'] = {
-            'email': request.user.email,
-            'direccion': request.user.last_name, 
-        }
-        
-    return render(request, 'catalogo.html', contexto)
 
 def api_productos(request):
     query = request.GET.get('q', '')
@@ -183,6 +146,45 @@ def view_login(request):
 def exit(request):
     logout(request)
     return redirect('index')
+
+
+def catalogo(request):
+    productos = Producto.objects.all().order_by('id_producto')
+    
+    categorias = request.GET.getlist('categoria')
+    if categorias:
+        productos = productos.filter(nombre_categoria__nombre_categoria__in=categorias)
+    
+    precio_min = request.GET.get('precio_min')
+    precio_max = request.GET.get('precio_max')
+    if precio_min:
+        productos = productos.filter(precio__gte=float(precio_min))
+    if precio_max:
+        productos = productos.filter(precio__lte=float(precio_max))
+    
+    query = request.GET.get('q')
+    if query:
+        productos = productos.filter(
+            Q(nombre__icontains=query) | 
+            Q(nombre_categoria__nombre_categoria__icontains=query)
+        )
+    
+    paginator = Paginator(productos, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    contexto = {
+        'productos': page_obj,
+        'categorias': Categoria.objects.all(),
+    }
+    
+    if request.user.is_authenticated:
+        contexto['usuario'] = {
+            'email': request.user.email,
+            'direccion': request.user.last_name, 
+        }
+        
+    return render(request, 'catalogo.html', contexto)
 
 @csrf_exempt
 @transaction.atomic

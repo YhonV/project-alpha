@@ -160,57 +160,130 @@ function agregarBotonCompra() {
   }
 }
 
-
-document.getElementById('boton-comprar').addEventListener('click', function() {
-  const nombresProductos = productosAgregados.map(p => encodeURIComponent(p.title));
-  const cantidades = productosAgregados.map(p => p.cantidad);
-  const total = calcularTotal();
-  const csrftoken = getCookie('csrftoken');
-
-  fetch('/procesar_compra/', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-      'X-CSRFToken': csrftoken
+document.getElementById('boton-comprar').addEventListener('click', function(){
+  Swal.fire({
+    title: '¿Estás seguro de realizar la compra?',
+    html: `
+      <div class="swal2-form">
+        <div class="form-row">
+          <div class="swal2-form-group">
+            <label for="email">Correo Electrónico</label>
+            <input type="email" id="email" class="swal2-input custom-swal-input" value="${usuario.email}" readonly>
+          </div>
+          <div class="swal2-form-group">
+            <label for="direccion">Dirección</label>
+            <input type="text" id="direccion" class="swal2-input custom-swal-input" value="${usuario.direccion}" readonly>
+          </div>
+        </div>
+        <div class="swal2-form-group" style="margin-top: 20px;">
+          <label for="metodo-pago">Seleccionar método de pago</label>
+          <select id="metodo-pago" class="swal2-input custom-swal-input">
+            <option value="efectivo">Efectivo al retirar</option>
+            <option value="tarjeta-debito">Tarjeta de débito</option>
+          </select>
+        </div>
+      </div>
+      <p style="font-size: 14px; margin-top: 15px;">Tus productos son: </p>
+      <table style="width: 100%; border-collapse: collapse; font-size: 14px;">
+        <thead>
+          <tr style="background-color: #f3f3f3;">
+            <th style="padding: 8px; text-align: left; border: 1px solid #ddd;">Producto</th>
+            <th style="padding: 8px; text-align: center; border: 1px solid #ddd;">Cantidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${productosAgregados.map(p => `
+            <tr>
+              <td style="padding: 8px; border: 1px solid #ddd;">${p.title}</td>
+              <td style="padding: 8px; text-align: center; border: 1px solid #ddd;">${p.cantidad}</td>
+            </tr>
+          `).join('')}
+        </tbody>
+      </table>
+      <p style="font-size: 14px; margin-top: 15px; font-weight: bold;">Total a pagar: $${calcularTotal()}</p>
+    `,
+    confirmButtonText: 'Confirmar Compra',
+    cancelButtonText: 'Cancelar',
+    showCancelButton: true,
+    customClass: {
+      container: 'custom-swal-container',
+      popup: 'custom-swal-popup',
+      header: 'custom-swal-header',
+      title: 'custom-swal-title',
+      closeButton: 'custom-swal-close',
+      content: 'custom-swal-content',
+      input: 'custom-swal-input',
+      actions: 'custom-swal-actions',
+      confirmButton: 'custom-swal-confirm',
+      cancelButton: 'custom-swal-cancel'
     },
-    body: `nombresProductos[]=${nombresProductos.join('&nombresProductos[]=')}&cantidades[]=${cantidades.join('&cantidades[]=')}&total=${total}`
-  })
-  .then(response => response.json())
-  .then(data => {
-    if (data.success) {
-      var myModal = new bootstrap.Modal(document.getElementById('modalCompraExitosa'), {
-        keyboard: false
-      });
-      myModal.show();
+    preConfirm: () => {
+      return new Promise((resolve, reject) => {
+        const nombresProductos = productosAgregados.map(p => encodeURIComponent(p.title));
+        const cantidades = productosAgregados.map(p => p.cantidad);
+        const total = calcularTotal();
+        const csrftoken = getCookie('csrftoken');
 
-      // Vaciar el carrito
-      productosAgregados = [];
-      actualizarContadoresYTotal();
-      document.getElementById("productos-agregados").innerHTML = '';
-    } else {
-      // Mostrar el mensaje de error con SweetAlert2
-      if (data.message && data.message.includes('Stock insuficiente')) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Stock insuficiente',
-          text: data.message
+        fetch('/procesar_compra/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': csrftoken
+          },
+          body: `nombresProductos[]=${nombresProductos.join('&nombresProductos[]=')}&cantidades[]=${cantidades.join('&cantidades[]=')}&total=${total}`
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            resolve();
+          } else {
+            reject(data.message || 'Error al procesar la compra');
+          }
+        })
+        .catch(error => {
+          reject('Error inesperado, por favor intente nuevamente.');
         });
-      } else {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: 'Error al procesar la compra'
-        });
-      }
+      });
     }
-  })
-  .catch((error) => {
-    // Capturar errores que puedan ocurrir durante la solicitud
-    console.error('Error en la solicitud:', error);
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire({
+        icon: 'success',
+        title: '¡Compra Exitosa!',
+        html: `
+          <p>Tu compra ha sido procesada con éxito.</p>
+          <p>Te hemos enviado un correo electrónico con los detalles de tu compra a: ${usuario.email}</p>
+          <p>Gracias por tu compra.</p>
+        `,
+        confirmButtonText: 'Cerrar',
+        customClass: {
+          container: 'custom-swal-container',
+          popup: 'custom-swal-popup',
+          header: 'custom-swal-header',
+          title: 'custom-swal-title',
+          content: 'custom-swal-content',
+          confirmButton: 'custom-swal-confirm',
+        }
+      }).then(() => {
+        // Vaciar el carrito
+        productosAgregados = [];
+        actualizarContadoresYTotal();
+        document.getElementById("productos-agregados").innerHTML = '';
+      });
+    }
+  }).catch(error => {
     Swal.fire({
       icon: 'error',
       title: 'Error',
-      text: 'Error inesperado, por favor intente nuevamente.'
+      text: error,
+      customClass: {
+        container: 'custom-swal-container',
+        popup: 'custom-swal-popup',
+        header: 'custom-swal-header',
+        title: 'custom-swal-title',
+        content: 'custom-swal-content',
+        confirmButton: 'custom-swal-confirm',
+      }
     });
   });
 });
